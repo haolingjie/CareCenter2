@@ -1,0 +1,288 @@
+﻿@{
+    CareCenter2.Admin.Controllers.HomeController.RefAdmin();//刷新信息
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Bootstrap Core CSS -->
+    <link href="/Content/CSS/bootstrap.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="/Content/CSS/style.css" rel="stylesheet" />
+    <!-- font CSS -->
+    <!-- font-awesome icons -->
+    <link href="/Content/CSS/font-awesome.css" rel="stylesheet" />
+    <!-- //font-awesome icons -->
+    <!-- js-->
+    @*<script src="/Content/JS/jquery-1.11.1.min.js"></script>*@
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="/Content/JS/custom.js"></script>
+
+    <!-- Metis Menu 导航栏 -->
+    <script src="/Content/JS/metisMenu.min.js"></script>
+    <script src="/Content/JS/custom.js"></script>
+    <link href="/Content/CSS/custom.css" rel="stylesheet" />
+    <!--//Metis Menu 导航栏-->
+    <!--layui -->
+    <link href="/Content/layui/css/layui.css" rel="stylesheet" />
+
+    <script src="/Content/layui/layui.all.js"></script>
+    @*<script src="/Content/layui/layui.js"></script>*@
+    @*<script src="/Content/layui/lay/modules/layer.js"></script>*@
+    <!--layui -->
+    @Styles.Render("~/Content/css")
+</head>
+<body class="cbp-spmenu-push">
+    <div class="main-content">
+        <!--左侧导航菜单  开始-->
+        <div class=" sidebar" role="navigation">
+            <div class="navbar-collapse">
+                <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="/Home/Index/"><i class="fa fa-home nav_icon"></i>首页</a>
+                        </li>
+                        @{
+                            if (Convert.ToBoolean(System.Web.HttpContext.Current.Session["Role"]))
+                            {
+                                 <li>
+                                    <a href="#"><i class="fa fa-cogs nav_icon"></i>系统管理 <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level collapse">
+                                        <li>
+                                            <a href="/Home/AdminList/">用户管理</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="nav nav-second-level collapse">
+                                        <li>
+                                            <a href="/UploadFile/AboutUs/">家园建设</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="nav nav-second-level collapse">
+                                        <li>
+                                            <a href="/UploadFile/UploadPicture/">图片上传</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /nav-second-level -->
+                                </li>
+                            }
+                            if (Convert.ToBoolean(System.Web.HttpContext.Current.Session["Role"]))
+                            {
+                                 <li class="">
+                                    <a href="#"><i class="fa fa-book nav_icon"></i>需求审批 <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level collapse">
+                                        <li>
+                                            <a href="/MemberM/CheckedCare/">看护方审批与选择</a>
+                                        </li>
+
+                                    </ul>
+                                    <!-- /nav-second-level -->
+                                </li>
+                            }
+                           
+                            <li>
+                                <a href="#"><i class="fa fa-check-square-o nav_icon"></i>照护管理<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li>
+                                        <a href="/MemberM/AdminClassCare/">照护列表 </a>
+                                    </li>                                  
+                                </ul>
+                                <!-- //nav-second-level -->
+                            </li>
+                                if (Convert.ToBoolean(System.Web.HttpContext.Current.Session["Role"]))
+                                {
+                                 <li>
+                                    <a href="#"><i class="fa fa-file-text-o nav_icon"></i>服务方管理<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level collapse">
+
+                                        <li>
+                                            <a href="/MemberM/CareParson/">服务人员</a>
+                                        </li>
+
+                                    </ul>
+                                    <!-- //nav-second-level -->
+                                </li>
+                            }
+                           
+                        }
+
+                    </ul>
+                    <!-- //sidebar-collapse -->
+                </nav>
+            </div>
+        </div>
+        <!--左侧导航菜单  结束-->
+        <!-- 头部菜单-开始 -->
+        <div class="sticky-header header-section ">
+            <div class="header-left">
+
+                <!--logo -->
+                <div class="logo">
+                    <a href="/Home/Index/">
+                        <h1>LOGO</h1>
+                        <span>Administration</span>
+                    </a>
+                </div>
+                <!--//logo-->
+                <!--toggle button start-->
+                <button id="showLeftPush"><i class="fa fa-bars"></i></button>
+                <!--toggle button end-->
+                <!--search-box-->
+                @*<div class="search-box">
+                        <form class="input">
+                            <input class="sb-search-input input__field--madoka" placeholder="Search..." type="search" id="input-31" />
+                            <label class="input__label" for="input-31">
+                                <svg class="graphic" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
+                                    <path d="m0,0l404,0l0,77l-404,0l0,-77z" />
+                                </svg>
+                            </label>
+                        </form>
+                    </div>*@
+                <!--//end-search-box-->
+                <div class="clearfix"> </div>
+            </div>
+            <!--头部菜单 右侧 开始-->
+            <div class="header-right">
+                <div class="profile_details_left">
+                    <!--通知公告菜单  开始 -->
+                    <ul class="nofitications-dropdown"></ul>
+                    <div class="clearfix"> </div>
+                </div>
+                <!--通知公告菜单 结束 -->
+                <!--登录用户菜单  开始 -->
+                <div class="profile_details">
+                    <ul>
+                        <li class="dropdown profile_details_drop">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <div class="profile_img">
+                                    <span class="prfil-img"><img src="/Content/Images/a.png" alt=""> </span>
+                                    <div class="user-name">
+                                        <p id="adminNick">
+                                            @(Convert.ToBoolean(System.Web.HttpContext.Current.Session["Role"]) ? "超级管理员" : "管理员")
+                                            (@(System.Web.HttpContext.Current.Session["NickName"]))
+                                        </p>
+                                        <span id="adminHpone">@(User.Identity.Name)</span>
+                                    </div>
+                                    <i class="fa fa-angle-down lnr"></i>
+                                    <i class="fa fa-angle-up lnr"></i>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu drp-mnu">
+                                @*<li> <a href="#"><i class="fa fa-cog"></i> 设置</a> </li>*@
+                                <li> <a href="javascript:updNewPwd();"><i class="fa fa-user"></i> 修改密码</a> </li>
+                                <li> <a href="/Home/LoginOut/"><i class="fa fa-sign-out"></i> 退出</a> </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!--登录用户菜单 结束-->
+                <div class="clearfix"> </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <!-- //头部菜单-结束 -->
+        <!-- 主体部分 start-->
+        <div id="page-wrapper">
+            @RenderBody()
+        </div>
+        <!--footer-->
+        <div class="footer">
+            <p>Copyright &copy; 2018.Company name All rights reserved.<a target="_blank" href="javascript:;">测试网站</a></p>
+        </div>
+        <!--//footer-->
+    </div>
+    <!-- Classie 侧边栏滑动菜单导航-->
+    <script src="/Content/JS/classie.js"></script>
+    <script>
+        var menuLeft = document.getElementById('cbp-spmenu-s1'),
+            showLeftPush = document.getElementById('showLeftPush'),
+            body = document.body;
+
+        showLeftPush.onclick = function () {
+            classie.toggle(this, 'active');
+            classie.toggle(body, 'cbp-spmenu-push-toright');
+            classie.toggle(menuLeft, 'cbp-spmenu-open');
+            disableOther('showLeftPush');
+        };
+
+
+        function disableOther(button) {
+            if (button !== 'showLeftPush') {
+                classie.toggle(showLeftPush, 'disabled');
+            }
+        }
+    </script>
+    <!--scrolling js 滚动条插件 API-->
+    <script src="/Content/JS/jquery.nicescroll.js"></script>
+    <script src="/Content/JS/scripts.js"></script>
+    <!--//scrolling js-->
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/Content/JS/bootstrap.js"></script>
+    <script>
+        @*$(function () {
+            var login = '@Request.IsAuthenticated';
+            if (login == "True") {
+
+            } else {
+                return true;
+            }
+        })*@
+
+        //修改密码
+        function updNewPwd() {
+
+            //加载层-风格3
+            parent.layer.load(1, { shade: false });
+            layer.open({
+                type: 2,
+                skin: 'Withdraw-class', //加上边框
+                title: '修改密码',
+                shadeClose: true,
+                shade: 0.5,
+                scrollbar: false,
+                cancel: function (index, layero) {
+                    layer.close(index)
+                    return false;
+                },
+                area: ['520px', '620px'],
+                content: ['/Home/UpdAdminWpd/'] //iframe的url no是不显示滚动条
+            });
+            //此处演示关闭
+            setTimeout(function () {
+                parent.layer.closeAll('loading');
+            }, 1000);
+
+        }
+        //20分钟不操作自动回到登陆页面
+        var maxTime = 1200; // seconds
+        var time = maxTime;
+
+        document.body.addEventListener("mousemove", function () {
+            time = maxTime; // reset
+        }, false);
+
+        var intervalId = setInterval(function () {
+            time--;
+            if (time <= 0) {
+                ShowInvalidLoginMessage();
+                clearInterval(intervalId);
+            }
+        }, 1000)
+
+        function ShowInvalidLoginMessage() {
+            // 清除sessionstorage中的登录ID
+            // 退到登陆界面
+            //window.localStorage.removeItem("loguserId");
+            window.location.href = "/Home/SignIn/";
+        }
+
+
+    </script>
+</body>
+</html>
+

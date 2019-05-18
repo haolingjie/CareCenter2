@@ -1,0 +1,1429 @@
+﻿
+@{
+    ViewBag.Title = "订单版面";
+    Layout = null;
+}
+@*<link href="/Content/layui/css/layui.css" rel="stylesheet" />*@
+<link href="~/Content/index/city-select.css" rel="stylesheet" />
+<style>
+    .about-btn {
+        max-width: inherit;
+        background: #fff;
+    }
+    /*form表单*/
+    .layui-form-label {
+        padding: 9px 4px;
+        width: 68px;
+    }
+
+    .layui-form-item .layui-input-inline {
+        width: 120px;
+    }
+
+    .layui-form-item .layui-inline {
+        margin-right: 0;
+    }
+
+    layui-form-item {
+        margin-bottom: 0px;
+    }
+    /*下拉框弹出高度*/
+    .layui-form-select dl {
+        max-height: 160px;
+    }
+    /*性别外框*/
+    .layui-form-pane .layui-form-item[pane] {
+        max-width: 300px;
+    }
+    /*提交按钮*/
+    .layui-btn {
+        /*width: 50%;*/
+        background-color: #ff6a00;
+        /*margin-left: 42%;*/
+    }
+    /*时间选中颜色*/
+    .layui-laydate .layui-this {
+        background-color: #2b96cc !important;
+    }
+    /*下拉框选中颜色*/
+    .layui-form-select dl dd.layui-this {
+        background-color: #2577e3;
+    }
+    /*单选选中颜色*/
+    .layui-form-radio > i:hover, .layui-form-radioed > i {
+        color: #2b96cc;
+    }
+
+    .layui-btn {
+        width: 50%;
+        background-color: #ff6a00;
+        margin-left: 42%;
+    }
+    /*TAB*/
+    .layui-tab {
+        margin: 0;
+    }
+
+    .layui-tab-title li {
+        display: block;
+        background-color: #2577e3;
+        color: #fff;
+        height: 85px;
+        line-height: 85px;
+        /*border-bottom: 15px solid #f2f2f2;
+        border-top: 15px solid #f2f2f2;*/
+    }
+
+        .layui-tab-title li b {
+            position: relative;
+            display: block;
+            height: 85px;
+            border-bottom: 1px dashed #95cbe6;
+            font-weight: normal;
+        }
+
+        .layui-tab-title li:hover {
+            color: #2577e3;
+            background-color: #ffffff;
+            border-left: 4px solid #e06802;
+        }
+
+    .layui-tab-title {
+        float: left;
+        width: 96px;
+        border-bottom-width: 0;
+        border-bottom-style: none;
+    }
+
+    .layui-tab-content {
+        float: left;
+        width: 421px;
+        padding: 0;
+    }
+
+    .layui-tab-title .layui-this {
+        color: #2577e3;
+        background-color: #ffffff;
+        border-left: 4px solid #e06802;
+    }
+
+        .layui-tab-title .layui-this b {
+            border-bottom: none;
+        }
+
+        .layui-tab-title .layui-this:after {
+            border-width: 1px;
+            border-style: none;
+        }
+    .layui-input, .layui-select, .layui-textarea {
+        height: 28px;    color:#333;   
+    }
+    .layui-form-label {
+        line-height: 8px;        color: #333;
+    }
+    .city-select .city-info .city-input, .city-select .city-info span {       
+        margin-top: 2px;
+    }
+    .city-select .city-info:after {        
+        top: 10px;       
+    }
+    .city-select .city-info span {       
+        color: #333;
+        padding: 0px;
+       
+    }
+    .Index_btn {        
+        line-height: 30px;       
+    }
+</style>
+<div class="layui-tab">
+    <ul class="layui-tab-title">
+        <li class="layui-this"><b>智区养老</b></li>
+        <li><b>婴幼照护</b></li>
+        <li><b>孕产照护</b></li>
+        <li><b>课后照护</b></li>
+        @*<li><b>订单管理</b></li>*@
+    </ul>
+    <div class="layui-tab-content">
+        <!--智区养老-->
+        <div class="layui-tab-item layui-show">
+            <div class="main" style="margin-top: 0">
+                @*<h2>需求发布</h2>*@
+                <div class="about-btn" style="margin-top:0;">
+                    <form class="layui-form" action="" lay-filter="example">
+
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">养老方式</label>
+                                <div class="layui-input-inline">
+                                    @*<input type="text" class="layui-input search" name="ordertitle" lay-verify="required" placeholder=" 请选择">*@
+                                    <div class="city-select" id="single-select-1">
+                                        <div class="city-info">
+                                            <div class="city-input">
+                                                <input type="text" class="layui-input input-search" value="" placeholder="请选择" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <input type="hidden" class="layui-input" name="ordertitle" id="ordertitle" lay-verify="ordertitle" />
+                                    @*<select name="ordertitle" id="ordertitle" lay-filter="aihao" style="display:none;">
+                                        <option value="社区养老">社区养老</option>
+                                        <option value="居家养老">居家养老</option>
+                                        <option value="机构养老" selected="">机构养老</option>
+                                        <option value="旅游养老">旅游养老</option>
+                                    </select>*@
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">身体情况</label>
+                                <div class="layui-input-inline">
+                                    <div class="city-select" id="single-select-2">
+                                        <div class="city-info">
+                                            <div class="city-input">
+                                                <input type="text" class="layui-input input-search" value="" placeholder="请选择" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <input type="hidden" class="layui-input" name="PersonInro" id="PersonInro" lay-verify="PersonInro" />
+                                    @*<select name="PersonInro" id="PersonInro" lay-filter="aihao">
+                                        <option value="失能">失能</option>
+                                        <option value="半失能">半失能</option>
+                                        <option value="健康" selected="">健康</option>
+                                    </select>*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">现住址</label>
+                            <div class="layui-input-inline" style="width:90px;">
+                                <select name="provid" id="provid" lay-filter="provid">
+                                    <option value="">请选择省</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline" style="width:100px;">
+                                <select name="cityid" id="cityid" lay-filter="cityid">
+                                    <option value="">请选择市</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline" style="width:112px;">
+                                <select name="areaid" id="areaid" lay-filter="areaid">
+                                    <option value="">请选择县/区</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline" style="width:322px;margin:5px 0;">
+                                <input type="text" class="layui-input"name="Address" lay-verify="required" placeholder="详细地址" />
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+
+                            <div class="layui-inline">
+                                <label class="layui-form-label">照护日期</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input" name="CeraRange" lay-verify="required" id="CeraRange" placeholder=" 起止日期">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">日照护时</label>
+                                <div class="layui-input-inline">
+                                    <div class="city-select" id="single-select-3">
+                                        <div class="city-info">
+                                            <div class="city-input">
+                                                <input type="text" class="layui-input input-search" value="" placeholder="请选择" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <input type="hidden" class="layui-input" name="DateType" id="DateType" lay-verify="DateType" />
+                                    @*<select name="DateType" id="DateType" lay-filter="aihao">
+                                        <option value="4h(半天)">4h(半天)</option>
+                                        <option value="10h(白天)">10h(白天)</option>
+                                        <option value="24h(全天)" selected="">24h(全天)</option>
+                                    </select>*@
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="layui-form-item">
+                            <label class="layui-form-label">现住址</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="Address" placeholder="请输入居住地址" lay-verify="required" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>*@
+
+                        <div class="layui-form-item">
+
+                            <div class="layui-inline">
+                                <label class="layui-form-label">照护地点</label>
+                                <div class="layui-input-inline">
+                                    <div class="city-select" id="single-select-4">
+                                        <div class="city-info">
+                                            <div class="city-input">
+                                                <input type="text" class="layui-input input-search" value="" placeholder="请选择" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <input type="hidden" class="layui-input" name="CareAddress" id="CareAddress" lay-verify="CareAddress" />
+                                    @*<select name="CareAddress" id="CareAddress" lay-filter="aihao">
+                                        <option value="居家">居家</option>
+                                        <option value="定点社区">定点社区</option>
+                                        <option value="机构养老" selected="">机构养老</option>
+                                        <option value="旅游养老">旅游养老</option>
+                                    </select>*@
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">照护人数</label>
+                                <div class="layui-input-inline">
+                                    <div class="city-select" id="single-select-5">
+                                        <div class="city-info">
+                                            <div class="city-input">
+                                                <input type="text" class="layui-input input-search" value="" placeholder="请选择" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <input type="hidden" class="layui-input" name="CarePerson" id="CarePerson" lay-verify="CarePerson" />
+                                    @*<select name="CarePerson" id="CarePerson" lay-filter="aihao">
+                                        <option value="1人" selected="">1人</option>
+                                        <option value="2人">2人</option>
+                                        <option value="3人">3人</option>
+                                        <option value="4人">4人</option>
+                                        <option value="5人">5人</option>
+                                    </select>*@
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">其他需求</label>
+                            <div class="layui-input-inline">
+                                <textarea placeholder="请输入其他需求(可为空)" name="memo"  class="layui-textarea" style="width:322px;max-height:60px;"></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item" style="display:none;">
+                            <label class="layui-form-label">需求类别</label>
+                            <div class="layui-input-block">
+                                <select name="OrderType" id="OrderType" lay-filter="aihao">
+                                    <option value=""></option>
+                                    <option value="1">课后托管照护</option>
+                                    <option value="2">婴幼照护</option>
+                                    <option value="3" selected="">养老照护</option>
+                                    <option value="4">孕检照护</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <button class="Index_btn" lay-submit="" id="tijiaoData1" lay-filter="save">提交订单</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--婴幼照护-->
+        <div class="layui-tab-item">
+            <div class="main" style="margin-top: 0">
+                @*<h2>需求发布</h2>*@
+                <div class="about-btn" style="margin-top:0;">
+                    <form class="layui-form" action="" lay-filter="">
+
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">婴幼照护</label>
+                                <div class="layui-input-inline">
+                                    <div class="city-select" id="single-select-1-2">
+                                        <div class="city-info">
+                                            <div class="city-input">
+                                                <input type="text" class="layui-input input-search" value="" placeholder="请选择" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <input type="hidden" class="layui-input" name="ordertitle" id="ordertitle2" lay-verify="ordertitle2" />
+                                    
+                                </div>
+                            </div>
+                            <div class="layui-inline" style="display:none;">
+                                <label class="layui-form-label">您的情况</label>
+                                <div class="layui-input-inline">
+                                    <select name="PersonInro" id="PersonInro" lay-filter="aihao">
+                                        <option value="失能">失能</option>
+                                        <option value="半失能">半失能</option>
+                                        <option value="健康" selected="">健康</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">现住址</label>
+                            <div class="layui-input-inline" style="width:90px;">
+                                <select name="provid" id="provid2" lay-filter="provid">
+                                    <option value="">请选择省</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline" style="width:100px;">
+                                <select name="cityid" id="cityid2" lay-filter="cityid">
+                                    <option value="">请选择市</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline" style="width:112px;">
+                                <select name="areaid" id="areaid2" lay-filter="areaid">
+                                    <option value="">请选择县/区</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline" style="width:322px;margin:5px 0;">
+                                <input type="text" class="layui-input" name="Address" lay-verify="required" placeholder="详细地址" />
+                            </div>
+                        </div>
+                        <div class="layui-form-item" id="parttime">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">照护日期</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input" name="CeraRange" lay-verify="required" id="CeraRange2" placeholder=" 照护起止日期">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">日照护</label>
+                                <div class="layui-input-inline">
+                                    <div class="layui-input-inline">
+                                        <div class="city-select" id="single-select-3-2">
+                                            <div class="city-info">
+                                                <div class="city-input">
+                                                    <input type="text" class="layui-input input-search" value="" placeholder="请选择" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <input type="hidden" class="layui-input" name="DateType" id="DateType2" lay-verify="DateType2" />
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">照护地点</label>
+                                <div class="layui-input-inline">
+                                    <div class="city-select" id="single-select-4-2">
+                                        <div class="city-info">
+                                            <div class="city-input">
+                                                <input type="text" class="layui-input input-search" value="" placeholder="请选择" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <input type="hidden" class="layui-input" name="CareAddress" id="CareAddress2" lay-verify="CareAddress2" />
+                                   
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">照护人数</label>
+                                <div class="layui-input-inline">
+                                    <div class="city-select" id="single-select-5-2">
+                                        <div class="city-info">
+                                            <div class="city-input">
+                                                <input type="text" class="layui-input input-search" value="" placeholder="请选择" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <input type="hidden" class="layui-input" name="CarePerson" id="CarePerson2" lay-verify="CarePerson2" />
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">其他需求</label>
+                            <div class="layui-input-inline">
+                                <textarea placeholder="请输入其他需求(可为空)" name="memo" class="layui-textarea" style="width:322px;max-height:60px;"></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item" style="display:none;">
+                            <label class="layui-form-label">需求类别</label>
+                            <div class="layui-input-block">
+                                <select name="OrderType" lay-filter="aihao">
+                                    <option value=""></option>
+                                    <option value="1">课后托管照护</option>
+                                    <option value="2">婴幼照护</option>
+                                    <option value="3" selected="">养老照护</option>
+                                    <option value="4">孕检照护</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <button class="Index_btn" lay-submit="" id="tijiaoData2" lay-filter="save2">提交订单</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--孕检照护-->
+        <div class="layui-tab-item">
+            <div class="main" style="margin-top: 0">
+                @*<h2>需求发布</h2>*@
+                <div class="about-btn" style="margin-top:0;">
+                    <form class="layui-form " action="" lay-filter="">
+
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">孕产照护</label>
+                                <div class="layui-input-inline">
+                                    <div class="city-select" id="single-select-1-3">
+                                        <div class="city-info">
+                                            <div class="city-input">
+                                                <input type="text" class="layui-input input-search" value="" placeholder="请选择" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <input type="hidden" class="layui-input" name="ordertitle" id="ordertitle3" lay-verify="ordertitle3" />
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="layui-form-item" style="display:none;">
+                            <label class="layui-form-label">您的情况</label>
+                            <div class="layui-input-block">
+                                <select name="PersonInro" id="PersonInro" lay-filter="aihao">
+                                    <option value="失能">失能</option>
+                                    <option value="半失能">半失能</option>
+                                    <option value="健康" selected="">健康</option>
+                                </select>
+                            </div>
+                        </div>                       
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">现住址</label>
+                            <div class="layui-input-inline" style="width:90px;">
+                                <select name="provid" id="provid3" lay-filter="provid">
+                                    <option value="">请选择省</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline" style="width:100px;">
+                                <select name="cityid" id="cityid3" lay-filter="cityid">
+                                    <option value="">请选择市</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline" style="width:112px;">
+                                <select name="areaid" id="areaid3" lay-filter="areaid">
+                                    <option value="">请选择县/区</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline" style="width:322px;margin:5px 0;">
+                                <input type="text" class="layui-input" name="Address" lay-verify="required" placeholder="详细地址" />
+                            </div>
+                        </div>
+                        <div class="layui-form-item" id="parttime">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">照护日期</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input" name="CeraRange" lay-verify="required" id="CeraRange3" placeholder=" 照护起止日期">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">日照护</label>                                
+                                <div class="layui-input-inline">
+                                    <div class="city-select" id="single-select-3-3">
+                                        <div class="city-info">
+                                            <div class="city-input">
+                                                <input type="text" class="layui-input input-search" value="" placeholder="请选择" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <input type="hidden" class="layui-input" name="DateType" id="DateType3" lay-verify="DateType3" />                                        
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">照护地点</label>
+                                <div class="layui-input-inline">
+                                    <div class="city-select" id="single-select-4-3">
+                                        <div class="city-info">
+                                            <div class="city-input">
+                                                <input type="text" class="layui-input input-search" value="" placeholder="请选择" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <input type="hidden" class="layui-input" name="CareAddress" id="CareAddress3" lay-verify="CareAddress3" />
+                                    
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">照护人数</label>
+                                <div class="layui-input-inline">
+                                    <div class="city-select" id="single-select-5-3">
+                                        <div class="city-info">
+                                            <div class="city-input">
+                                                <input type="text" class="layui-input input-search" value="" placeholder="请选择" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <input type="hidden" class="layui-input" name="CarePerson" id="CarePerson3" lay-verify="CarePerson3" />
+                                    
+                                </div>
+                            </div>
+                        </div>                        
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">其他需求</label>
+                            <div class="layui-input-inline">
+                                <textarea placeholder="请输入其他需求(可为空)" name="memo" class="layui-textarea" style="width:322px;max-height:60px;"></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item" style="display:none;">
+                            <label class="layui-form-label">需求类别</label>
+                            <div class="layui-input-block">
+                                <select name="OrderType" id="OrderType" lay-filter="aihao">
+                                    <option value=""></option>
+                                    <option value="1">课后托管照护</option>
+                                    <option value="2">婴幼照护</option>
+                                    <option value="3" selected="">养老照护</option>
+                                    <option value="4">孕检照护</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <button class="Index_btn" lay-submit="" id="tijiaoData3" lay-filter="save3">提交订单</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--课后照护-->
+        <div class="layui-tab-item">
+            <div class="main" style="margin-top: 0">
+                @*<h2>需求发布</h2>*@
+                <div class="about-btn" style="margin-top:0;">
+                    <form class="layui-form " action="" lay-filter="example">
+
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">课后照护</label>
+                                <div class="layui-input-inline">
+                                    <div class="city-select" id="single-select-1-4">
+                                        <div class="city-info">
+                                            <div class="city-input">
+                                                <input type="text" class="layui-input input-search" value="" placeholder="请选择" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <input type="hidden" class="layui-input" name="ordertitle" id="ordertitle4" lay-verify="ordertitle4" />                                   
+                                </div>
+                            </div>
+                           
+                        </div>
+                        <div class="layui-form-item" style="display:none;">
+                            <label class="layui-form-label">您的情况</label>
+                            <div class="layui-input-block">
+                                <select name="PersonInro" lay-filter="aihao">
+                                    <option value="失能">失能</option>
+                                    <option value="半失能">半失能</option>
+                                    <option value="健康" selected="">健康</option>
+                                </select>
+                            </div>
+                        </div>                        
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">现住址</label>
+                            <div class="layui-input-inline" style="width:90px;">
+                                <select name="provid" id="provid4" lay-filter="provid">
+                                    <option value="">请选择省</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline" style="width:100px;">
+                                <select name="cityid" id="cityid4" lay-filter="cityid">
+                                    <option value="">请选择市</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline" style="width:112px;">
+                                <select name="areaid" id="areaid4" lay-filter="areaid">
+                                    <option value="">请选择县/区</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline" style="width:322px;margin:5px 0;">
+                                <input type="text" class="layui-input" name="Address" lay-verify="required" placeholder="详细地址" />
+                            </div>
+                        </div>
+                        <div class="layui-form-item" id="parttime">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">照护日期</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input" name="CeraRange" lay-verify="required" id="CeraRange4" placeholder=" 照护起止日期">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">日照护</label>
+                                <div class="layui-input-inline">
+                                    <div class="layui-input-inline">
+                                        <div class="city-select" id="single-select-3-4">
+                                            <div class="city-info">
+                                                <div class="city-input">
+                                                    <input type="text" class="layui-input input-search" value="" placeholder="请选择" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <input type="hidden" class="layui-input" name="DateType" id="DateType4" lay-verify="DateType4" />
+                                       
+                                    </div>
+                                </div>                           
+                             </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">照护地点</label>
+                                <div class="layui-input-inline">
+                                    <div class="city-select" id="single-select-4-4">
+                                        <div class="city-info">
+                                            <div class="city-input">
+                                                <input type="text" class="layui-input input-search" value="" placeholder="请选择" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <input type="hidden" class="layui-input" name="CareAddress" id="CareAddress4" lay-verify="CareAddress" />                                  
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">照护人数</label>
+                                <div class="layui-input-inline">
+                                    <div class="city-select" id="single-select-5-4">
+                                        <div class="city-info">
+                                            <div class="city-input">
+                                                <input type="text" class="layui-input input-search" value="" placeholder="请选择" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <input type="hidden" class="layui-input" name="CarePerson" id="CarePerson4" lay-verify="CarePerson4" />
+                                   
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">其他需求</label>
+                            <div class="layui-input-inline">
+                                <textarea placeholder="请输入其他需求(可为空)" name="memo" class="layui-textarea" style="width:322px;max-height:60px;"></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item" style="display:none;">
+                            <label class="layui-form-label">需求类别</label>
+                            <div class="layui-input-block">
+                                <select name="OrderType" id="OrderType" lay-filter="aihao">
+                                    <option value=""></option>
+                                    <option value="1">课后托管照护</option>
+                                    <option value="2">婴幼照护</option>
+                                    <option value="3" selected="">养老照护</option>
+                                    <option value="4">孕检照护</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <button class="Index_btn" lay-submit="" id="tijiaoData4" lay-filter="save4">提交订单</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--未加载-->
+        <div class="layui-tab-item">内容5</div>
+    </div>
+</div>
+
+
+<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script src="~/Content/js/data.js"></script>
+<script src="~/Content/js/province.js"></script>
+<script type="text/javascript" src="~/Content/index/newcitydata.js"></script>
+<script type="text/javascript" src="~/Content/index/citySelect-1.0.3.js"></script>
+@*<script type="text/javascript" src="/Scripts/jquery-1.10.2.min.js"></script>*@
+<script type="text/javascript">
+    //省市县三级联动
+    var defaults = {
+        s1: 'provid',
+        s2: 'cityid',
+        s3: 'areaid',
+        v1: null,
+        v2: null,
+        v3: null
+    };
+    $(function () {
+        //jquery方法测试
+        $("#tijiaoData1").click(function () {
+
+            //验证登录
+            if (!is_login()) {
+                location.href = "/Home/Login/?ReturnUrl=/Home/Index/";
+            }
+        });
+        //jquery方法测试
+        $("#tijiaoData2").click(function () {
+
+            //验证登录
+            if (!is_login()) {
+                location.href = "/Home/Login/?ReturnUrl=/Home/Index/";
+            }
+        });
+        //jquery方法测试
+        $("#tijiaoData3").click(function () {
+
+            //验证登录
+            if (!is_login()) {
+                location.href = "/Home/Login/?ReturnUrl=/Home/Index/";
+            }
+        });
+        //jquery方法测试
+        $("#tijiaoData4").click(function () {
+
+            //验证登录
+            if (!is_login()) {
+                location.href = "/Home/Login/?ReturnUrl=/Home/Index/";
+            }
+        });
+
+        // 养老方式单选
+        var singleSelect1 = $('#single-select-1').citySelect({
+            dataJson: cityData_1,
+            multiSelect: false,
+            whole: true,
+            shorthand: true,
+            search: false,
+            placeholder: '请选择',
+            onCallerAfter: function (target, values) {
+                $("#ordertitle").val(values.name);
+            }
+        });
+        // 身体情况单选
+        var singleSelect2 = $('#single-select-2').citySelect({
+            dataJson: cityData_2,
+            multiSelect: false,
+            whole: true,
+            shorthand: true,
+            search: false,
+            placeholder: '请选择',
+            onCallerAfter: function (target, values) {
+                $("#PersonInro").val(values.name);
+
+            }
+        });
+        // 日照护方式单选
+        var singleSelect3 = $('#single-select-3').citySelect({
+            dataJson: cityData_3,
+            multiSelect: false,
+            whole: true,
+            shorthand: true,
+            search: false,
+            placeholder: '请选择',
+            onCallerAfter: function (target, values) {
+                $("#DateType").val(values.name);
+
+            }
+        });
+        // 日照护方式单选2
+        var singleSelect3 = $('#single-select-3-2').citySelect({
+            dataJson: cityData_3,
+            multiSelect: false,
+            whole: true,
+            shorthand: true,
+            search: false,
+            placeholder: '请选择',
+            onCallerAfter: function (target, values) {
+                $("#DateType2").val(values.name);
+
+            }
+        });
+        // 日照护方式单选3
+        var singleSelect3 = $('#single-select-3-3').citySelect({
+            dataJson: cityData_3,
+            multiSelect: false,
+            whole: true,
+            shorthand: true,
+            search: false,
+            placeholder: '请选择',
+            onCallerAfter: function (target, values) {
+                $("#DateType3").val(values.name);
+
+            }
+        });
+        // 日照护方式单选4
+        var singleSelect3 = $('#single-select-3-4').citySelect({
+            dataJson: cityData_3,
+            multiSelect: false,
+            whole: true,
+            shorthand: true,
+            search: false,
+            placeholder: '请选择',
+            onCallerAfter: function (target, values) {
+                $("#DateType4").val(values.name);
+
+            }
+        });
+        // 照护地点单选
+        var singleSelect4 = $('#single-select-4').citySelect({
+            dataJson: cityData_4,
+            multiSelect: false,
+            whole: true,
+            shorthand: true,
+            search: false,
+            placeholder: '请选择',
+            onCallerAfter: function (target, values) {
+                $("#CareAddress").val(values.name);
+
+            }
+        });
+        // 照护地点单选2
+        var singleSelect4_2 = $('#single-select-4-2').citySelect({
+            dataJson: cityData_7,
+            multiSelect: false,
+            whole: true,
+            shorthand: true,
+            search: false,
+            placeholder: '请选择',
+            onCallerAfter: function (target, values) {
+                $("#CareAddress2").val(values.name);
+
+            }
+        });
+        // 照护地点单选3
+        var singleSelect4_3 = $('#single-select-4-3').citySelect({
+            dataJson: cityData_7,
+            multiSelect: false,
+            whole: true,
+            shorthand: true,
+            search: false,
+            placeholder: '请选择',
+            onCallerAfter: function (target, values) {
+                $("#CareAddress3").val(values.name);
+
+            }
+        });
+        // 照护地点单选4
+        var singleSelect4_4 = $('#single-select-4-4').citySelect({
+            dataJson: cityData_7,
+            multiSelect: false,
+            whole: true,
+            shorthand: true,
+            search: false,
+            placeholder: '请选择',
+            onCallerAfter: function (target, values) {
+                $("#CareAddress4").val(values.name);
+
+            }
+        });
+        // 照护人数单选
+        var singleSelect5 = $('#single-select-5').citySelect({
+            dataJson: cityData_5,
+            multiSelect: false,
+            whole: true,
+            shorthand: true,
+            search: false,
+            placeholder: '请选择',
+            onCallerAfter: function (target, values) {
+                $("#CarePerson").val(values.name);
+
+            }
+        });
+        // 照护人数单选2
+        var singleSelect5_2 = $('#single-select-5-2').citySelect({
+            dataJson: cityData_5,
+            multiSelect: false,
+            whole: true,
+            shorthand: true,
+            search: false,
+            placeholder: '请选择',
+            onCallerAfter: function (target, values) {
+                $("#CarePerson2").val(values.name);
+
+            }
+        });
+        // 照护人数单选3
+        var singleSelect5_3 = $('#single-select-5-3').citySelect({
+            dataJson: cityData_5,
+            multiSelect: false,
+            whole: true,
+            shorthand: true,
+            search: false,
+            placeholder: '请选择',
+            onCallerAfter: function (target, values) {
+                $("#CarePerson3").val(values.name);
+
+            }
+        });
+        // 照护人数单选4
+        var singleSelect5_4 = $('#single-select-5-4').citySelect({
+            dataJson: cityData_5,
+            multiSelect: false,
+            whole: true,
+            shorthand: true,
+            search: false,
+            placeholder: '请选择',
+            onCallerAfter: function (target, values) {
+                $("#CarePerson4").val(values.name);
+
+            }
+        });
+
+        // 婴幼照护单选
+        var singleSelect1_2 = $('#single-select-1-2').citySelect({
+            dataJson: cityData_6,
+            multiSelect: false,
+            whole: true,
+            shorthand: true,
+            search: false,
+            placeholder: '请选择',
+            onCallerAfter: function (target, values) {
+                $("#ordertitle2").val(values.name);
+            }
+        });
+        // 孕产照护单选
+        var singleSelect1_3 = $('#single-select-1-3').citySelect({
+            dataJson: cityData_8,
+            multiSelect: false,
+            whole: true,
+            shorthand: true,
+            search: false,
+            placeholder: '请选择',
+            onCallerAfter: function (target, values) {
+                $("#ordertitle3").val(values.name);
+            }
+        });
+        // 课后照护单选
+        var singleSelect1_4 = $('#single-select-1-4').citySelect({
+            dataJson: cityData_9,
+            multiSelect: false,
+            whole: true,
+            shorthand: true,
+            search: false,
+            placeholder: '请选择',
+            onCallerAfter: function (target, values) {
+                $("#ordertitle4").val(values.name);
+            }
+        });
+    });
+
+
+    //发布需求养老
+    layui.use(['element', 'carousel', 'form', 'layer', 'upload', 'laydate'], function () {
+        var $ = layui.jquery
+            , upload = layui.upload
+            , form = layui.form
+            , layer = layui.layer
+            , carousel = layui.carousel
+            , element = layui.element
+            , laydate = layui.laydate;
+
+        //图片轮播
+        carousel.render({
+            elem: '#sublunbo'
+            , width: '100%'
+            , height: '440px'
+            , arrow: 'none'
+            , interval: 3000
+        });
+        //日期
+        laydate.render({
+            elem: '#date'
+            , type: 'year'
+        });
+        //时间范围
+        laydate.render({
+            elem: '#CeraRange'
+            //, type: 'time'
+            , range: true
+        });
+
+        //自定义验证规则
+        form.verify({
+            ordertitle: function (value) {
+                if (value == "" || value == null) {
+                    return '请选择养老方式';
+                }
+              
+            }
+            , PersonInro: function (value) {
+                if (value == "" || value == null) {
+                    return '请选择身体情况';
+                }
+               
+            }
+            , DateType: function (value) {
+                if (value == "" || value == null) {
+                    return '请选择日照护方式';
+                }
+              
+            }
+            , CareAddress: function (value) {
+                if (value == "" || value == null) {
+                    return '请选择照护地点';
+                }
+              
+            }
+            , CarePerson: function (value) {
+                if (value == "" || value == null) {
+                    return '请选择照护人数';
+                }
+                
+            }
+            
+        });
+
+
+        //监听提交
+        form.on('submit(save)', function (data) {
+            var prov = $("#provid option:selected").text();
+            var city = $("#cityid option:selected").text();
+            var area = $("#areaid option:selected").text();    
+            $.ajax({
+                type: "POST",
+                url: "/Demand/SetOwnNeedData",
+                data: {
+                    //"totalData": JSON.stringify(data.field)
+                    "Title": data.field.ordertitle,
+                    "PersonInro": data.field.PersonInro,//被照护人情况
+                    "Address": prov + city +area+data.field.Address,
+                    "CeraRange": data.field.CeraRange,//照护起止日期
+                    "DateType": data.field.DateType,//照护方式  如：4H（半天）、10h(白天)、24h（全天）
+                    "CarePerson": data.field.CarePerson,//照护人数
+                    "Memo": data.field.memo,
+                    "OrderClassify": 3,
+                    "OrderType": "养老照护",
+                    "CareAddress": data.field.CareAddress
+                },
+                dataType: "json",
+                success: function (res) {
+
+                    if (res.Statu == 1) {
+                        layer.alert(res.Msg, { skin: 'layui-layer-molv' }, function (index) {
+                            parent.location.href = res.BackUrl;
+                            layer.close(index)
+                        });
+
+                    } else {
+                        layer.alert(res.Msg, { skin: 'layui-layer-molv' });
+                        //layer.closrAll();
+                    }
+                }
+            });
+            return false;
+        });
+
+    });
+
+    //发布需求婴幼儿
+    layui.use(['carousel', 'form', 'layedit', 'layer', 'upload', 'laydate'], function () {
+        var $ = layui.jquery
+            , upload = layui.upload
+            , form = layui.form
+            , layer = layui.layer
+            , carousel = layui.carousel
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+        //图片轮播
+        carousel.render({
+            elem: '#sublunbo2'
+            , width: '100%'
+            , height: '240px'
+            , arrow: 'none'
+            , interval: 3000
+        });
+        //日期
+        laydate.render({
+            elem: '#date'
+            , type: 'year'
+        });
+        //时间范围
+        laydate.render({
+            elem: '#CeraRange2'
+            //, type: 'time'
+            , range: true
+        });
+
+
+        //自定义验证规则
+        form.verify({
+            ordertitle2: function (value) {
+                if (value == "" || value == null) {
+                    return '请选择婴幼照护标题';
+                }
+              
+            }           
+            , DateType2: function (value) {
+                if (value == "" || value == null) {
+                    return '请选择日照护方式';
+                }
+               
+            }
+            , CareAddress2: function (value) {
+                if (value == "" || value == null) {
+                    return '请选择照护地点';
+                }
+             
+            }
+            , CarePerson2: function (value) {
+                if (value == "" || value == null) {
+                    return '请选择照护人数';
+                }
+               
+            }
+
+        });
+
+        //监听提交
+        form.on('submit(save2)', function (data) {
+            var prov = $("#provid2 option:selected").text();
+            var city = $("#cityid2 option:selected").text();
+            var area = $("#areaid2 option:selected").text();    
+            $.ajax({
+                type: "POST",
+                url: "/Demand/SetOwnNeedData",
+                data: {
+                    //"totalData": JSON.stringify(data.field)
+                    "Title": data.field.ordertitle,
+                    "PersonInro": "健康",//被照护人情况
+                    "Address": prov + city + area+ data.field.Address,
+                    "CeraRange": data.field.CeraRange,//照护起止日期
+                    "DateType": data.field.DateType,//照护方式  如：4H（半天）、10h(白天)、24h（全天）
+                    "CarePerson": data.field.CarePerson,//照护人数
+                    "Memo": data.field.memo,
+                    "OrderClassify": 2,
+                    "OrderType": "婴幼照护",
+                    "CareAddress": data.field.CareAddress
+                },
+                dataType: "json",
+                success: function (res) {
+
+                    if (res.Statu == 1) {
+                        layer.alert(res.Msg, { skin: 'layui-layer-molv' }, function (index) {
+                            parent.location.href = res.BackUrl;
+                            layer.close(index)
+                        });
+
+                    } else {
+                        layer.alert(res.Msg, { skin: 'layui-layer-molv' });
+                        //layer.closrAll();
+                    }
+                }
+            });
+            return false;
+        });
+
+    });
+
+    //发布需求孕妇
+    layui.use(['carousel', 'form', 'layedit', 'layer', 'upload', 'laydate'], function () {
+        var $ = layui.jquery
+            , upload = layui.upload
+            , form = layui.form
+            , layer = layui.layer
+            , carousel = layui.carousel
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+        //图片轮播
+        carousel.render({
+            elem: '#sublunbo3'
+            , width: '100%'
+            , height: '240px'
+            , arrow: 'none'
+            , interval: 3000
+        });
+        //日期
+        laydate.render({
+            elem: '#date'
+            , type: 'year'
+        });
+        //时间范围
+        laydate.render({
+            elem: '#CeraRange3'
+            //, type: 'time'
+            , range: true
+        });
+
+
+        //自定义验证规则
+        form.verify({
+            ordertitle3: function (value) {
+                if (value == "" || value == null) {
+                    return '请选择孕产照护标题';
+                }
+                
+            }           
+            , DateType3: function (value) {
+                if (value == "" || value == null) {
+                    return '请选择日照护方式';
+                }
+               
+            }
+            , CareAddress3: function (value) {
+                if (value == "" || value == null) {
+                    return '请选择照护地点';
+                }
+               
+            }
+            , CarePerson3: function (value) {
+                if (value == "" || value == null) {
+                    return '请选择照护人数';
+                }
+              
+            }
+
+        });
+
+        //监听提交
+        form.on('submit(save3)', function (data) {
+            var prov = $("#provid3 option:selected").text();
+            var city = $("#cityid3 option:selected").text();
+            var area = $("#areaid3 option:selected").text();    
+            $.ajax({
+                type: "POST",
+                url: "/Demand/SetOwnNeedData",
+                data: {
+                    //"totalData": JSON.stringify(data.field)
+                    "Title": data.field.ordertitle,
+                    "PersonInro": "健康",//被照护人情况
+                    "Address": prov + city + area+ data.field.Address,
+                    "CeraRange": data.field.CeraRange,//照护起止日期
+                    "DateType": data.field.DateType,//照护方式  如：4H（半天）、10h(白天)、24h（全天）
+                    "CarePerson": data.field.CarePerson,//照护人数
+                    "Memo": data.field.memo,
+                    "OrderClassify": 4,
+                    "OrderType": "孕产照护",
+                    "CareAddress": data.field.CareAddress
+                },
+                dataType: "json",
+                success: function (res) {
+
+                    if (res.Statu == 1) {
+                        layer.alert(res.Msg, { skin: 'layui-layer-molv' }, function (index) {
+                            parent.location.href = res.BackUrl;
+                            layer.close(index)
+                        });
+
+                    } else {
+                        layer.alert(res.Msg, { skin: 'layui-layer-molv' });
+                        //layer.closrAll();
+                    }
+                }
+            });
+            return false;
+        });
+
+    });
+
+    //发布需求课后看护
+    layui.use(['carousel', 'form', 'layedit', 'layer', 'upload', 'laydate'], function () {
+        var $ = layui.jquery
+            , upload = layui.upload
+            , form = layui.form
+            , layer = layui.layer
+            , carousel = layui.carousel
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+        //图片轮播
+        carousel.render({
+            elem: '#sublunbo4'
+            , width: '100%'
+            , height: '240px'
+            , arrow: 'none'
+            , interval: 3000
+        });
+        //日期
+        laydate.render({
+            elem: '#date'
+            , type: 'year'
+        });
+        //时间范围
+        laydate.render({
+            elem: '#CeraRange4'
+            //, type: 'time'
+            , range: true
+        });
+
+
+        //自定义验证规则
+        form.verify({
+            ordertitle4: function (value) {
+                if (value == "" || value == null) {
+                    return '请选择课后照护标题';
+                }
+                
+            }           
+            , DateType4: function (value) {
+                if (value == "" || value == null) {
+                    return '请选择日照护方式';
+                }
+                
+            }
+            , CareAddress4: function (value) {
+                if (value == "" || value == null) {
+                    return '请选择照护地点';
+                }
+               
+            }
+            , CarePerson4: function (value) {
+                if (value == "" || value == null) {
+                    return '请选择照护人数';
+                }
+               
+            }
+
+        });
+
+        //监听提交
+        form.on('submit(save4)', function (data) {
+            
+            var prov= $("#provid4 option:selected").text();
+            var city = $("#cityid4 option:selected").text();
+            var area = $("#areaid4 option:selected").text();          
+           
+            $.ajax({
+                type: "POST",
+                url: "/Demand/SetOwnNeedData",
+                data: {
+                    //"totalData": JSON.stringify(data.field)
+                    "Title": data.field.ordertitle,
+                    "PersonInro": "健康",//被照护人情况
+                    "Address": prov + city + area+ data.field.Address,
+                    "CeraRange": data.field.CeraRange,//照护起止日期
+                    "DateType": data.field.DateType,//照护方式  如：4H（半天）、10h(白天)、24h（全天）
+                    "CarePerson": data.field.CarePerson,//照护人数
+                    "Memo": data.field.memo,
+                    "OrderClassify": 1,
+                    "OrderType": "共享保姆/课后托管照护",
+                    "CareAddress": data.field.CareAddress
+                },
+                dataType: "json",
+                success: function (res) {
+
+                    if (res.Statu == 1) {
+                        layer.alert(res.Msg, { skin: 'layui-layer-molv' }, function (index) {
+                            parent.location.href = res.BackUrl;
+                            layer.close(index)
+                        });
+
+                    } else {
+                        layer.alert(res.Msg, { skin: 'layui-layer-molv' });
+                        //layer.closrAll();
+                    }
+                }
+            });
+            return false;
+        });
+
+    });
+</script>

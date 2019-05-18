@@ -1,0 +1,298 @@
+﻿
+@{
+    ViewBag.Title = "看护/陪护";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="/Content/layui/css/layui.css" rel="stylesheet" />
+<style type="text/css">
+    /*下拉框弹出高度*/
+    .layui-form-select dl {
+        max-height: 160px;
+    }
+    /*性别外框*/
+    .layui-form-pane .layui-form-item[pane] {
+       max-width: 300px;
+    }
+    /*提交按钮*/
+    .layui-btn {
+        width: 50%;
+        background-color: #ff6a00;
+        margin-left: 42%;
+    }
+    /*时间选中颜色*/
+    .layui-laydate .layui-this {
+        background-color: #2b96cc !important;
+    }
+    /*下拉框选中颜色*/
+    .layui-form-select dl dd.layui-this {
+        background-color: #2b96cc;
+    }
+    /*单选选中颜色*/
+    .layui-form-radio > i:hover, .layui-form-radioed > i {
+        color: #2b96cc;
+    }
+    /*单选项*/
+    .layui-form-radio {
+        line-height: 28px;
+        margin: 6px 0px 0 0;
+        padding-right: 0px;
+        cursor: pointer;
+        font-size: 0;
+    }
+    .layui-form-item {
+        margin: 10px 0;
+    }
+    #content {
+        margin-top: 150px;
+    }
+</style>
+
+<section  id="content">
+    <div class="container " style="background:#fff;margin-top:20px;margin-bottom:20px;">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="single-blog blog-details two-column">
+                    <div class="post-content overflow">
+                        <div class="response-area">
+                            @*<h2 class="bold" style="margin-left: 15px;">看护/陪护</h2>*@
+                            <div class="col-md-6">
+                                
+                                <div class="about-image" style="padding:0;">
+                                    <img src="~/Content/img/zhaoping.jpg" alt="About Images">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="about-text" style="color:#ff6a00;">
+                                    <h3 style="color:#ff6a00;text-align:center;">看护/陪护申请事项</h3>
+                                    <p>1.招聘看护/陪护20名，年龄30岁-50岁左右。</p>
+                                    <p>2.主要工作照顾8个月宝宝，上班时间上午8：00-下午5:30左右。</p>
+                                    <p>3.看护/陪护要求：身体健康，干净利索，会做饭，会照顾小孩，有家人一样互相照顾的心态。</p>
+
+                                </div>
+                                
+                                <div class="about-btn">
+                                    <form class="layui-form layui-form-pane" action="">
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">姓名</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="username" lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item" pane="">
+                                            <label class="layui-form-label">性别</label>
+                                            <div class="layui-input-inline">
+                                                <input type="radio" name="sex" value="男" title="男" checked="">
+                                                <input type="radio" name="sex" value="女" title="女">
+                                            </div>
+                                        </div>
+                                         <div class="layui-form-item" pane="">
+                                            <label class="layui-form-label">职位性质</label>
+                                            <div class="layui-input-inline">
+                                                <input type="radio" name="memo" value="全职" title="全职" checked="" lay-filter="zhiwei">
+                                                <input type="radio" name="memo" value="兼职" title="兼职" lay-filter="zhiwei">
+                                            </div>
+                                        </div>
+                                        @*<div class="layui-form-item">
+                                            <label class="layui-form-label">毕业年份</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="date" id="date" placeholder="请输入毕业年份" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>*@
+                                        @*<div class="layui-form-item">
+                                            <label class="layui-form-label">毕业院校</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="school" placeholder="请输入毕业院校" lay-verify="phone" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>*@
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">最高学历</label>
+                                            <div class="layui-input-inline">
+                                                <select name="education" lay-filter="aihao">
+                                                    <option value=""></option>
+                                                    <option value="高中以下">高中以下</option>
+                                                    <option value="高中" selected="">高中</option>
+                                                    <option value="中专/技校">中专/技校</option>
+                                                    <option value="大专">大专</option>
+                                                    <option value="本科">本科</option>
+                                                    <option value="硕士">硕士</option>
+                                                    <option value="博士">博士</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">工作经验</label>
+                                            <div class="layui-input-inline">
+                                                <select name="work" lay-filter="aihao">
+                                                    <option value=""></option>
+                                                    <option value="无经验">无经验</option>
+                                                    <option value="1年以下" selected="">1年以下</option>
+                                                    <option value="1-3年">1-3年</option>
+                                                    <option value="3-5年">3-5年</option>
+                                                    <option value="5-10年">5-10年</option>
+                                                    <option value="10年以上">10年以上</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item" id="parttime" style="display:none;">
+                                            <label class="layui-form-label">兼职时间</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" class="layui-input" name="date_range" id="date_range" placeholder=" 兼职时间范围 ">
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item" pane="">
+                                            <label class="layui-form-label">上门服务</label>
+                                            <div class="layui-input-inline">
+                                                <input type="radio" name="serve1" value="同意" title="同意" checked="">
+                                                <input type="radio" name="serve1" value="不同意" title="不同意">
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item" pane="">
+                                            <label class="layui-form-label">机构服务</label>
+                                            <div class="layui-input-inline">
+                                                <input type="radio" name="serve2" value="同意" title="同意" checked="">
+                                                <input type="radio" name="serve2" value="不同意" title="不同意">
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">薪水报酬</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="salary" placeholder="请输入薪水报酬" lay-verify="number" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+
+                                        <div class="layui-form-item">
+                                            <button class="layui-btn" lay-submit="" id="tijiaoData" lay-filter="save">提交申请</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div><!--/Response-area-->
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>   
+</section>
+<section>
+    <div class="container ">
+        <div class="row">
+            <div class="col-md-9 col-lg-9">
+                <div style="padding:0;">
+                    <img src="~/Content/img/xuanchuan1.png" class="img-zhaoping" alt="About Images">
+                    <img src="~/Content/img/xuanchuan1.png" class="img-zhaoping" alt="About Images">
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3">
+                <div style="padding:0;">
+                    <img src="~/Content/images/blogdetails/6.png" class="img-thumbnail" alt="About Images">
+                    <img src="~/Content/images/blogdetails/6.png" class="img-thumbnail" alt="About Images">
+                    <img src="~/Content/images/blogdetails/6.png" class="img-thumbnail" alt="About Images">
+                    <img src="~/Content/images/blogdetails/6.png" class="img-thumbnail" alt="About Images">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@*<script src="/Scripts/jquery-1.10.2.min.js"></script>
+<script src="/Content/layui/layui.js"></script>*@
+<script type="text/javascript">
+    //页面加载--导航菜单设置选中状态
+    $(function () {
+        $("ul[class='nav navbar-nav'] li").removeClass("active");//删除class属性。
+        $("ul[class='nav navbar-nav'] > li:eq(2)").addClass("active");//设置class属性。
+        $("ul[class='nav navbar-nav'] > li:eq(2)>ul>li:eq(2)").addClass("active");//设置子菜单class属性。
+       
+
+
+        //jquery方法测试
+        $("#tijiaoData").click(function () {
+            
+            //验证登录
+            if (!is_login()) {
+                location.href = "/Home/Login/?ReturnUrl=/PartTime/Chaperonage/";
+            }
+        });
+    });
+    //预约表单
+    layui.use(['jquery','form', 'layedit', 'laydate'], function () {
+        var $ = layui.$ //重点处 
+            ,form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#date'
+            , type: 'year'
+        });
+        //时间范围
+        laydate.render({
+            elem: '#date_range'
+            , type: 'time'
+            , range: true
+        });
+        //监听单选按钮
+        form.on('radio(zhiwei)', function (data) {           
+            var zhiwei= data.value; //被点击的radio的value值
+            if (zhiwei == '兼职') {
+                $("#parttime").css('display', 'block');//显示
+            }else {
+                $("#parttime").css('display', 'none');//隐藏
+            }
+        });  
+
+
+        //监听提交
+        form.on('submit(save)', function (data) {
+
+            $.ajax({
+                type: "POST",
+                url: "/PartTime/ChaperonageData",
+                data: {
+                    "username": data.field.username,
+                    "education": data.field.education,
+                    "work": data.field.work,
+                    "date_range": data.field.date_range,
+                    "serve1": data.field.serve1,
+                    "serve2": data.field.serve2,
+                    "salary": data.field.salary,
+                    "sex": data.field.sex,
+                    "memo": data.field.memo
+                },
+                dataType: "json",
+                success: function (res) {
+
+                    if (res.Statu == 1) {
+                        layer.alert(res.Msg, { skin: 'layui-layer-molv' }, function (index) {
+                            location.href = res.BackUrl;
+                            layer.close(index)
+                        });
+
+                    } else {
+                        layer.alert(res.Msg, { skin: 'layui-layer-molv' });
+                        layer.closrAll();
+                    }
+                }
+            });
+            return false;
+        });
+
+    });
+
+     //判断当前是否登录
+    function is_login() {
+        var login = '@Request.IsAuthenticated';
+        if (login == "False") {
+            return false;
+        } else {
+            return true;
+        }
+    }
+</script>

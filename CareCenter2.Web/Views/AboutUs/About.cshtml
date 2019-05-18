@@ -1,0 +1,90 @@
+﻿@{              
+    ViewBag.Title = "关于我们";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model List<CareCenter2.DB.tb_Context>
+<style>
+    .about-text p img {
+        display: block;
+        margin: 0 auto;
+        width: 85%;
+        height: 480px;
+    }
+
+    .about-text {
+        text-align: left;
+        font-size: 18px;
+    }
+
+        .about-text h3 {
+            font-size: 34px;
+            padding-bottom: 20px;
+            text-align:center;
+        }
+
+        .about-text p {
+            margin: 4% auto;
+            font-size: 16px;
+            letter-spacing: 2px;
+            line-height: 37px;
+        }
+    #content {
+        margin-top: 150px;
+    }
+</style>
+@{
+    if (Model.Count > 0)
+    {
+        <section id="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="single-blog blog-details two-column">
+                            <div class="post-content overflow">
+                                <div class="response-area">
+                                    <h2 class="bold">关于我们</h2>
+                                    <div class="about-text">
+                                        <h3>@Model[0].Title</h3>
+                                        <p>@Model[0].Explain</p>
+                                        <p>@Html.Raw(Model[0].Intro)</p>
+                                    </div>
+
+                                </div><!--/Response-area-->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+}
+
+
+<script src="/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    //页面加载--导航菜单设置选中状态
+    $(function () {
+        $("ul[class='nav navbar-nav'] li").removeClass("active");//删除class属性。
+        $("ul[class='nav navbar-nav'] > li:eq(4)").addClass("active");//设置class属性。
+        $("ul[class='nav navbar-nav'] > li:eq(4)>ul>li:eq(0)").addClass("active");//设置子菜单class属性。
+    
+        //var logo = sessionStorage.getItem("logo");
+        //if (logo == '杰出养老') {
+        //    //养老
+        //    $("#infantcare").css('display', 'none');//隐藏
+        //    $("#oldeyear").css('display', 'block');//显示
+        //    $("#logo").html("杰出养老");
+        //} else if (logo == '杰出婴幼陪护') {
+        //    $("#oldeyear").css('display', 'none');//隐藏
+        //    $("#infantcare").css('display', 'block');//显示
+        //    $("#logo").html("杰出婴幼陪护");
+        //} else {
+        //    $("#oldeyear").css('display', 'none');//隐藏
+        //    $("#infantcare").css('display', 'none');//显示
+        //    $("#logo").html("照护中心");
+        //}
+    });
+</script>
+
+

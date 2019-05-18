@@ -1,0 +1,130 @@
+﻿
+@{
+    ViewBag.Title = "派发需求给服务方";
+    Layout = null;
+}
+@model List<CareCenter2.DB.OrderModel>
+<link href="/Content/layui/css/layui.css" rel="stylesheet" />
+<style>
+    .layui-form-label {
+        width: 100px;
+    }
+
+    .layui-input, .layui-textarea {
+        display: block;
+        width: 60%;
+        padding-left: 10px;
+    }
+    .layui-form-select .layui-edge {       
+        right: 40%;           
+    }
+    .layui-form-select dl {       
+        left: 20px;       
+        min-width: 60%;      
+    }
+</style>
+<div class="main-page signup-page">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>选择服务方</legend>
+    </fieldset>
+    <form class="layui-form" method="post" enctype="multipart/form-data">
+        <div class="layui-form-item" hidden>
+            <label class="layui-form-label">订单ID</label>
+            <div class="layui-input-block">
+                <input type="text" name="OrderID" id="OrderID" lay-verify="required" autocomplete="off" value="@Model[0].OrderID" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">需求昵称</label>
+            <div class="layui-input-block">
+                <input type="text" name="NickName" id="NickName" lay-verify="required" autocomplete="off" value="@Model[0].NickName" class="layui-input" disabled>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">手机号码</label>
+            <div class="layui-input-block">
+                <input type="text" name="Mobile" id="Mobile" lay-verify="required|phone" autocomplete="off" value="@Model[0].UserPhone" class="layui-input" disabled>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">需求标题</label>
+            <div class="layui-input-block">
+                <input type="text" name="RealName" id="RealName" lay-verify="required" autocomplete="off" value="@Model[0].OrderTitle" class="layui-input" disabled>
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="color:#01AAED;">服务人员</label>
+            <div class="layui-input-block">
+                <select name="AdminUserID" lay-verify="AdminUserID">
+                    <option value="-1">请选择服务人员</option>
+                    @{
+                        foreach (var item in (List<CareCenter2.DB.tb_User>)ViewData["ParsonList"])
+                        {
+                            <option value="@item.ID">@(item.Role == 1 ? "保姆" : (item.Role == 2 ? "教师" : "陪护/看护"))--@item.NickName--@(item.Sex == 1 ? "男" : "女")--@item.UserPhone</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block ">
+                <button class="layui-btn" lay-submit="" lay-filter="UploadFile">确定</button>
+                @*<button type="reset" class="layui-btn layui-btn-primary">重置</button>*@
+            </div>
+        </div>
+    </form>
+</div>
+<script src="/Scripts/jquery-1.10.2.min.js"></script>
+<script src="/Content/layui/layui.js"></script>
+<script>
+    layui.use(['form', 'layedit', 'layer', 'upload'], function () {
+
+        var $ = layui.jquery
+            , upload = layui.upload
+            , form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit;
+
+        //自定义验证规则
+        form.verify({
+            AdminUserID: function (val) {
+
+                if (val == "" || val == null || val == -1) {
+                    return '请选择服务人员';
+                }
+            }
+        });
+
+        //监听提交
+        form.on('submit(UploadFile)', function (data) {
+
+            $.ajax({
+                type: "POST",
+                url: "/MemberM/NeedToCareParsonData/",
+                data: {
+                    "OrderID": data.field.OrderID,
+                    "AdminUserID": data.field.AdminUserID
+                    
+                },
+                dataType: "json",
+                success: function (res) {
+                    if (res.Statu == 1) {
+                        layer.alert(res.Msg, { skin: 'layui-layer-lan' }, function (index) {
+                            parent.location.href = res.BackUrl;
+                            layer.close(index);
+                        });
+                    } else {
+                        layer.alert(res.Msg, { skin: 'layui-layer-lan' });
+                    }
+                }
+            });
+            return false;
+        });
+
+    });
+</script>
+
+

@@ -1,0 +1,552 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CareCenterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_Admins">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdminID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NickName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdminPwd" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RealName" Type="varchar" MaxLength="50" />
+          <Property Name="Mobile" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastLoginTime" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Memo" Type="varchar" MaxLength="200" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Comment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FaBuUserID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrderID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ComIntor" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Memo" Type="varchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Context">
+          <Key>
+            <PropertyRef Name="ContextID" />
+          </Key>
+          <Property Name="ContextID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="100" />
+          <Property Name="Explain" Type="varchar" MaxLength="200" />
+          <Property Name="Intro" Type="text" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Memo" Type="varchar" MaxLength="200" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_MoneyRecord">
+          <Key>
+            <PropertyRef Name="MoneyID" />
+          </Key>
+          <Property Name="MoneyID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MoneyIntor" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MoneyClassify" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Memo" Type="varchar" MaxLength="200" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Need">
+          <Key>
+            <PropertyRef Name="NeedID" />
+          </Key>
+          <Property Name="NeedID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NeedTitle" Type="varchar" MaxLength="100" />
+          <Property Name="NeedType" Type="varchar" MaxLength="50" />
+          <Property Name="NeedIntor" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NeedClassify" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Memo" Type="varchar" MaxLength="200" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdminUserID" Type="varchar" MaxLength="50" />
+          <Property Name="OrderTitle" Type="nvarchar" MaxLength="200" />
+          <Property Name="PersonInro" Type="varchar" MaxLength="100" />
+          <Property Name="OrderType" Type="varchar" MaxLength="50" />
+          <Property Name="OrderIntor" Type="nvarchar(max)" />
+          <Property Name="OrderClassify" Type="int" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="200" />
+          <Property Name="CeraRange" Type="varchar" MaxLength="100" />
+          <Property Name="DateType" Type="varchar" MaxLength="50" />
+          <Property Name="CareAddress" Type="varchar" MaxLength="50" />
+          <Property Name="CarePerson" Type="varchar" MaxLength="10" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Memo" Type="varchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_PartTime">
+          <Key>
+            <PropertyRef Name="PartTimeID" />
+          </Key>
+          <Property Name="PartTimeID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="Sex" Type="varchar" MaxLength="10" />
+          <Property Name="Post" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SchoolName" Type="varchar" MaxLength="50" />
+          <Property Name="GraduationYear" Type="varchar" MaxLength="10" />
+          <Property Name="Education" Type="varchar" MaxLength="50" />
+          <Property Name="YearWork" Type="varchar" MaxLength="50" />
+          <Property Name="DateRange" Type="varchar" MaxLength="50" />
+          <Property Name="RoomService" Type="varchar" MaxLength="10" />
+          <Property Name="AgencyService" Type="varchar" MaxLength="10" />
+          <Property Name="Salary" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Memo" Type="varchar" MaxLength="200" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Pictuer">
+          <Key>
+            <PropertyRef Name="PicID" />
+          </Key>
+          <Property Name="PicID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PicTitle" Type="nvarchar" MaxLength="100" />
+          <Property Name="PicUrl" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="OrderID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Memo" Type="varchar" MaxLength="200" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LoginID" Type="varchar" MaxLength="20" />
+          <Property Name="NickName" Type="varchar" MaxLength="20" />
+          <Property Name="LoginPwd" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RealName" Type="varchar" MaxLength="50" />
+          <Property Name="UserEmail" Type="varchar" MaxLength="50" />
+          <Property Name="UserPhone" Type="varchar" MaxLength="20" />
+          <Property Name="Sex" Type="int" Nullable="false" />
+          <Property Name="Education" Type="varchar" MaxLength="50" />
+          <Property Name="YearWork" Type="varchar" MaxLength="50" />
+          <Property Name="LastLognTime" Type="datetime" Nullable="false" />
+          <Property Name="GoldMoney" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SGoldMoney" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Points" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" />
+          <Property Name="ImgUrl" Type="nvarchar" MaxLength="400" />
+          <Property Name="Memo" Type="varchar" MaxLength="200" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="Role" Type="int" Nullable="false" />
+          <Property Name="RoleStatus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Video">
+          <Key>
+            <PropertyRef Name="VideoID" />
+          </Key>
+          <Property Name="VideoID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="VideoTitle" Type="nvarchar" MaxLength="200" />
+          <Property Name="VideoUrl" Type="nvarchar" MaxLength="400" />
+          <Property Name="OrderID" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Memo" Type="varchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="CareCenterModelStoreContainer">
+          <EntitySet Name="tb_Admins" EntityType="Self.tb_Admins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Comment" EntityType="Self.tb_Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Context" EntityType="Self.tb_Context" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_MoneyRecord" EntityType="Self.tb_MoneyRecord" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Need" EntityType="Self.tb_Need" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Order" EntityType="Self.tb_Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_PartTime" EntityType="Self.tb_PartTime" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Pictuer" EntityType="Self.tb_Pictuer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_User" EntityType="Self.tb_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Video" EntityType="Self.tb_Video" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CareCenterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tb_Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OrderTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="OrderIntor" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OrderClassify" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Memo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OrderType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AdminUserID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PersonInro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CeraRange" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DateType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CareAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CarePerson" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tb_Pictuer">
+          <Key>
+            <PropertyRef Name="PicID" />
+          </Key>
+          <Property Name="PicID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PicTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PicUrl" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OrderID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="tb_Video">
+          <Key>
+            <PropertyRef Name="VideoID" />
+          </Key>
+          <Property Name="VideoID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VideoTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="VideoUrl" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="OrderID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Memo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="CareCenterEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_Order" EntityType="Self.tb_Order" />
+          <EntitySet Name="tb_Pictuer" EntityType="Self.tb_Pictuer" />
+          <EntitySet Name="tb_Video" EntityType="Self.tb_Video" />
+          <EntitySet Name="tb_User" EntityType="CareCenterModel.tb_User" />
+          <EntitySet Name="tb_MoneyRecord" EntityType="CareCenterModel.tb_MoneyRecord" />
+          <EntitySet Name="tb_PartTime" EntityType="CareCenterModel.tb_PartTime" />
+          <EntitySet Name="tb_Need" EntityType="CareCenterModel.tb_Need" />
+          <EntitySet Name="tb_Comment" EntityType="CareCenterModel.tb_Comment" />
+          <EntitySet Name="tb_Admins" EntityType="CareCenterModel.tb_Admins" />
+          <EntitySet Name="tb_Context" EntityType="CareCenterModel.tb_Context" />
+        </EntityContainer>
+        <EntityType Name="tb_User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LoginID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NickName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LoginPwd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RealName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Sex" Type="Int32" Nullable="false" />
+          <Property Name="Education" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="YearWork" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastLognTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="GoldMoney" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="SGoldMoney" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Points" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="ImgUrl" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Role" Type="Int32" Nullable="false" />
+          <Property Name="RoleStatus" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_MoneyRecord">
+          <Key>
+            <PropertyRef Name="MoneyID" />
+          </Key>
+          <Property Name="MoneyID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Money" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="MoneyIntor" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MoneyClassify" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="tb_PartTime">
+          <Key>
+            <PropertyRef Name="PartTimeID" />
+          </Key>
+          <Property Name="PartTimeID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Sex" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Post" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SchoolName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GraduationYear" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Education" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="YearWork" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateRange" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RoomService" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="AgencyService" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Salary" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tb_Need">
+          <Key>
+            <PropertyRef Name="NeedID" />
+          </Key>
+          <Property Name="NeedID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NeedTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NeedType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NeedIntor" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NeedClassify" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="tb_Comment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FaBuUserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ComIntor" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Memo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="tb_Admins">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AdminID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NickName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AdminPwd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RealName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LastLoginTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="tb_Context">
+          <Key>
+            <PropertyRef Name="ContextID" />
+          </Key>
+          <Property Name="ContextID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Explain" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Intro" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Memo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CareCenterModelStoreContainer" CdmEntityContainer="CareCenterEntities">
+          <EntitySetMapping Name="tb_Order">
+            <EntityTypeMapping TypeName="CareCenterModel.tb_Order">
+              <MappingFragment StoreEntitySet="tb_Order">
+                <ScalarProperty Name="CarePerson" ColumnName="CarePerson" />
+                <ScalarProperty Name="CareAddress" ColumnName="CareAddress" />
+                <ScalarProperty Name="DateType" ColumnName="DateType" />
+                <ScalarProperty Name="CeraRange" ColumnName="CeraRange" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PersonInro" ColumnName="PersonInro" />
+                <ScalarProperty Name="AdminUserID" ColumnName="AdminUserID" />
+                <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="OrderTitle" ColumnName="OrderTitle" />
+                <ScalarProperty Name="OrderIntor" ColumnName="OrderIntor" />
+                <ScalarProperty Name="OrderClassify" ColumnName="OrderClassify" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Pictuer">
+            <EntityTypeMapping TypeName="CareCenterModel.tb_Pictuer">
+              <MappingFragment StoreEntitySet="tb_Pictuer">
+                <ScalarProperty Name="PicID" ColumnName="PicID" />
+                <ScalarProperty Name="PicTitle" ColumnName="PicTitle" />
+                <ScalarProperty Name="PicUrl" ColumnName="PicUrl" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Video">
+            <EntityTypeMapping TypeName="CareCenterModel.tb_Video">
+              <MappingFragment StoreEntitySet="tb_Video">
+                <ScalarProperty Name="VideoID" ColumnName="VideoID" />
+                <ScalarProperty Name="VideoTitle" ColumnName="VideoTitle" />
+                <ScalarProperty Name="VideoUrl" ColumnName="VideoUrl" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_User">
+            <EntityTypeMapping TypeName="CareCenterModel.tb_User">
+              <MappingFragment StoreEntitySet="tb_User">
+                <ScalarProperty Name="RoleStatus" ColumnName="RoleStatus" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="ImgUrl" ColumnName="ImgUrl" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="SGoldMoney" ColumnName="SGoldMoney" />
+                <ScalarProperty Name="GoldMoney" ColumnName="GoldMoney" />
+                <ScalarProperty Name="LastLognTime" ColumnName="LastLognTime" />
+                <ScalarProperty Name="YearWork" ColumnName="YearWork" />
+                <ScalarProperty Name="Education" ColumnName="Education" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
+                <ScalarProperty Name="LoginPwd" ColumnName="LoginPwd" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_MoneyRecord">
+            <EntityTypeMapping TypeName="CareCenterModel.tb_MoneyRecord">
+              <MappingFragment StoreEntitySet="tb_MoneyRecord">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="MoneyClassify" ColumnName="MoneyClassify" />
+                <ScalarProperty Name="MoneyIntor" ColumnName="MoneyIntor" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="MoneyID" ColumnName="MoneyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_PartTime">
+            <EntityTypeMapping TypeName="CareCenterModel.tb_PartTime">
+              <MappingFragment StoreEntitySet="tb_PartTime">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="AgencyService" ColumnName="AgencyService" />
+                <ScalarProperty Name="RoomService" ColumnName="RoomService" />
+                <ScalarProperty Name="DateRange" ColumnName="DateRange" />
+                <ScalarProperty Name="YearWork" ColumnName="YearWork" />
+                <ScalarProperty Name="Education" ColumnName="Education" />
+                <ScalarProperty Name="GraduationYear" ColumnName="GraduationYear" />
+                <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+                <ScalarProperty Name="Post" ColumnName="Post" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PartTimeID" ColumnName="PartTimeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Need">
+            <EntityTypeMapping TypeName="CareCenterModel.tb_Need">
+              <MappingFragment StoreEntitySet="tb_Need">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="NeedClassify" ColumnName="NeedClassify" />
+                <ScalarProperty Name="NeedIntor" ColumnName="NeedIntor" />
+                <ScalarProperty Name="NeedType" ColumnName="NeedType" />
+                <ScalarProperty Name="NeedTitle" ColumnName="NeedTitle" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="NeedID" ColumnName="NeedID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Comment">
+            <EntityTypeMapping TypeName="CareCenterModel.tb_Comment">
+              <MappingFragment StoreEntitySet="tb_Comment">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ComIntor" ColumnName="ComIntor" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="FaBuUserID" ColumnName="FaBuUserID" />
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Admins">
+            <EntityTypeMapping TypeName="CareCenterModel.tb_Admins">
+              <MappingFragment StoreEntitySet="tb_Admins">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
+                <ScalarProperty Name="AdminPwd" ColumnName="AdminPwd" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Context">
+            <EntityTypeMapping TypeName="CareCenterModel.tb_Context">
+              <MappingFragment StoreEntitySet="tb_Context">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Intro" ColumnName="Intro" />
+                <ScalarProperty Name="Explain" ColumnName="Explain" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ContextID" ColumnName="ContextID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

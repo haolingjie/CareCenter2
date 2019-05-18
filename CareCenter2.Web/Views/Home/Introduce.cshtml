@@ -1,0 +1,526 @@
+﻿
+@{
+    ViewBag.Title = "智区广告";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>智区广告</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    @*<link rel="icon" href="ctrip_favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="ctrip_favicon.ico" type="image/x-icon">*@
+
+    <link href="/Content/Introduce/public.css" rel="stylesheet" />
+    <link href="/Content/Introduce/index.css" rel="stylesheet" />
+    <link href="/Content/Introduce/idangerous.swiper.css" rel="stylesheet" />  
+    <style type="text/css">
+        .pagination {
+            position: absolute;
+            z-index: 20;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .swiper-pagination-switch {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 8px;
+            background: #ccc;
+            margin: 0 5px;
+            opacity: 0.8;
+            cursor: pointer;
+        }
+
+        .swiper-active-switch {
+            background: #007aff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="grid-page" id="J-page-index">
+        <!-- grid-header -->
+        <div class="grid-header">
+            <div class="logo"><a href="#" title="智取广告"><img src="~/Content/Introduce/img/templogo.jpg" alt="logo" style="width: 114px;height: 114px;border-radius: 50%"></a></div>@**@
+            <div class="nav">
+                <div class="g-wrapper">
+                    <ul class="left">
+                        <li><a href="#adform" title="广告形式">广告业务<br><span>Advertising&nbsp;&nbsp;form</span></a></li>
+                        <li><a href="#advantage" title="广告优势">广告优势<br><span>Advertising&nbsp;&nbsp;advantage</span></a></li>
+
+                    </ul>
+                    <ul class="right">
+                        @*<li><a href="strategy.html" title="营销策略">营销策略<br><span>Marketing&nbsp;&nbsp;strategy</span></a></li>*@
+
+                        @*<li><a href="http://pages.ctrip.com/destinationad/201807/kunAI5/index.html" title="鲲&middot;全景营销AI平台"> 鲲&middot;全景营销AI平台 <br /> <span> Ctrip&nbsp;&nbsp;homepage </span> </a> </li>*@
+                        <li><a href="#anli" title="合作案例">合作案例<br><span>Cooperation&nbsp;&nbsp;case</span></a></li>
+                        <li><a href="#adphone" title="联系方式">联系方式<br><span>Contact</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- grid-body -->
+        <div class="grid-body">
+            <div class="focus"><h1>智区 · 全能系照护服务营销平台</h1></div>
+            <div class="advan" id="advantage">
+                <div class="g-wrapper">
+                    <h2>我们的优势</h2>
+                    <p>照护服务平台资源，高效资源共享， 为品牌打造定制化营销提供整合价值平台</p>
+                    <ul class="des">
+                        <li><div class="pic"><img src="/Content/Introduce/img/advan_ico_01.png"></div><h3>在线照护推动者</h3><p>持续8年保持市场第一</p><p>领先地位。</p></li>
+                        <li><div class="pic"><img src="/Content/Introduce/img/advan_ico_02.png"></div><h3>一站式照护服务产品全覆盖</h3><p>整合养老、孕产、婴幼、课后等照护产品链。</p></li>
+                        <li><div class="pic"><img src="/Content/Introduce/img/advan_ico_03.png"></div><h3>中高端价值照护人群</h3><p>3亿优质会员，70%以上用户月收入超过8000。</p></li>
+                        <li><div class="pic"><img src="/Content/Introduce/img/advan_ico_04.png"></div><h3>个性化营销方案</h3><p>满足不同客户需求，成功为其他行业类等广告主提供优质推广方案。</p></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="business" id="adform">
+                <div class="bgpic"></div>
+                <div class="g-wrapper bgcon">
+                    <h2>广告业务</h2>
+                    <p>我们可以为你提供什么</p>
+                    <ul class="des">
+                        <li><h3>品牌合作</h3><p>基于品牌方的推广目标和推广阶段，给予相应合作策略，有效提升品牌声量曝光和阶段性销量提升。</p><a href="#adphone" title="点击联系">点击联系</a></li>
+                        <li><h3>照护周边合作</h3><p>深挖当地照护资源，结合当地照护服务特点和平台用户的数据给予合作规划，助力照护平台新客增加。</p><a href="#adphone" title="点击联系">点击联系</a></li>
+                        <li><h3>BD合作</h3><p>通过置换照护与其他行业的优势资源，扩大双方业务规模，达到双方共赢的效果。</p><a href="#adphone" title="点击联系">点击联系</a></li>
+                        <li><h3>智区合作</h3><p>智区照护旗下优选照护生活平台，通过全业务线联合活动以及高额补贴，带领合作方玩转特色定制化活动。</p><a href="#adphone" title="点击联系">点击联系</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="case" id="anli" style="display:none;">
+                <div class="title">
+                    <h2 id="adcase">合作案例</h2>
+                    <p>为车企、快消、3C、时尚、酒店、航司等行业品牌创造中高端旅游消费的营销空间</p>
+                </div>
+                <div class="case_wrap">
+                    <div id="viewport">
+                        <ul>
+                            <li style="background-color: #005176">
+                                <a href="case_lamer2019.html">
+                                    <div class="pic"><img src="img/case_lamer201901.jpg"><b>快消</b></div>
+                                    <h4>LA MER</h4><span></span>
+                                </a>
+                            </li>
+                            <li style="background-color: #8c1f22">
+                                <a href="case_wey201901.html">
+                                    <div class="pic"><img src="img/case_wey201901.jpg"><b>车企</b></div>
+                                    <h4>WEY</h4><span></span>
+                                </a>
+                            </li>
+                            <li style="background-color: #000000">
+                                <a href="case_honor201901.html">
+                                    <div class="pic"><img src="img/case_honor201901.jpg"><b>3C</b></div>
+                                    <h4>荣耀V20</h4><span></span>
+                                </a>
+                            </li>
+                            <li style="background-color: #e53433">
+                                <a href="case_shilla.html">
+                                    <div class="pic"><img src="img/case_shilla.jpg"><b>免税店</b></div>
+                                    <h4>新罗免税店</h4><span></span>
+                                </a>
+                            </li>
+                            <li style="background-color: #006ba6">
+                                <a href="case_united.html">
+                                    <div class="pic"><img src="img/case_united.jpg"><b>航司</b></div>
+                                    <h4>美联航</h4><span></span>
+                                </a>
+                            </li>
+                            <li style="background-color: #2488e8">
+                                <a href="case_chery201901.html">
+                                    <div class="pic"><img src="img/case_chery201901.jpg"><b>车企</b></div>
+                                    <h4>奇瑞</h4><span></span>
+                                </a>
+                            </li>
+                            <li style="background-color: #d52448">
+                                <a href="case_zst201901.html">
+                                    <div class="pic"><img src="img/case_zst201901.jpg"><b>快消</b></div>
+                                    <h4>资生堂</h4><span></span>
+                                </a>
+                            </li>
+                            <li style="background-color: #001445">
+                                <a href="case_mcbx.html">
+                                    <div class="pic"><img src="img/case_mcbx.jpg"><b>快消</b></div>
+                                    <h4>马爹利</h4><span></span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li style="background-color: #29000C">
+                                <a href="case_etihad0116.html">
+                                    <div class="pic"><img src="img/case_etihad0116.jpg"><b>航司</b></div>
+                                    <h4>阿提哈德航空-第二季</h4><span></span>
+                                </a>
+                            </li>
+                            <li style="background-color: #000000">
+                                <a href="case_gopro.html">
+                                    <div class="pic"><img src="img/case_gopro.jpg"><b>3C</b></div>
+                                    <h4>GoPro</h4><span></span>
+                                </a>
+                            </li>
+                            <li style="background-color: #2f3335">
+                                <a href="case_lp.html">
+                                    <div class="pic"><img src="img/case_lp.jpg"><b>快消化妆品</b></div>
+                                    <h4>LP</h4><span></span>
+                                </a>
+                            </li>
+                            <li style="background-color: #000000">
+                                <a href="case_blackx21.html">
+                                    <div class="pic"><img src="img/case_black21.jpg"><b>手机</b></div>
+                                    <h4>vivo X21 黑金版</h4><span></span>
+                                </a>
+                            </li>
+                            <li style="background-color: #293339">
+                                <a href="case_fresh.html">
+                                    <div class="pic"><img src="img/case_fresh.jpg"><b>快消化妆品</b></div>
+                                    <h4>fresh</h4><span></span>
+                                </a>
+                            </li>
+                            <li style="background-color: #035cb0">
+                                <a href="case_cdfel.html">
+                                    <div class="pic"><img src="img/case_cdfel.jpg"><b>免税店</b></div>
+                                    <h4>cdf</h4><span></span>
+                                </a>
+                            </li>
+                            <li style="background-color: #005d1f">
+                                <a href="case_heineken.html">
+                                    <div class="pic"><img src="img/case_heineken.jpg"><b>快消</b></div>
+                                    <h4>喜力啤酒</h4><span></span>
+                                </a>
+                            </li>
+                            <li style="background-color: #ea4609">
+                                <a href="case_club3.html">
+                                    <div class="pic"><img src="img/case_club3.jpg"><b>车企</b></div>
+                                    <h4>行者俱乐部-东风雪铁龙</h4><span></span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li style="background-color: #d60000">
+                                <a href="case_jnto2018.html">
+                                    <div class="pic"><img src="img/case_jnto2018.jpg"><b>旅游周边</b></div>
+                                    <h4>JNTO</h4><span></span>
+                                </a>
+                            </li>
+                            <li style="background-color: #000000">
+                                <a href="case_axela.html">
+                                    <div class="pic"><img src="img/case_axela.jpg"><b>车企</b></div>
+                                    <h4>长安马自达昂克赛拉</h4><span></span>
+                                </a>
+                            </li>
+                            <li style="background-color: #013672">
+                                <a href="case_spdbank.html">
+                                    <div class="pic"><img src="img/case_spdbank.jpg"><b>金融</b></div>
+                                    <h4>浦发银行信用卡</h4><span></span>
+                                </a>
+                            </li>
+                            <li style="background-color: #f30b16">
+                                <a href="case_hly.html">
+                                    <div class="pic"><img src="img/case_hly.jpg"><b>快消</b></div>
+                                    <h4>好丽友</h4><span></span>
+                                </a>
+                            </li>
+                            <li style="background-color: #000000">
+                                <a href="case_honor9.html">
+                                    <div class="pic"><img src="img/case_honor9.jpg"><b>手机</b></div>
+                                    <h4>荣耀 9</h4><span></span>
+                                </a>
+                            </li>
+                            <li style="background-color: #000000">
+                                <a href="case_mont.html">
+                                    <div class="pic"><img src="img/case_mont.jpg"><b>快消</b></div>
+                                    <h4>万宝龙</h4><span></span>
+                                </a>
+                            </li>
+                            <li style="background-color: #a2512a">
+                                <a href="case_ctrek.html">
+                                    <div class="pic"><img src="img/case_05.jpg"><b>车企</b></div>
+                                    <h4>一汽大众</h4><span></span>
+                                </a>
+                            </li>
+                            <li style="background-color: #eb0028">
+                                <a href="case_oneplus.html">
+                                    <div class="pic"><img src="img/case_oneplus5.jpg"><b>手机</b></div>
+                                    <h4>OnePlus 5</h4><span></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="control">
+                        <button id="prev"></button>
+                        <a class="more" href="case_all.html" target="_blank" rel="noopener noreferrer" title="更多">more</a>
+                        <button id="next"></button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="scheme" id="adscheme">
+                <div class="g-wrapper">
+                    <div class="title">
+                        <h2>智区照护营销策略</h2>
+                        <p>我们拥有哪些可以帮您实现营销目的的方案</p>
+                    </div>
+                    <div class="content">
+                        <div class="row one">
+                            <img src="/Content/Introduce/img/scheme_01.png">
+                            <h4>原生产品策略</h4>
+                        </div>
+                        <div class="row one">
+                            <img src="/Content/Introduce/img/scheme_02.png">
+                            <h4>活动策略</h4>
+                        </div>
+                        <div class="row">
+                            <img src="/Content/Introduce/img/scheme_03.png">
+                            <h4>影响力策略</h4>
+                        </div>
+                    </div>
+                    <div class="content02">
+                        <div class="row two">
+                            <img src="/Content/Introduce/img/scheme_04.png">
+                            <h4>大数据策略</h4>
+                        </div>
+                        <div class="row">
+                            <img src="/Content/Introduce/img/scheme_05.png">
+                            <h4>线下策略</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn">
+                    <a href="javascript:;" title="了解详情">了解详情</a>
+                </div>
+            </div>
+            <div class="brand" style="display:none;">
+                <div class="g-wrapper">
+                    <div class="title">
+                        <h2>合作品牌</h2>
+                        <p>“精营”之旅，让选择更简单</p>
+                    </div>
+                    <div class="customer">
+                        <ul>
+                            <li><div class="add"><i class="broder01"></i></div></li>
+                            <li><div class="add"><i class="broder02"></i></div></li>
+                            <li><div class="add"><i class="broder03"></i></div></li>
+                            <li><div class="add"><i class="broder04"></i></div></li>
+                            <li><div class="add"><i class="broder05"></i></div></li>
+                            <li><div class="add"><i class="broder06"></i></div></li>
+                            <li><div class="add"><i class="broder07"></i></div></li>
+                            <li><div class="add"><i class="broder08"></i></div></li>
+                            <li><div class="add"><i class="broder09"></i></div></li>
+                            <li><div class="add"><i class="broder10"></i></div></li>
+                            <li><div class="add"><i class="broder11"></i></div></li>
+                            <li><div class="add"><i class="broder12"></i></div></li>
+                            <li><div class="add"><i class="broder13"></i></div></li>
+                            <li><div class="add"><i class="broder14"></i></div></li>
+                            <li><div class="add"><i class="broder15"></i></div></li>
+                        </ul>
+                    </div>
+                    <div class="btn">
+                        <a href="javascript:;" title="更多品牌">更多品牌</a>
+                    </div>
+                </div>
+            </div>
+            <div class="vip" style="display:none;">
+                <div class="g-wrapper swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <ul>
+                                <li class="v_left">
+                                    <div class="photo"><img src="img/vip01.jpg" alt="vip"></div>
+                                    <div class="quote"></div>
+                                    <div class="talk"><p style="font-family: arial;line-height: 20px;">Our Marketing Campaign with Ctrip has been a great success due to Ctrip’s huge audience and professional service delivery. We look forward to continue working very closely with Ctrip’s marketing department as we consider it a great tool to reach potential customers as well as to spread word and advertise our All Inclusive Concept by RIU Hotels & Resorts.</p><span>Sandra Robles&nbsp;&nbsp;RIU Hotels & Resorts全球销售总监</span></div>
+                                </li>
+                                <li class="v_right">
+                                    <div class="photo"><img src="img/vip02.jpg" alt="vip"></div>
+                                    <div class="quote"></div>
+                                    <div class="talk"><p>シートリップとの代理店契約に至るにあたり、顧客満足を得るまでたゆまぬ努力をしてきました。お客様への広告提案においてはヒアリングを重ね、お客様それぞれに合わせたプロモーションをご提案させていただきました。シートリップは絶大な信頼を置ける素晴らしいパートナーであり、今後につきましても、更なる飛躍を目指した、より強固な協力体制作りを進めて参ります</p><span>谭玉峰&nbsp;&nbsp;インタセクト·コミュニケーションズ株式会社</span></div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="swiper-slide">
+                            <ul>
+                                <li class="v_left">
+                                    <div class="photo"><img src="img/vip03.jpg" alt="vip"></div>
+                                    <div class="quote"></div>
+                                    <div class="talk"><p style="font-family: arial;line-height: 20px;">Ctrip was a great strategic partner and provided extensive knowledge to support our turnaround. They have been responsive, flexible and proactive to the needs of our business. We look forward to further developing our collaboration with them for many years to come.<div>&nbsp;&nbsp;</div></p><span>Yan Lee&nbsp;&nbsp; Chief Product Officer<br>iClick Interactive Asia Limited</span></div>
+                                </li>
+                                <li class="v_right">
+                                    <div class="photo"><img src="img/vip01.jpg" alt="vip"></div>
+                                    <div class="quote"></div>
+                                    <div class="talk"><p style="font-family: arial;line-height: 20px;">Our Marketing Campaign with Ctrip has been a great success due to Ctrip’s huge audience and professional service delivery. We look forward to continue working very closely with Ctrip’s marketing department as we consider it a great tool to reach potential customers as well as to spread word and advertise our All Inclusive Concept by RIU Hotels & Resorts.</p><span>Sandra Robles&nbsp;&nbsp;RIU Hotels & Resorts全球销售总监</span></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="pagination"></div>
+                </div>
+            </div>
+            <div class="news">
+                <div class="g-wrapper">
+                    <div class="title">
+                        <h2 id="adnews">资讯中心</h2>
+                        <p>了解最新合作动态</p>
+                    </div>
+                    <div class="simply-scroll simply-scroll-container">
+                        <div class="simply-scroll-clip">
+                            <ul class="simply-scroll-list">
+                                 <li>
+                                  <a href="news03_core.html">
+                                    <span class="time">2017-03-07</span>
+                                    <i class="circle"></i>
+                                    <h5>智区照护2019 核心代理发布会</h5>
+                                    <p>安沃传媒、去哪儿、北京品众互动网络营销技术有限公司、上海忻威文化传媒有限公司等多家......</p>
+                                  </a>
+                                </li> 
+                                <li>
+                                    <a href="news05_rank.html">
+                                        <span class="time">2019-01-23</span>
+                                        <i class="circle"></i>
+                                        <h5>看完这份智区精选榜，邻居家的小孩都馋哭了</h5>
+                                        <p>智区精选榜2019年焕新升级<br>精选全国热门城市的智区服务<br>呈现最顶尖的服务享受<br>致力于打造高端照护风向标</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="news06_kin.html">
+                                        <span class="time">2018-10-18</span>
+                                        <i class="circle"></i>
+                                        <h5>智区照护广告局实力斩获金投赏，助力品牌“增长下一年”</h5>
+                                        <p>2018年10月18日，有着“广告行业奥斯卡”之称的第十一届金投赏国际创意节在上海落幕。</p>
+                                    </a>
+                                </li>                               
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="line"></div>
+            </div>
+        </div>
+        <!-- grid-footer -->
+        <div class="grid-footer">
+            <div class="contact">
+                <div class="g-wrapper">
+                    <h3 id="adphone">联系我们</h3>
+                    <div class="tel_sns">
+                        <span class="en">(Hong Kong, Macao and Taiwan and overseas)</span>
+                        <div class="tel">
+                            <dl>
+                                <dt>华东：</dt>
+                                <dd>
+                                    021-123456789
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                            <tr>
+                                                <td width="20%">ext.</td>
+                                                <td>197835</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>华南：</dt>
+                                <dd>
+                                    021-123456789
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                            <tr>
+                                                <td width="20%">ext.</td>
+                                                <td>15613</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </dd>
+                            </dl>
+                            <dl><dt>华北：</dt><dd>010-123456789<br>ext.23042<br></dd><br></dl>
+                            <dl><dt>港澳台及海外：</dt><dd>021-123456879<br>ext.12635<br><br></dd></dl>
+                            <dl><dt>邮箱：</dt><dd>123456@zhiqu.com</dd></dl>
+                        </div>
+                        <ul class="sns">
+                            <li><img src="/Content/images/blogdetails/Qrcode .png" width="130" alt="zhiqu">
+                            <p style="text-align:center;margin-top:5px">智区公众号</p>
+                            </li>
+                            <!-- <li><img src="img/ewm_cping.png" alt="cping"></li> -->
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div class="links" style="display:none;">
+                <div class="g-wrapper">
+                    <h3>友情链接</h3>
+                    <ul>
+                        <li><a href="http://www.saicgroup.com/index.shtml" title="上汽集团" target="_blank" rel="noopener noreferrer">上汽集团</a></li>
+                        <li><a href="http://vw.faw-vw.com/zh/cn.html" title="一汽大众" target="_blank" rel="noopener noreferrer">一汽大众</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="http://www.hilton.com.cn/zh-cn/" title="希尔顿酒店" target="_blank" rel="noopener noreferrer">希尔顿酒店</a></li>
+                        <li><a href="http://cn.ihg.com/intercontinental" title="洲际酒店集团" target="_blank" rel="noopener noreferrer">洲际酒店集团</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="http://www.pg.com.cn/" title="宝洁中国" target="_blank" rel="noopener noreferrer">宝洁中国</a></li>
+                        <li><a href="http://www.coca-cola.com.cn/" title="可口可乐" target="_blank" rel="noopener noreferrer">可口可乐</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="https://www.mastercard.com.cn/zh-cn.html" title="万事达卡" target="_blank" rel="noopener noreferrer">万事达卡</a></li>
+                        <li><a href="https://www.sc.com/cn/" title="渣打银行" target="_blank" rel="noopener noreferrer">渣打银行</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="http://www.canon.com.cn/" title="佳能" target="_blank" rel="noopener noreferrer">佳能</a></li>
+                        <li><a href="http://www.samsung.com/cn/" title="三星" target="_blank" rel="noopener noreferrer">三星</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="http://www.welcome2japan.cn/" title="日本旅游局" target="_blank" rel="noopener noreferrer">日本旅游局</a></li>
+                        <li><a href="http://chinese.visitkorea.or.kr/chs/index.jsp" title="韩国旅游局" target="_blank" rel="noopener noreferrer">韩国旅游局</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="http://ccc.spdb.com.cn/" title="浦发信用卡" target="_blank" rel="noopener noreferrer">浦发信用卡</a></li>
+                        <li><a href="http://bank.pingan.com/" title="平安银行" target="_blank" rel="noopener noreferrer">平安银行</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="https://www.wanda.cn/" title="万达集团" target="_blank" rel="noopener noreferrer">万达集团</a></li>
+                        <li><a href="http://www.banyantree.com/zh" title="悦榕庄" target="_blank" rel="noopener noreferrer">悦榕庄</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="http://you.ctrip.com/thematic/events/sml" title="携程美食林" target="_blank" rel="noopener noreferrer">携程美食林</a></li>
+                        <li><a href="http://piao.ctrip.com/" title="玩乐门票" target="_blank" rel="noopener noreferrer">玩乐门票</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="http://huodong.ctrip.com/wifi#ctm_ref=ctr_hp_wifi" title="出境WIFI" target="_blank" rel="noopener noreferrer">出境WIFI</a></li>
+                        <li><a href="http://g.ctrip.com/" title="全球购" target="_blank" rel="noopener noreferrer">全球购</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="legal">Copyright©2019, <a href="javascript:;" target="_blank" rel="noopener noreferrer" title="智区">智区照护.com</a>. All rights reserved.本站版权归<a href="javascripr:;" target="_blank" rel="noopener noreferrer" title="智区">智区</a>所有</div>
+        </div>
+    </div>
+    <input type='hidden' id='page_id' value='10320673348' />
+    <script type='text/javascript' src='http://webresource.c-ctrip.com/code/cquery/LABjs/LAB.js'></script>
+    <script type='text/javascript' src='http://pages.c-ctrip.com/commerce/PubResource/jq/latestJQ.js'></script>
+    <!-- <script type="text/javascript" src="script/jquery.min.js"></script> -->    
+    <script type="text/javascript" src="/Content/Introduce/idangerous.swiper.min.js"></script>
+    <script type="text/javascript" src="/Content/Introduce/index.js"></script>
+    <script type="text/javascript" src="/Content/Introduce/simplyScroll.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".simply-scroll-list").simplyScroll({ orientation: 'horizontal' });
+        })
+    </script>
+    <script>
+
+        var mySwiper = new Swiper('.swiper-container', {
+            autoplay: 5000,
+            loop: true,
+            pagination: '.pagination',
+            paginationClickable: true,
+        })
+    </script>
+</body>
+</html>
+
+

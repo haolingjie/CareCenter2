@@ -1,0 +1,151 @@
+﻿
+@{
+    ViewBag.Title = "个人中心";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model CareCenter2.DB.tb_User
+<link href="/Content/user/css/user.css" rel="stylesheet" />
+
+@{ if (Model != null)
+    {
+        <sectionn id="content">
+            <div class="container " style="margin-top:166px;">
+                <div class="wrap">
+                    @*<div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/User/Index/"><img src="~/Content/user/images/full/1.jpg" alt="logo" /></a>
+                    </div>*@
+                    <div class="header-right "> @*navbar-collapse collapse*@
+                                        <div class="logo">
+                                            <a href="/User/Index/"><img src="/Content/img/HeadImg/login.png" alt="" /> </a>
+                                            <h1>@(Model.NickName == null ? "" : Model.NickName)</h1>
+                                            <p><span style="color:#ff0000;"><i class="fa fa-certificate"></i>@ViewBag.Role</span></p>
+                                        </div>
+                                        <div class="menu">
+                                            <ul class="user-nav">
+                                                <li class="active"><a href="/User/Index/"><i class="fa fa-child"></i>个人主页</a></li>
+                                                <li><a href="/User/OwnOrder/"><i class="fa fa-calendar"></i>待服务订单(工作人员)</a></li>
+                                                <li><a href="/User/OwnNeed/"><i class="fa fa-file-text"></i>已提交订单</a></li>
+                                                <li><a href="/User/OwnApply/"><i class="fa fa-briefcase"></i>我的钱包</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                    <div class="header-left">
+
+                        <div class="main">
+                            <div class="content">
+                                @*<h2>个人中心</h2>*@
+                                <div class="banner">
+                                    <a href="#"><img src="/Content/img/HeadImg/login.png" alt="" style="width:25%;"></a>
+                                    <p style="display:inline-block;font-size:18px;margin-left:5%;">欢迎 <b style="color:#00aeef;font-size:24px;">@(Model.NickName == null ? "" : Model.NickName) </b> 登录个人中心</p>
+                                </div>
+                                <p class="para-top" style="padding: 10px 20px; border: 1px dashed #9ECCFE;">
+                                    欢迎您登录照护中心网站。<br>
+                                    <span style="color: red;">如果您的密码在其他网站也使用，建议您修改本网站密码。</span><br>
+                                    <span style="color:red;">注册会员后，即可享有在线申请兼职新服务。</span><br>
+                                </p>
+                                @*<div class="readmore">
+                        <a href="details.html"><button class="btn btn-3 btn-3e icon-arrow-right">Read More</button></a>
+                    </div>*@
+                                <div class="banner">
+                                    <a href="#"><img src="/Content/user/images/pic2.jpg" alt=""></a>
+                                </div>
+                            </div>
+                            @*<div class="sidebar">
+                    <div class="blog">
+                        <h2>Blogs</h2>
+                        <div class="blog-img">
+                            <img src="/Content/user/images/blog2.jpg" alt="">
+                        </div>
+                        <div class="blog-text">
+                            <a href="#" class="link4">augue duis dolore</a><br>
+                            <span class="color1">USA (2013)</span><br>
+                            <a href="#" class="color2">duis</a> / <a href="#" class="color2">soluta nobis</a><br>
+                            <span class="link-top">Lorems: <a href="#" class="color2">Conse ctetur</a> </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="blog">
+                        <div class="blog-img">
+                            <img src="/Content/user/images/blog1.jpg" alt="">
+                        </div>
+                        <div class="blog-text">
+                            <a href="#" class="link4">augue duis dolore</a><br>
+                            <span class="color1">USA (2013)</span><br>
+                            <a href="#" class="color2">duis</a> / <a href="#" class="color2">soluta nobis</a><br>
+                            <span class="link-top">Lorems: <a href="#" class="color2">Conse ctetur</a> </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="blog">
+                        <div class="blog-img">
+                            <img src="/Content/user/images/blog3.jpg" alt="">
+                        </div>
+                        <div class="blog-text">
+                            <a href="#" class="link4">augue duis dolore</a><br>
+                            <span class="color1">USA (2013)</span><br>
+                            <a href="#" class="color2">duis</a> / <a href="#" class="color2">soluta nobis</a><br>
+                            <span class="link-top">Lorems: <a href="#" class="color2">Conse ctetur</a> </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="readmore">
+                        <a href="details.html"><button class="btn btn-3 btn-3e icon-arrow-right">View All</button></a>
+                    </div>
+                </div>*@
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </sectionn>
+    }
+}
+
+
+<script src="/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    //页面加载--导航菜单设置选中状态
+    $(function () {
+        $("ul[class='nav navbar-nav'] li").removeClass("active");//删除class属性。
+        $("ul[class='nav navbar-nav'] > li:eq(6)").addClass("active");//设置class属性。
+        $("ul[class='nav navbar-nav'] > li:eq(6)>ul>li:eq(0)").addClass("active");//设置子菜单class属性。
+
+        //var logo = sessionStorage.getItem("logo");
+        //if (logo == '杰出养老') {
+        //    //养老
+        //    $("#infantcare").css('display', 'none');//隐藏
+        //    $("#oldeyear").css('display', 'block');//显示
+        //    $("#logo").html("杰出养老");
+        //} else if (logo == '杰出婴幼陪护') {
+        //    $("#oldeyear").css('display', 'none');//隐藏
+        //    $("#infantcare").css('display', 'block');//显示
+        //    $("#logo").html("杰出婴幼陪护");
+        //} else {
+        //    $("#oldeyear").css('display', 'none');//隐藏
+        //    $("#infantcare").css('display', 'none');//显示
+        //    $("#logo").html("照护中心");
+        //}
+
+        //验证登录
+        if (!is_login()) {
+            location.href = "/Home/Login/?ReturnUrl=/User/Index/";
+        }
+    });
+    //判断当前是否登录
+    function is_login() {
+        var login = '@Request.IsAuthenticated';
+        if (login == "False") {
+            return false;
+        } else {
+            return true;
+        }
+    }
+</script>
+

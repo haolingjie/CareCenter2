@@ -1,0 +1,238 @@
+﻿
+@{
+    ViewBag.Title = "我的钱包";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model CareCenter2.DB.tb_User
+<link href="/Content/user/css/user.css" rel="stylesheet" />
+<link href="~/Content/laypage/skin/laypage.css" rel="stylesheet" />
+@{
+    if (Model != null)
+    {
+        <sectionn id="content">
+            <div class="container " style="margin-top:166px;">
+                <div class="wrap">
+                    <div class="header-right">
+                        <div class="logo">
+                            <a href="/User/Index/"><img src="/Content/img/HeadImg/login.png" alt="" /> </a>
+                            <h1>@Model.NickName</h1>
+                            <p><span style="color:#ff0000;"><i class="fa fa-certificate"></i>@ViewBag.Role</span></p>
+                        </div>
+                        <div class="menu">
+                            <ul class="user-nav">
+                                <li><a href="/User/Index/"><i class="fa fa-child"></i>个人主页</a></li>
+                                <li><a href="/User/OwnOrder/"><i class="fa fa-calendar"></i>待服务订单(工作人员)</a></li>
+                                <li><a href="/User/OwnNeed/"><i class="fa fa-file-text"></i>已提交订单</a></li>
+                                <li class="active"><a href="/User/OwnApply/"><i class="fa fa-briefcase"></i>我的钱包</a></li>
+                            </ul>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="header-left">
+                        <div class="main" style="margin-top: 0">
+                            <!--头-->
+                            <div class="center-top">
+                                <div class="center-top-user">
+                                    <div class="user-box">
+                                        <div class="user-head" id="sexImg"><img style="" src="/Content/img/HeadImg/login.png" alt=""></div>
+                                        <div class="user-body">
+                                            <div class="user-txt">你好，<span class="names" style="color:#478dcd;" id="jfUserName">@Model.NickName</span></div>
+                                            <div class="user-tel">@Model.UserPhone</div>
+                                            <div class="user-rank"><span style="width: 40%;color:#478dcd;" id="userLever">@ViewBag.Role</span></div>
+                                            <!-- 一颗星为20% -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="center-top-count">
+                                    <div class="count-usable">
+                                        <p style="text-align: center;" class="count-num" id="workable">@Model.GoldMoney</p>
+                                        <div class="count-name">可用余额</div>
+                                    </div>
+                                    <div class="count-usable" style="display: none;">
+                                        <p style="text-align: center;" class="count-num" id="other_point">0</p>
+                                        <div class="count-name">冻结余额</div>
+                                    </div>
+                                    <div class="count-overdue" style="display: none;">
+                                        <p style="text-align: center;" class="count-num" id="cancel_point">0</p>
+                                        <div class="count-name">本月将过期积分</div>
+                                    </div>
+                                </div>
+                                <div class="readmore">
+                                    <a href="javascript:AddSalary();"><button class="btn btn-3 btn-3e icon-arrow-right">充值</button></a>
+                                </div>
+
+                            </div>
+
+                            <div class="tab-center mt20">                              
+                                <div class="tab-bd mt10">
+                                    <div class="tab-item" style="min-height: 270px;">
+                                        <table class="table table-border-bottom table-border">
+                                            <thead><tr><th width="180">日期</th><th width="180">收入/支出</th><th width="180">项目</th><th width="180">类型</th><th width="">备注</th></tr></thead>
+                                            <tbody id="pageDatalist">
+                                               
+                                            </tbody>
+                                        </table>
+
+                                        <div id="pageNotData"></div>
+                                        @*<div class="empty-box"><div class="empty-pic"><img src="~/Content/user/images/history@2x.png" alt="" width="70" height="64"></div><div class="empty-txt">您还没有充值记录</div></div>*@
+                                    </div>
+                                    <!-------------------翻页---------------------->
+                                    <div style="display:block;line-height:25px;">
+                                        <div class=" font14 font-galy alpha-1" style="display:none;">
+                                            <i class="fa fa-arrow-down" style="color:crimson"></i>
+                                            <div class="font-white">共为您搜索到<b id="pageNumber"></b>条结果,共<b id="pageShu"></b>页</div>
+                                        </div>
+                                        <div id="pageFenYe" style="text-align:center;">
+
+                                        </div>
+                                    </div>
+
+                                    <!-------------------翻页---------------------->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </sectionn>
+    }
+}
+
+
+<script src="/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Content/laypage/laypage.js"></script>
+<script src="~/Content/js/timer.js"></script>
+<script type="text/javascript">
+
+    //转换时间格式
+    function formatDateTime(time) {
+        var datetime = new Date();
+        datetime.setTime(time);
+        var year = datetime.getFullYear();
+        var month = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+        var date = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
+        var hour = datetime.getHours() < 10 ? "0" + datetime.getHours() : datetime.getHours();
+        var minute = datetime.getMinutes() < 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
+        var second = datetime.getSeconds() < 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
+        return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
+    }
+
+
+    //页面加载--导航菜单设置选中状态
+    $(function () {
+        $("ul[class='nav navbar-nav'] li").removeClass("active");//删除class属性。
+        $("ul[class='nav navbar-nav'] > li:eq(6)").addClass("active");//设置class属性。
+        $("ul[class='nav navbar-nav'] > li:eq(6)>ul>li:eq(0)").addClass("active");//设置子菜单class属性。
+        //var logo = sessionStorage.getItem("logo");
+        //if (logo == '杰出养老') {
+        //    //养老
+        //    $("#infantcare").css('display', 'none');//隐藏
+        //    $("#oldeyear").css('display', 'block');//显示
+        //    $("#logo").html("杰出养老");
+        //} else if (logo == '杰出婴幼陪护') {
+        //    $("#oldeyear").css('display', 'none');//隐藏
+        //    $("#infantcare").css('display', 'block');//显示
+        //    $("#logo").html("杰出婴幼陪护");
+        //} else {
+        //    $("#oldeyear").css('display', 'none');//隐藏
+        //    $("#infantcare").css('display', 'none');//显示
+        //    $("#logo").html("照护中心");
+        //}
+         //验证登录
+        if (!is_login()) {
+            location.href = "/Home/Login/?ReturnUrl=/User/OwnApply/";
+        }
+        //分页显示
+        //var matchtype = "@ViewBag.MatchType";//赛事类型 1：足球，2：篮球
+        //var search = "@ViewBag.SearchTxt";//搜索框内容
+        //var ddlDate = "@ViewBag.ddlDate";//获取当前时间段 默认1：近一周，2：近一月，3：近三月
+        var data = "";//查询的数据
+        var pages = "";//总页数
+        $.ajax({
+            type: "POST",
+            url: "/User/OwnApplyData",
+            data: {}, //MatchType: matchtype, SearchTxt: search, ddlDate: ddlDate
+            dataType: "json",
+            success: function (res) {
+
+                if (res.Statu == 1) {
+                    data = eval(res.Data);// res.Data;
+                    //window.parent.location.href = res.BackUrl;
+                    var nums = 5; //每页出现的数量
+                    pages = Math.ceil(data.length / nums); //得到总页数
+
+                    var thisDate = function (curr) {
+                        //此处只是演示，实际场景通常是返回已经当前页已经分组好的数据
+                        var str = '', last = curr * nums - 1;
+                        last = last >= data.length ? (data.length - 1) : last;
+                        for (var i = (curr * nums - nums); i <= last; i++) {
+                            str += '<tr>';
+                            var date = new Date(data[i].CreateDate).Format("yyyy-MM-dd hh:mm");
+                            str += '<td>' + date + '</td>';
+                            if (data[i].MoneyClassify == 1) {
+                                str += '<td style="color:cornflowerblue"> <i class="fa fa-arrow-up" ></i> +' + data[i].Money + '</td>';
+                            } else {
+                                str += '<td style="color:crimson"> <i class="fa fa-arrow-down" ></i> -' + data[i].Money + '</td>';
+                            }
+                            str += '<td>' + data[i].MoneyIntor + '</td>';
+                            //str += '<td>' + "长期 " + '</td>';
+                            if (data[i].MoneyClassify == 1) {
+                                str += '<td>' + "收入记录" + '</td>';
+                            } else {
+                                str += '<td>' + "支出记录" + '</td>';
+                            }
+                            str += '<td>' + data[i].Memo + '</td>';
+                            str += '</tr>';
+
+
+                        }
+                        return str;
+                    };
+
+                    //调用分页
+                    laypage({
+                        cont: 'pageFenYe',
+                        pages: pages,
+                        skin: 'molv', //皮肤
+                        //skip: true, //是否开启跳页
+                        groups: 4,//连续显示分页数
+                        jump: function (obj) {
+                            document.getElementById('pageDatalist').innerHTML = thisDate(obj.curr);//绑定数据
+                            document.getElementById('pageNumber').innerHTML = data.length;//总条数
+                            document.getElementById('pageShu').innerHTML = pages;//总页数
+                        }
+                    });
+
+                } else {
+                    var str = "<div class='empty-box'><div class='empty-pic'><img src='/Content/user/images/history2x.png' alt='' width='70' height='64'></div><div class='empty-txt'>您还没有收支记录</div></div>";
+                    document.getElementById('pageNotData').innerHTML = str;//绑定数据
+                    document.getElementById('pageNumber').innerHTML = 0;//总条数
+                    document.getElementById('pageShu').innerHTML = 0;//总页数
+                }
+            }
+        });
+    });
+
+    //充值
+    function AddSalary() {
+        layer.alert('该功能尚未开放！', { skin: 'layui-layer-lan' });
+    }
+
+
+    //判断当前是否登录
+    function is_login() {
+        var login = '@Request.IsAuthenticated';
+        if (login == "False") {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+</script>
+
+
+
+

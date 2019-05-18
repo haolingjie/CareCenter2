@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewBag.Title = "课后照护数据详情";
+    Layout = null;
+}
+@model List<CareCenter2.DB.OrderModel>
+<!--layui -->
+<link href="/Content/layui/css/layui.css" rel="stylesheet" />
+<!--layui -->
+
+<div class="layui-container">
+
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>课后照护数据详情</legend>
+    </fieldset>
+    @if (Model.Count > 0)
+    {
+        <blockquote class="layui-elem-quote">
+            <span>需求发布者 : <span style="color:#00aeef">@(Model[0].NickName)</span> </span>
+            <span style="margin-left:10px;"> 发布时间 :<span style="color:#00aeef">@Model[0].CreateDate.ToString("yyyy-MM-dd HH:mm")</span>   </span>
+            <span style="margin-left:10px;">
+            类别:
+            @if (Model[0].OrderClassify == 1)
+            {
+                <span style="color:#00aeef">课后看护</span>
+            }
+            else if (Model[0].OrderClassify == 2)
+            {
+                <span style="color:#00aeef">幼儿看护</span>
+            }
+            else if (Model[0].OrderClassify == 3)
+            {
+                <span style="color:#00aeef">敬老看护</span>
+            }
+            else if (Model[0].OrderClassify == 4)
+            {
+                <span style="color:#00aeef">孕检陪护</span>
+            }
+        </span>
+        <span style="margin-left:10px;"> 
+            状态:
+            @if (Model[0].Status == 1)
+            {
+                <span style = "color:#00aeef" > 待对接 </span >  
+            }
+            else if (Model[0].Status == 2)
+            {
+                <span style="color:#00aeef"> 对接中 </span>                                              
+            }
+            else if (Model[0].Status == 3)
+            {
+                <span style="color:#00aeef"> 已对接 </span>                                             
+            }
+                else if (Model[0].Status == 4)
+            {
+                <span style="color:#00aeef"> 待评论 </span>                                             
+            }
+        </span>
+        </blockquote>
+        <!--图片、视频-->
+        <div class="layui-row layui-col-space1">            
+            @foreach (var item in (List<CareCenter2.DB.tb_Video>)ViewData["VideoList"])
+            {
+                <div class="layui-col-xs3">               
+                        @if (!string.IsNullOrEmpty(item.VideoUrl))
+                        {
+                            <video style="width:100%;height:360px" controls="controls">
+                                <source src="@item.VideoUrl" type="video/ogg" />
+                                <source src="@item.VideoUrl" type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
+                        }                
+                </div>
+            }
+            @foreach (var item in (List<CareCenter2.DB.tb_Pictuer>)ViewData["PicList"])
+            {
+            <div class="layui-col-xs3">              
+                    @if (!string.IsNullOrEmpty(item.PicUrl))
+                    {
+                    <img src="@item.PicUrl" style="width: 100%; height: 360px;" alt="">
+                    }    
+            </div>
+            }
+
+        </div>
+
+        <!--具体内容-->
+        <div style="padding: 20px; background-color: #F2F2F2;">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md12">
+
+
+                    <div class="layui-card">
+                        <div class="layui-card-header">@Model[0].OrderTitle</div>
+                        <div class="layui-card-body">
+                            @Html.Raw(Model[0].OrderIntor)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+
+
+
+</div>
+
+

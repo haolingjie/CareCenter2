@@ -1,0 +1,321 @@
+﻿
+@{
+    ViewBag.Title = "新建图文";
+    Layout = null;
+}
+<!--layui -->
+<link href="/Content/layui/css/layui.css" rel="stylesheet" />
+<!--layui -->
+<div class="main" style="margin-top: 0">
+    @*<h2>需求发布</h2>*@
+    <div class="about-btn" style="margin:0 6%;">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>添加图文</legend>
+        </fieldset>
+        <form class="layui-form layui-form-pane" action="">
+            <div class="layui-form-item">
+                <label class="layui-form-label">标题</label>
+                <div class="layui-input-block">
+                    <input type="hidden" name="orderid" value="" autocomplete="off" class="layui-input">
+                    <input type="text" name="Title" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">简介</label>
+                <div class="layui-input-block">
+                    <input type="text" name="Explain" placeholder="请输入简介" lay-verify="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">类别</label>
+                <div class="layui-input-block">
+                    <select name="Type" id="Type" lay-filter="aihao">
+                        <option value=""></option>
+                        <option value="公司团队">公司团队</option>
+                        <option value="工作意义">工作意义</option>
+                        <option value="申请应用">申请应用</option>
+                        <option value="你想知道">你想知道</option>
+                        <option value="注意事项">注意事项</option>                       
+                        <option value="关于我们">关于我们</option>
+                    </select>
+                </div>
+            </div>
+            <!--视频上传/PBook/AddPBook-->
+            <div class="layui-form-item layui-form-text" style="display:none;">
+                <label class="layui-form-label">视频文件</label>
+                <div class="layui-input-inline  layui-upload-drag" id="videoList" style="margin-top:15px;">
+                    <i class="layui-icon layui-icon-add-1" id="shipin" style="color:#d7d7d7;"></i>
+                    @*<p>点击上传，或将文件拖拽到此处</p>*@
+                    <video class="layui-upload-img" id="demo2" style="display:none;width:100px;"></video>
+                </div>
+                <p id="errorVideo"></p>
+                <input type="hidden" value="" name="VideoUrl" id="VideoUrl" />
+                <!--上传视频进度条-->
+                <div class="layui-progress " lay-filter="videoProgress" lay-showPercent="true" style="margin-top:7%;width:50%;margin-left:3%;float:left;line-height:40px;">
+                    (上传视频，支持格式mp4,rm,rmvb）
+                    <br />
+                    <div class="layui-progress-bar layui-bg-red" lay-percent="0%"></div>
+                </div>
+
+            </div>
+            <!--图片上传-->
+            <div class="layui-form-item layui-form-text" style="display:none;">
+                <label class="layui-form-label">图片上传</label>
+                <div class="layui-input-inline  layui-upload-drag" id="ImgList" style="margin-top:15px;">
+                    <i class="layui-icon layui-icon-add-1" id="jiahao" style="color:#d7d7d7;"></i>
+                    @*<p>点击上传，或将文件拖拽到此处</p>*@
+                    <img class="layui-upload-img" id="demo1" style="display:none;width:100px;">
+                </div>
+                <div class="layui-form-mid layui-word-aux" style="margin-top: 80px;">（上传图片,建议尺寸:150*200,大小不超过2M,支持格式jpg|png|gif|bmp|jpeg）</div>
+                <p id="errorImg"></p>
+                <input type="hidden" value="" name="ImgUrl" id="ImgUrl" />
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">内容</label>
+                <div class="layui-input-block" style="background:#fff;">
+                    <textarea class="layui-textarea layui-hide" name="content" lay-verify="content" placeholder="请输入内容" id="Article_editor" autocomplete="off"></textarea>
+
+                </div>
+                <p>（<b style="color:red">上传图片--</b>,建议尺寸:<i style="color:red">880*480</i> 支持格式jpg、png、gif、bmp、jpeg）</p>
+               
+            </div>
+
+
+            <div class="layui-form-item">
+                <button class="layui-btn" lay-submit="" id="tijiaoData" lay-filter="save">发布信息</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/Scripts/jquery-1.10.2.min.js"></script>
+<script src="/Content/layui/layui.js"></script>
+<script>
+
+
+    //发布需求
+    layui.use(['form', 'layedit', 'layer', 'upload', 'laydate'], function () {
+        var $ = layui.jquery
+            , upload = layui.upload
+            , form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#date'
+            , type: 'year'
+        });
+        //插入图片接口
+        layedit.set({
+            uploadImage: {
+                url: '/MemberM/UploadImg/' //接口url
+                , type: 'post' //默认post
+                , xhr: xhrOnProgress
+                , progress: function (value) {//上传进度回调 value进度值
+                    element.progress('demoeidt', value + '%')//设置页面进度条
+                }
+            }
+        });
+
+        //创建一个编辑器
+        var editIndex = layedit.build('Article_editor', {
+            tool: [
+                'strong' //加粗
+                , 'italic' //斜体
+                , 'underline' //下划线
+                , 'del' //删除线
+                , '|' //分割线
+                , 'left' //左对齐
+                , 'center' //居中对齐
+                , 'right' //右对齐
+                , 'image' //插入图片
+                , 'face'
+            ]
+        });
+        //自定义验证规则
+        form.verify({
+            content: function () {
+                var value = layedit.getContent(editIndex);
+                if (value == "") {
+
+                    return '内容不能为空!';
+                }
+                layedit.sync(editIndex);//用于同步编辑器内容到textarea（一般用于异步提交）
+            }
+        });
+        //监听提交
+        form.on('submit(save)', function (data) {
+
+            $.ajax({
+                type: "POST",
+                url: "/UploadFile/AddContextData/",
+                data: {
+                    //"totalData": JSON.stringify(data.field)
+                    "Title": data.field.Title,
+                    "Explain": data.field.Explain,
+                    "Type": $("#Type option:selected").text(),
+                    "Intro": data.field.content
+
+                    //"Memo": data.field.memo,
+                    //"VideoUrl": data.field.VideoUrl,
+                    //"ImgUrl": data.field.ImgUrl
+                    //"OrderClassify": data.field.OrderType,
+
+
+                },
+                dataType: "json",
+                success: function (res) {
+
+                    if (res.Statu == 1) {
+                        parent.layer.alert(res.Msg,  function (index) {
+                            parent.location.href = res.BackUrl;
+                            layer.close(index)
+                        });
+
+                    } else {
+                        layer.alert(res.Msg);
+                        //layer.closrAll();
+                    }
+                }
+            });
+            return false;
+        });
+
+    });
+
+    //上传图片/视频
+    layui.use(['form', 'layedit', 'layer', 'upload', 'element'], function () {
+        var form = layui.form
+            , upload = layui.upload
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , element = layui.element;
+        //单个图片上传
+        var uploadInst = upload.render({
+            elem: '#ImgList'
+            , url: '/MemberM/UploadImgData/'
+            , method: 'POST'
+            , accept: 'images'
+            , xhr: xhrOnProgress
+            , progress: function (value) {//上传进度回调 value进度值
+                element.progress('demoimg', value + '%')//设置页面进度条
+            }
+            //, bindAction: '#testListAction'
+            , choose: function (obj) {
+
+                obj.preview(function (index, file, result) {
+
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+            }
+            , data: {
+
+            }
+            , before: function (obj) {
+
+            }
+            , done: function (res, index, upload) {
+
+                if (res.Statu == 1) { //上传成功
+
+                    //parent.location.href = res.BackUrl;
+                    $("#demo1").css("display", "block");
+                    $("#jiahao").css("display", "none");
+                    $('#demo1').attr('src', res.Data);
+                    $('#ImgUrl').val(res.Data);
+                    layer.closeAll();
+                } else {
+                    layer.alert(res.Msg);
+                    return false;
+
+                }
+
+            }
+            , error: function (index, upload) {
+
+                var demoText = $('#errorImg');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</ a>');
+                demoText.find('.demo-reload').on('click', function () {
+                    uploadInst.upload();
+                });
+            }
+        });
+        //视频
+        var uploadVideo = upload.render({
+            elem: '#videoList'
+            , url: '/MemberM/UploadVideoData/'
+            , method: 'POST'
+            , accept: 'video'
+            , exts: 'mp4'
+            , xhr: xhrOnProgress
+            , progress: function (value) {//上传进度回调 value进度值
+
+                element.progress('videoProgress', value + '%')//设置页面进度条
+            }
+            //, bindAction: '#testListAction'
+            , choose: function (obj) {
+
+                obj.preview(function (index, file, result) {
+
+                    $('#demo2').attr('src', result); //图片链接（base64）
+                });
+            }
+            , data: {
+
+            }
+            , before: function (obj) {
+
+            }
+            , done: function (res, index, upload) {
+
+                if (res.Statu == 1) { //上传成功
+
+                    //parent.location.href = res.BackUrl;
+                    $("#demo2").css("display", "block");
+                    $("#shipin").css("display", "none");
+                    $('#demo2').attr('src', res.Data);
+                    $('#VideoUrl').val(res.Data);
+                    layer.closeAll();
+                } else {
+                    layer.alert(res.Msg);
+                    return false;
+
+                }
+
+            }
+            , error: function (index, upload) {
+
+                var demoText = $('#errorVideo');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</ a>');
+                demoText.find('.demo-reload').on('click', function () {
+                    uploadVideo.upload();
+                });
+            }
+        });
+
+    });
+
+    //创建监听函数
+    var xhrOnProgress = function (fun) {
+        xhrOnProgress.onprogress = fun; //绑定监听
+        //使用闭包实现监听绑
+        return function () {
+            //通过$.ajaxSettings.xhr();获得XMLHttpRequest对象
+            var xhr = $.ajaxSettings.xhr();
+            //判断监听函数是否为函数
+            if (typeof xhrOnProgress.onprogress !== 'function')
+                return xhr;
+            //如果有监听函数并且xhr对象支持绑定时就把监听函数绑定上去
+            if (xhrOnProgress.onprogress && xhr.upload) {
+                xhr.upload.onprogress = xhrOnProgress.onprogress;
+            }
+            return xhr;
+        }
+    }
+
+</script>
+
+

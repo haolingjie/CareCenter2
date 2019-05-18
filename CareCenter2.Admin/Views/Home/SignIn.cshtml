@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+@{
+    ViewBag.Title = "登录";
+    Layout = null;
+}
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Bootstrap Core CSS -->
+    <link href="/Content/CSS/bootstrap.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="/Content/CSS/style.css" rel="stylesheet" />
+    <!-- font CSS -->
+    <!-- font-awesome icons -->
+    <link href="/Content/CSS/font-awesome.css" rel="stylesheet" />
+    <!-- //font-awesome icons -->
+    <!-- js-->
+    <script src="/Content/JS/jquery-1.11.1.min.js"></script>
+    <script src="/Content/JS/custom.js"></script>
+
+    <!-- Metis Menu 导航栏 -->
+    <script src="/Content/JS/metisMenu.min.js"></script>
+    <script src="/Content/JS/custom.js"></script>
+    <link href="/Content/CSS/custom.css" rel="stylesheet" />
+    <!--//Metis Menu 导航栏-->
+    <!--layui -->   
+    <link href="~/Content/layui/css/modules/layer/default/layer.css" rel="stylesheet" />
+    @*<script src="~/Content/layui/css/modules/layer/default/layer.js"></script>*@   
+    <!--layui -->
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <div class="main-page login-page " style="width: 368px;">
+        <h3 class="title1">登录页面</h3>
+        <div class="widget-shadow">
+            <div class="login-top">
+                <h4>欢迎回到登录页面 ! @*<br> 若无账号? <a href="javascript:;"> 请联系管理员 »</a>*@ </h4>
+            </div>
+            <div class="login-body">
+                @*<form>*@
+                <input type="text" class="user" name="admin" id="txtAdmin" placeholder="请输入用户名/手机号码" required="">
+                <input type="password" name="password" id="password" class="lock" placeholder="请输入登录密码">
+                <input type="submit" onclick="login();" name="Sign In" value="登录">
+                <div class="forgot-grid">
+                    @*<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Remember me</label>*@
+                    @*<div class="forgot">
+                            <a href="#">忘记密码?</a>
+                        </div>*@
+                    <div class="clearfix"> </div>
+                </div>
+                @*</form>*@
+            </div>
+        </div>
+
+        @*<div class="login-page-bottom">
+                <h5> - OR -</h5>
+                <div class="social-btn"><a href="#"><i class="fa fa-facebook"></i><i>Sign In with Facebook</i></a></div>
+                <div class="social-btn sb-two"><a href="#"><i class="fa fa-twitter"></i><i>Sign In with Twitter</i></a></div>
+            </div>*@
+    </div>
+   
+    <script src="/Content/layui/lay/modules/layer.js"></script>
+    <script type="text/javascript">
+        function login() {
+
+            var txtAdmin = $.trim($("#txtAdmin").val());//用户号
+            var txtPwd = $.trim($("#password").val());//密码
+
+            //登录数据交互
+            $.ajax({
+                type: "POST",
+                url: "/Home/SignInData",
+                data: {
+                    "AdminID": txtAdmin,
+                    "AdminPwd": txtPwd
+
+                },
+                dataType: "json",
+                success: function (jsonData) {
+
+                    if (jsonData.Statu == 1) {
+                        location.href = jsonData.BackUrl;
+                    } else {
+                        layer.alert(jsonData.Msg, { skin: 'layui-layer-lan' });
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>
+

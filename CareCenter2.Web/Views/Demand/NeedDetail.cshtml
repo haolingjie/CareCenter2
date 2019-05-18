@@ -1,0 +1,197 @@
+﻿
+@{
+    ViewBag.Title = "需求详情";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model List<CareCenter2.DB.OrderModel>
+<link href="/Content/user/css/user.css" rel="stylesheet" />
+
+<sectionn id="content">
+    <div class="container " style="margin-top:166px;">
+        <div class="row" style="background:#fff;">
+            <div class="col-md-12 col-sm-12">
+                <div class="main" style="margin-top: 0">
+                    <div class="details">
+
+                        @if (Model != null)
+                        {
+                            <span class="layui-breadcrumb">
+                                <a href="/Home/Index/">首页</a>
+                                @if (Model[0].OrderClassify == 1)
+                                {
+                                    <a href="/Demand/ClassCare/">(共享保姆)课后托管照护</a>
+                                }
+                                else if (Model[0].OrderClassify == 2)
+                                {
+                                    <a href="/Demand/InfantCare/">婴幼照护</a>
+                                }
+                                else if (Model[0].OrderClassify == 3)
+                                {
+                                    <a href="/Demand/OldAgeCare/">养老照护</a>
+                                }
+                                else if (Model[0].OrderClassify == 4)
+                                {
+                                    <a href="/Demand/GravidaCare/">孕检照护</a>
+                                }
+                                else if (Model[0].OrderClassify == 5)
+                                {
+                                    <a href="/Demand/InfantCare/">24小时智能照护平台(幼儿)</a>
+                                }
+                                else if (Model[0].OrderClassify == 6)
+                                {
+                                    <a href="/Demand/InfantCare/">全方位早教服务</a>
+                                }
+                                <a><cite>正文</cite></a>
+                            </span>
+                            <h2 style="text-align:center;margin-bottom:20px;">@Model[0].NickName——(@Model[0].OrderTitle)——<span style="color:aqua;">订单</span></h2>
+                            <div class="article_r">
+                                <span class="pulisher">发布者  <span style="color:#00aeef">@(Model[0].NickName)</span> </span>
+                                <span class="pulisher">工作服务人员  <span style="color:#00aeef">@(Model[0].AdminNickName)</span> </span><br />
+                                <span class="Actime"> 发布时间 <span style="color:#00aeef">@Model[0].CreateDate.ToString("yyyy-MM-dd HH:mm")</span></span>
+                                <span class="pulisher">
+                                    需求
+                                    @if (Model[0].OrderClassify == 1)
+                                    {
+                                        <span style="color:#00aeef">共享保姆/课后托管照护</span>
+                                    }
+                                    else if (Model[0].OrderClassify == 2)
+                                    {
+                                        <span style="color:#00aeef">婴幼照护</span>
+                                    }
+                                    else if (Model[0].OrderClassify == 3)
+                                    {
+                                        <span style="color:#00aeef">养老照护</span>
+                                    }
+                                    else if (Model[0].OrderClassify == 4)
+                                    {
+                                        <span style="color:#00aeef">孕检照护</span>
+                                    }
+
+                                </span>
+                                <span class="pulisher">
+                                    状态
+                                    @if (Model[0].Status == 1)
+                                    {
+                                        <span style="color:#ff0000"> 待对接 </span>
+                                    }
+                                    else if (Model[0].Status == 2)
+                                    {
+                                        <span style="color:#ff0000"> 对接中 </span>
+                                    }
+                                    else if (Model[0].Status == 3)
+                                    {
+                                        <span style="color:#ff0000"> 已对接 </span>
+                                    }
+                                    else if (Model[0].Status == 4)
+                                    {
+                                        <span style="color:#ff0000"> 已完结 </span>
+                                    }
+                                    else if (Model[0].Status == 0)
+                                    {
+                                        <span style="color:#ff0000"> 待审核 </span>
+                                    }
+                                </span>
+                                <input type="hidden" id="orderid" value="@Model[0].OrderID" />
+                            </div>
+                            <div class="article_r">
+                                <span class="pulisher">健康状况<span style="color:#00aeef"> @Model[0].PersonInro</span></span>
+                                <span class="pulisher">照护人数<span style="color:#00aeef"> @Model[0].CarePerson</span></span>
+                                <span class="pulisher">照护日期范围<span style="color:#00aeef"> @Model[0].CeraRange</span></span>
+                                <span class="pulisher">照护方式<span style="color:#00aeef"> @Model[0].DateType</span></span>
+                            </div>
+                            <div class="col-md-12" style="height:auto;margin:5% 0;">
+                                @foreach (var video in (List<CareCenter2.DB.tb_Video>)ViewData["VideoList"])
+                                {
+                                    <div class="col-md-4 col-sm-6 col-xs-12 det-pic">
+                                        @if (!string.IsNullOrEmpty(video.VideoUrl))
+                                        {
+                                            <video style="width:100%;height:430px" controls="controls">
+                                                <source src="@video.VideoUrl" type="video/ogg" />
+                                                <source src="@video.VideoUrl" type="video/mp4" />
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        }
+                                    </div>
+                                }
+                                @if (Model[0].OrderClassify == 1)//共享保姆/课后托管照护
+                                {
+                                    <img src="~/Content/img/img1.png" style="width: 100%; height: 430px;" alt="">
+                                }
+                                else if (Model[0].OrderClassify == 2)//婴幼照护
+                                {
+                                    <img src="/Content/img/oldyear7.jpg" style="width: 100%; height: 430px;" alt="">
+                                }
+                                else if (Model[0].OrderClassify == 3)//养老照护
+                                {
+                                    <img src="/Content/img/oldyear2.jpg" style="width: 100%; height: 430px;" alt="">
+                                }
+                                else if (Model[0].OrderClassify == 4)//孕检照护
+                                {
+                                    <img src="/Content/img/oldyear3.jpg" style="width: 100%; height: 430px;" alt="">
+                                }
+                                @foreach (var pic in (List<CareCenter2.DB.tb_Pictuer>)ViewData["PicList"])
+                                {
+                                    <div class="col-md-4 col-sm-6 col-xs-12 det-pic">
+                                        @if (!string.IsNullOrEmpty(pic.PicUrl))
+                                        {
+                                            <img src="@pic.PicUrl" style="width: 100%; height: 430px;" alt="">
+                                        }
+
+                                    </div>
+
+                                }
+                            </div>
+                            <div class="det-para" style="clear:both;">
+                                <span class="pulisher">健康状况<span style="color:#00aeef"> @Model[0].PersonInro</span></span><br />
+                                <span class="pulisher">照护人数<span style="color:#00aeef"> @Model[0].CarePerson</span></span><br />
+                                <span class="pulisher">照护方式<span style="color:#00aeef"> @Model[0].DateType</span></span><br />
+                                <span class="pulisher">照护日期范围<span style="color:#00aeef"> @Model[0].CeraRange</span></span><br />
+                                <span class="pulisher">照护地址<span style="color:#00aeef"> @Model[0].CareAddress</span></span><br />
+                                <p class="top">@Html.Raw(Model[0].OrderIntor)</p>
+
+                            </div>
+
+                        }
+
+
+                    </div>
+                            <div class="clear"></div>
+                        </div>
+            </div>
+        </div>
+
+    </div>
+</sectionn>
+
+<script src="/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    var num = "@(Model[0].OrderClassify)";
+    if (num == 1) {//共享保姆/课后托管照护
+        num = 3;
+    } else if (num == 2) {//婴幼照护
+        num = 1;
+    } else if (num == 3) {//养老照护
+        num = 0;
+    } else if (num == 4) {//孕检照护
+        num = 2;
+    }
+    //页面加载--导航菜单设置选中状态
+    $(function () {        
+        $("ul[class='nav navbar-nav'] li").removeClass("active");//删除class属性。
+        $("ul[class='nav navbar-nav'] > li:eq(1)").addClass("active");//设置class属性。
+        $("ul[class='nav navbar-nav'] > li:eq(1)>ul>li:eq(" + num + ")").addClass("active");//设置子菜单class属性。
+        //var logo = sessionStorage.getItem("logo");
+        //if (logo == '杰出养老') {
+        //    //养老
+        //    $("#infantcare").css('display', 'none');//隐藏
+        //    $("#oldeyear").css('display', 'block');//显示
+        //    $("#logo").html("杰出养老");
+        //} else {
+        //    $("#oldeyear").css('display', 'none');//隐藏
+        //    $("#infantcare").css('display', 'block');//显示
+        //    $("#logo").html("杰出婴幼陪护");
+        //}
+    });   
+   
+</script>
+

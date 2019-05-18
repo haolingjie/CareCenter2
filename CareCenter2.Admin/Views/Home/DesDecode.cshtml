@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "密码解密";
+    Layout = null;
+}
+
+<link href="/Content/layui/css/layui.css" rel="stylesheet" />
+<style>
+    .layui-form-item {
+        width: 50%;
+    }
+</style>
+<div class="main-page signup-page">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>密码解密</legend>
+    </fieldset>
+    <form class="layui-form" method="post" enctype="multipart/form-data">
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-block">
+                <input type="text" name="LoginPwd" lay-verify="LoginPwd" autocomplete="off" placeholder="请输入要解密的密码" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">解密显示</label>
+            <div class="layui-input-block">
+                <input type="text" name="ShowLoginPwd" id="ShowLoginPwd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <div class="layui-input-block ">
+                <button class="layui-btn demoBtn" lay-submit="" lay-filter="DesDecode">解密</button>
+                @*<button type="reset" class="layui-btn layui-btn-primary">重置</button>*@
+            </div>
+        </div>
+    </form>
+</div>
+<script src="/Scripts/jquery-1.10.2.min.js"></script>
+<script src="/Content/layui/layui.js"></script>
+<script>
+
+    //页面加载
+    $(window).on("load", function () {
+        //关于layui操作
+        layui.use(['form', 'layedit', 'layer'], function () {
+            var form = layui.form
+                , layer = layui.layer
+                , layedit = layui.layedit;
+
+            //自定义验证规则
+            form.verify({
+                LoginPwd: function (val) {
+                    if (val == "" || val == null || val == undefined) {
+
+                        return '密码不能为空';
+                    }
+                }
+            });
+
+            //监听提交
+            form.on('submit(DesDecode)', function (data) {
+
+                //H5获取临时信息
+                //var ArrayUserID = localStorage.getItem("ArrayUserID");
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/DesDecodeData",
+                    data: {
+                        "LoginPwd": data.field.LoginPwd//密码
+                    },
+                    dataType: "json",
+                    success: function (res) {
+
+                        if (res.Statu == 1) {
+
+                            //layer.alert(res.Msg, { skin: 'layui-layer-molv' });
+                            //parent.location.href = res.BackUrl;
+                            $("#ShowLoginPwd").val(res.Data);
+                            //layer.closeAll();
+
+                        } else {
+                            layer.alert(res.Msg, { skin: 'layui-layer-molv' });
+                            //layer.closeAll();
+                        }
+                    }
+                });
+                return false;
+            });
+        });
+    });
+
+
+</script>
+

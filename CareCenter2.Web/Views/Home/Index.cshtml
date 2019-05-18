@@ -1,0 +1,2142 @@
+﻿@{
+    ViewBag.Title = "首页";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var lunbo = (List<CareCenter2.DB.tb_Pictuer>)ViewData["lunbo"];
+    var InfantCare = (List<CareCenter2.DB.tb_Pictuer>)ViewData["InfantCare"];
+    var OldAgeCare = (List<CareCenter2.DB.tb_Pictuer>)ViewData["OldAgeCare"];
+    var GravidaCare = (List<CareCenter2.DB.tb_Pictuer>)ViewData["GravidaCare"];
+    var ClassCare = (List<CareCenter2.DB.tb_Pictuer>)ViewData["ClassCare"];
+}
+@model List<CareCenter2.DB.tb_Pictuer>
+@*<link href="/Content/user/css/user.css" rel="stylesheet" />*@
+<link href="/Content/css/index.css" rel="stylesheet" />
+<link href="/Content/layui/css/layui.css" rel="stylesheet" />
+<link href="~/Content/index/slider.css" rel="stylesheet" />
+@*<link href="~/Content/index/city-select.css" rel="stylesheet" />*@
+<link href="~/Content/css/private_index.A_v3.css" rel="stylesheet" />
+
+<style>
+    .layui-container {
+        padding: 0
+    }
+
+    .img-responsive {
+        display: block;
+        max-width: 100%;
+        height: 388px;
+        margin: 0 auto;
+    }
+
+    .service_bottom {
+        width: 95%;
+    }
+
+    .post-comment .pull-left img {
+        margin-right: 20px;
+        /*border-left: 3px solid #0884d5;*/
+    }
+</style>
+<section id="banner" style="display:none;">
+    <!-- Slider -->
+    <div id="main-slider" class="flexslider">
+        <ul class="slides" id="oldlunbo">
+            @{
+                if (Model.Count > 0)
+                {
+                    var cnt = 0;
+                    foreach (var item in Model)
+                    {
+                        if (cnt >= 5)
+                        {
+                            break;
+                        }
+                        <li>
+                            <img src="@item.PicUrl" alt="" />
+                            <div class="flex-caption">
+                                <h3>@item.PicTitle</h3>
+                                <p>@item.Memo</p>
+                            </div>
+                        </li>
+                        cnt++;
+                    }
+                }
+            }
+        </ul>
+    </div>
+    <!-- end slider -->
+</section>
+
+<!--常用搜索-->
+<section class="section-padding">
+    <div class="main product" style="padding-top: 158px">
+        <div class="layui-container">
+            <div class="mod cui_subway_internal">
+                <h2 class="line-title">特色服务<i class="icon-arrow"></i></h2>
+                <ul class="line-list">
+                    <li><i class="cui-icon-hotel"></i><a href="javascript:;">养老照护</a></li>
+                    <li><i class="cui-icon-outboundtravel"></i><a href="javascript:;">杰出•婴幼照护</a></li>
+                    <li><i class="cui-icon-HHtravel"></i><a href="javascript:;">孕产照护</a></li>
+                    <li><i class="cui-icon-visa"></i><a href="javascript:;">共享保姆•课后照护</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!--轮播图广告-->
+<section class="section-padding" style="height:360px;">
+    <div class="main product">
+        <div class="layui-carousel" id="sublunbo">
+            <div carousel-item="">
+                <div><a href="/Demand/OldAgeCare/"><img src="/Content/img/works/6.jpg" style="width:100%;height:360px;"></a></div>
+                <div><a href="/Demand/InfantCare/"><img src="/Content/img/works/3.jpg" style="width:100%;height:360px;"></a></div>
+                <div><a href="/Demand/GravidaCare/"><img src="/Content/img/works/4.jpg" style="width:100%;height:360px;"></a></div>
+                <div><a href="/Demand/ClassCare/"><img src="/Content/img/works/5.jpg" style="width:100%;height:360px;"></a></div>
+                <div><a href="/Demand/OldAgeCare/"><img src="/Content/img/works/7.jpg" style="width:100%;height:360px;"></a></div>
+                <div><a href="/Demand/OldAgeCare/"><img src="/Content/img/works/8.jpg" style="width:100%;height:360px;"></a></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--提交的表单-->
+@*<div class="topbar">*@
+    <div class="mod mod-search" style="">
+        <div id="UploadOrder" class=" searchbox searchbox_animate">
+            @*layui-tab*@
+
+        </div>
+    </div>
+@*</div>*@
+
+
+<!--图文介绍-->
+<section id="banner" class="section-padding" style="background:#f6f6f6;margin-top:0;">
+    <div class="" style="padding-top: 50px">
+        <div class="layui-container">
+            <div class="content layui-row">
+                <div class="layui-container">
+                    <!--Tab风格的-->
+                    <div class="layui-tab layui-tab-brief" style="margin: 10px 0;">
+                        <ul class="layui-tab-title" style="float:none; border-bottom-width: 3px; border-bottom-style: solid;border-color:#2577e3; width :100%">
+                            <li class="layui-this" style="display: inline-block;height: 0;line-height: 36px;margin-top: -3px;color: #666;font-size:16px;">居家养老</li>
+                            <li style="display:inline-block;height: 0;line-height: 36px;margin-top: -3px;color: #666;font-size:16px;">社区养老</li>
+                            <li style="display:inline-block;height: 0;line-height: 36px;margin-top: -3px;color: #666;font-size:16px;">旅游养老</li>
+                            <li style="display:inline-block;height: 0;line-height: 36px;margin-top: -3px;color: #666;font-size:16px;">课后照护</li>
+                            <li style="display:inline-block;height: 0;line-height: 36px;margin-top: -3px;color: #666;font-size:16px;">婴儿期护理</li>
+                            <li style="display:inline-block;height: 0;line-height: 36px;margin-top: -3px;color: #666;font-size:16px;">幼儿期护理</li>
+                            <li style="display:inline-block;height: 0;line-height: 36px;margin-top: -3px;color: #666;font-size:16px;">学前期护理</li>
+                            <li style="display:inline-block;height: 0;line-height: 36px;margin-top: -3px;color: #666;font-size:16px;">孕期照护</li>
+                            <li style="display:inline-block;height: 0;line-height: 36px;margin-top: -3px;color: #666;font-size:16px;">产期照护</li>
+                            <li style="display:inline-block;height: 0;line-height: 36px;margin-top: -3px;color: #666;font-size:16px;">围褥期照护</li>
+                            @*<li><b>订单管理</b></li>*@
+                        </ul>
+                        <div class="layui-tab-content" style="margin-top:20px;">
+                            <!--居家养老-->
+                            <div class="layui-tab-item layui-show">
+                                <div class="mod hotel">
+                                    <div class="mod-hd">
+                                        <div class="mod-bd-panel hotel-homestay">
+                                            <!-- product start -->
+                                            <div class="product">
+                                                <div class="product-bd">
+                                                    <div class="inner-tab-scroll-wrap">
+                                                            <div class="inner-tab-scroll-list">
+                                                                <div class="product-item  product-item_complex">
+                                                                    <a href="/Demand/OldAgeCare/">
+                                                                        <div class="item-thumbnail">
+                                                                            <img src="//dimg06.c-ctrip.com/images/100g10000000pf92gD939_C_221_166.jpg"
+                                                                                 alt="" class="">
+                                                                            <div class="tag-wrap" style="display:block">
+                                                                                <span class=" tag_saleNum">
+                                                                                    居家养老
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </a>
+                                                                </div>
+                                                                <div class="product-item  product-item_complex">
+                                                                    <a href="/Demand/OldAgeCare/">
+                                                                        <div class="item-thumbnail">
+                                                                            <img src="//dimg01.c-ctrip.com/images/100811000000r22651020_C_221_166.jpg"
+                                                                                 alt="" class="">
+                                                                            <div class="tag-wrap" style="display:block">
+                                                                                <span class=" tag_saleNum">
+                                                                                    居家养老
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </a>
+                                                                </div>
+                                                                <div class="product-item  product-item_complex">
+                                                                    <a href="/Demand/OldAgeCare/">
+                                                                        <div class="item-thumbnail">
+                                                                            <img src="//dimg07.c-ctrip.com/images/100f0e00000076pmrC805_C_221_166.jpg"
+                                                                                 alt="" class="">
+                                                                            <div class="tag-wrap" style="display:block">
+                                                                                <span class=" tag_saleNum">
+                                                                                    居家养老
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="product-item  product-item_complex">
+                                                                    <a href="/Demand/OldAgeCare/">
+                                                                        <div class="item-thumbnail">
+                                                                            <img src="//dimg04.c-ctrip.com/images/fd/tg/g2/M0B/87/F3/CghzgVWwtkiABWPkACg8DgXiBlU807_C_221_166.jpg"
+                                                                                 alt="" class="">
+                                                                            <div class="tag-wrap" style="display:block">
+                                                                                <span class=" tag_saleNum">
+                                                                                    居家养老
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </a>
+                                                                </div>
+                                                                <div class="product-item  product-item_complex">
+                                                                    <a href="/Demand/OldAgeCare/">
+                                                                        <div class="item-thumbnail">
+                                                                            <img src="//dimg07.c-ctrip.com/images/100f0g00000087ngm6A83_C_221_166.jpg"
+                                                                                 alt="" class="">
+                                                                            <div class="tag-wrap" style="display:block">
+                                                                                <span class=" tag_saleNum">
+                                                                                    居家养老
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </a>
+                                                                </div>
+                                                                <div class="product-item  product-item_complex">
+                                                                    <a href="/Demand/OldAgeCare/">
+                                                                        <div class="item-thumbnail">
+                                                                            <img src="//dimg05.c-ctrip.com/images/10050a0000004xyzo1CB3_C_221_166.jpg"
+                                                                                 alt="" class="">
+                                                                            <div class="tag-wrap" style="display:block">
+                                                                                <span class=" tag_saleNum">
+                                                                                    居家养老
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </a>
+                                                                </div>
+                                                                <div class="product-item  product-item_complex">
+                                                                    <a href="/Demand/OldAgeCare/">
+                                                                        <div class="item-thumbnail">
+                                                                            <img src="//dimg05.c-ctrip.com/images/fd/tg/g5/M04/6E/D3/CggYsFbvxkWAW8azAApi7j9YZzA868_C_221_166.jpg"
+                                                                                 alt="" class="">
+                                                                            <div class="tag-wrap" style="display:block">
+                                                                                <span class=" tag_saleNum">
+                                                                                    居家养老
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </a>
+                                                                </div>
+                                                                <div class="product-item  product-item_complex">
+                                                                    <a href="/Demand/OldAgeCare/">
+                                                                        <div class="item-thumbnail">
+                                                                            <img src="//dimg05.c-ctrip.com/images/100u0n000000e0fpmBF3A_C_221_166.jpg"
+                                                                                 alt="" class="">
+                                                                            <div class="tag-wrap" style="display: block;">
+                                                                                <span class=" tag_saleNum">
+                                                                                    居家养老
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                </div>
+                                            </div>
+                                            <!-- product end -->
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <!--社区养老-->
+                            <div class="layui-tab-item">
+                                <div class="mod hotel">
+                                    <div class="mod-hd">
+                                        <div class="mod-bd-panel hotel-homestay">
+                                            <!-- product start -->
+                                            <div class="product">
+                                                <div class="product-bd">
+                                                    <div class="inner-tab-scroll-wrap">
+                                                        <div class="inner-tab-scroll-list">
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/OldAgeCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg06.c-ctrip.com/images/100g10000000pf92gD939_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                社区养老
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/OldAgeCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg01.c-ctrip.com/images/100811000000r22651020_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                社区养老
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/OldAgeCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg07.c-ctrip.com/images/100f0e00000076pmrC805_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                社区养老
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/OldAgeCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg04.c-ctrip.com/images/fd/tg/g2/M0B/87/F3/CghzgVWwtkiABWPkACg8DgXiBlU807_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                社区养老
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/OldAgeCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg07.c-ctrip.com/images/100f0g00000087ngm6A83_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                社区养老
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/OldAgeCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg05.c-ctrip.com/images/10050a0000004xyzo1CB3_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                社区养老
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <!-- product end -->
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--旅游养老-->
+                            <div class="layui-tab-item">
+                                <div class="mod hotel">
+                                    <div class="mod-hd">
+                                        <div class="mod-bd-panel hotel-homestay">
+                                            <!-- product start -->
+                                            <div class="product">
+                                                <div class="product-bd">
+                                                    <div class="inner-tab-scroll-wrap">
+                                                        <div class="inner-tab-scroll-list">
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/OldAgeCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg06.c-ctrip.com/images/100g10000000pf92gD939_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                旅游养老
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/OldAgeCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg01.c-ctrip.com/images/100811000000r22651020_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                旅游养老
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/OldAgeCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg07.c-ctrip.com/images/100f0e00000076pmrC805_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                旅游养老
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/OldAgeCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg04.c-ctrip.com/images/fd/tg/g2/M0B/87/F3/CghzgVWwtkiABWPkACg8DgXiBlU807_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                旅游养老
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/OldAgeCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg07.c-ctrip.com/images/100f0g00000087ngm6A83_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                旅游养老
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <!-- product end -->
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--课后照护-->
+                            <div class="layui-tab-item">
+                                <div class="mod hotel">
+                                    <div class="mod-hd">
+                                        <div class="mod-bd-panel hotel-homestay">
+                                            <!-- product start -->
+                                            <div class="product">
+                                                <div class="product-bd">
+                                                    <div class="inner-tab-scroll-wrap">
+                                                        <div class="inner-tab-scroll-list">
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/ClassCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg06.c-ctrip.com/images/100g10000000pf92gD939_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                课后照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/ClassCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg01.c-ctrip.com/images/100811000000r22651020_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                课后照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/ClassCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg07.c-ctrip.com/images/100f0e00000076pmrC805_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                课后照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/ClassCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg04.c-ctrip.com/images/fd/tg/g2/M0B/87/F3/CghzgVWwtkiABWPkACg8DgXiBlU807_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                课后照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/ClassCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg07.c-ctrip.com/images/100f0g00000087ngm6A83_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                课后照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/ClassCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg05.c-ctrip.com/images/10050a0000004xyzo1CB3_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                课后照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/ClassCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg05.c-ctrip.com/images/fd/tg/g5/M04/6E/D3/CggYsFbvxkWAW8azAApi7j9YZzA868_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                课后照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/ClassCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg05.c-ctrip.com/images/100u0n000000e0fpmBF3A_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display: block;">
+                                                                            <span class=" tag_saleNum">
+                                                                                课后照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <!-- product end -->
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--婴儿期护理-->
+                            <div class="layui-tab-item">
+                                <div class="mod hotel">
+                                    <div class="mod-hd">
+                                        <div class="mod-bd-panel hotel-homestay">
+                                            <!-- product start -->
+                                            <div class="product">
+                                                <div class="product-bd">
+                                                    <div class="inner-tab-scroll-wrap">
+                                                        <div class="inner-tab-scroll-list">
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/InfantCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg06.c-ctrip.com/images/100g10000000pf92gD939_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                婴儿期护理
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/InfantCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg01.c-ctrip.com/images/100811000000r22651020_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                婴儿期护理
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/InfantCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg07.c-ctrip.com/images/100f0e00000076pmrC805_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                婴儿期护理
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/InfantCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg04.c-ctrip.com/images/fd/tg/g2/M0B/87/F3/CghzgVWwtkiABWPkACg8DgXiBlU807_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                婴儿期护理
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/InfantCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg07.c-ctrip.com/images/100f0g00000087ngm6A83_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                婴儿期护理
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/InfantCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg05.c-ctrip.com/images/10050a0000004xyzo1CB3_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                婴儿期护理
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/InfantCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg05.c-ctrip.com/images/fd/tg/g5/M04/6E/D3/CggYsFbvxkWAW8azAApi7j9YZzA868_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                婴儿期护理
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/InfantCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg05.c-ctrip.com/images/100u0n000000e0fpmBF3A_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display: block;">
+                                                                            <span class=" tag_saleNum">
+                                                                                婴儿期护理
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <!-- product end -->
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--幼儿期护理-->
+                            <div class="layui-tab-item">
+                                <div class="mod hotel">
+                                    <div class="mod-hd">
+                                        <div class="mod-bd-panel hotel-homestay">
+                                            <!-- product start -->
+                                            <div class="product">
+                                                <div class="product-bd">
+                                                    <div class="inner-tab-scroll-wrap">
+                                                        <div class="inner-tab-scroll-list">
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/InfantCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg06.c-ctrip.com/images/100g10000000pf92gD939_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                幼儿期护理
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/InfantCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg01.c-ctrip.com/images/100811000000r22651020_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                幼儿期护理
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/InfantCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg07.c-ctrip.com/images/100f0e00000076pmrC805_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                幼儿期护理
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/InfantCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg04.c-ctrip.com/images/fd/tg/g2/M0B/87/F3/CghzgVWwtkiABWPkACg8DgXiBlU807_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                幼儿期护理
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/InfantCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg07.c-ctrip.com/images/100f0g00000087ngm6A83_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                幼儿期护理
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/InfantCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg05.c-ctrip.com/images/10050a0000004xyzo1CB3_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                幼儿期护理
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/InfantCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg05.c-ctrip.com/images/fd/tg/g5/M04/6E/D3/CggYsFbvxkWAW8azAApi7j9YZzA868_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                幼儿期护理
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/InfantCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg05.c-ctrip.com/images/100u0n000000e0fpmBF3A_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display: block;">
+                                                                            <span class=" tag_saleNum">
+                                                                                幼儿期护理
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <!-- product end -->
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--学前期护理-->
+                            <div class="layui-tab-item">
+                                <div class="mod hotel">
+                                    <div class="mod-hd">
+                                        <div class="mod-bd-panel hotel-homestay">
+                                            <!-- product start -->
+                                            <div class="product">
+                                                <div class="product-bd">
+                                                    <div class="inner-tab-scroll-wrap">
+                                                        <div class="inner-tab-scroll-list">
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/InfantCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg06.c-ctrip.com/images/100g10000000pf92gD939_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                学前期护理
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/InfantCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg01.c-ctrip.com/images/100811000000r22651020_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                学前期护理
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/InfantCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg07.c-ctrip.com/images/100f0e00000076pmrC805_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                学前期护理
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/InfantCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg04.c-ctrip.com/images/fd/tg/g2/M0B/87/F3/CghzgVWwtkiABWPkACg8DgXiBlU807_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                学前期护理
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/InfantCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg07.c-ctrip.com/images/100f0g00000087ngm6A83_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                学前期护理
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/InfantCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg05.c-ctrip.com/images/10050a0000004xyzo1CB3_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                学前期护理
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="javascript:;">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg05.c-ctrip.com/images/fd/tg/g5/M04/6E/D3/CggYsFbvxkWAW8azAApi7j9YZzA868_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                学前期护理
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/InfantCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg05.c-ctrip.com/images/100u0n000000e0fpmBF3A_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display: block;">
+                                                                            <span class=" tag_saleNum">
+                                                                                学前期护理
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <!-- product end -->
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--孕期照护-->
+                            <div class="layui-tab-item">
+                                <div class="mod hotel">
+                                    <div class="mod-hd">
+                                        <div class="mod-bd-panel hotel-homestay">
+                                            <!-- product start -->
+                                            <div class="product">
+                                                <div class="product-bd">
+                                                    <div class="inner-tab-scroll-wrap">
+                                                        <div class="inner-tab-scroll-list">
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/GravidaCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg06.c-ctrip.com/images/100g10000000pf92gD939_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                孕期照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/GravidaCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg01.c-ctrip.com/images/100811000000r22651020_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                孕期照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/GravidaCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg07.c-ctrip.com/images/100f0e00000076pmrC805_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                孕期照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/GravidaCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg04.c-ctrip.com/images/fd/tg/g2/M0B/87/F3/CghzgVWwtkiABWPkACg8DgXiBlU807_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                孕期照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/GravidaCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg07.c-ctrip.com/images/100f0g00000087ngm6A83_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                孕期照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <!-- product end -->
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--产期照护-->
+                            <div class="layui-tab-item">
+                                <div class="mod hotel">
+                                    <div class="mod-hd">
+                                        <div class="mod-bd-panel hotel-homestay">
+                                            <!-- product start -->
+                                            <div class="product">
+                                                <div class="product-bd">
+                                                    <div class="inner-tab-scroll-wrap">
+                                                        <div class="inner-tab-scroll-list">
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/GravidaCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg06.c-ctrip.com/images/100g10000000pf92gD939_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                产期照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/GravidaCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg01.c-ctrip.com/images/100811000000r22651020_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                产期照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/GravidaCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg07.c-ctrip.com/images/100f0e00000076pmrC805_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                产期照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/GravidaCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg04.c-ctrip.com/images/fd/tg/g2/M0B/87/F3/CghzgVWwtkiABWPkACg8DgXiBlU807_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                产期照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/GravidaCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg07.c-ctrip.com/images/100f0g00000087ngm6A83_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                产期照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/GravidaCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg05.c-ctrip.com/images/10050a0000004xyzo1CB3_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                产期照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/GravidaCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg05.c-ctrip.com/images/fd/tg/g5/M04/6E/D3/CggYsFbvxkWAW8azAApi7j9YZzA868_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                产期照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/GravidaCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg05.c-ctrip.com/images/100u0n000000e0fpmBF3A_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display: block;">
+                                                                            <span class=" tag_saleNum">
+                                                                                产期照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <!-- product end -->
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--围褥期照护-->
+                            <div class="layui-tab-item">
+                                <div class="mod hotel">
+                                    <div class="mod-hd">
+                                        <div class="mod-bd-panel hotel-homestay">
+                                            <!-- product start -->
+                                            <div class="product">
+                                                <div class="product-bd">
+                                                    <div class="inner-tab-scroll-wrap">
+                                                        <div class="inner-tab-scroll-list">
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/GravidaCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg06.c-ctrip.com/images/100g10000000pf92gD939_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                围褥期照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/GravidaCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg01.c-ctrip.com/images/100811000000r22651020_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                围褥期照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/GravidaCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg07.c-ctrip.com/images/100f0e00000076pmrC805_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                围褥期照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/GravidaCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg04.c-ctrip.com/images/fd/tg/g2/M0B/87/F3/CghzgVWwtkiABWPkACg8DgXiBlU807_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                围褥期照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/GravidaCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg07.c-ctrip.com/images/100f0g00000087ngm6A83_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                围褥期照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/GravidaCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg05.c-ctrip.com/images/10050a0000004xyzo1CB3_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                围褥期照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/GravidaCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg05.c-ctrip.com/images/fd/tg/g5/M04/6E/D3/CggYsFbvxkWAW8azAApi7j9YZzA868_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display:block">
+                                                                            <span class=" tag_saleNum">
+                                                                                围褥期照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/GravidaCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg05.c-ctrip.com/images/100u0n000000e0fpmBF3A_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display: block;">
+                                                                            <span class=" tag_saleNum">
+                                                                                围褥期照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item  product-item_complex">
+                                                                <a href="/Demand/GravidaCare/">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//dimg05.c-ctrip.com/images/100u0n000000e0fpmBF3A_C_221_166.jpg"
+                                                                             alt="" class="">
+                                                                        <div class="tag-wrap" style="display: block;">
+                                                                            <span class=" tag_saleNum">
+                                                                                围褥期照护
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </a>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <!-- product end -->
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</section>
+<!--图文介绍-->
+<section id="banner" class="section-padding" style="background:#f6f6f6;margin-top:0;">
+
+    <div class="" style="padding-top: 50px">
+        <div class="layui-container">
+            <div class="content layui-row">
+                <div class="layui-container">
+                    <!--Tab风格的-->
+                    <div class="layui-tab layui-tab-brief" style="margin: 10px 0;">
+                        <ul class="layui-tab-title" style="float:none; border-bottom-width: 3px; border-bottom-style: solid;border-color:#2577e3; width :100%">
+                            <li class="layui-this" style="display: inline-block;height: 0;line-height: 36px;margin-top: -3px;color: #666;font-size:16px;">青岛智区</li>
+                            <li style="display:inline-block;height: 0;line-height: 36px;margin-top: -3px;color: #666;font-size:16px;">上海智区</li>
+                            <li style="display:inline-block;height: 0;line-height: 36px;margin-top: -3px;color: #666;font-size:16px;">广州智区</li>
+                            <li style="display:inline-block;height: 0;line-height: 36px;margin-top: -3px;color: #666;font-size:16px;">北京智区</li>
+                            <li style="display:inline-block;height: 0;line-height: 36px;margin-top: -3px;color: #666;font-size:16px;">南京智区</li>
+                            <li style="display:inline-block;height: 0;line-height: 36px;margin-top: -3px;color: #666;font-size:16px;">成都智区</li>
+                            <li style="display:inline-block;height: 0;line-height: 36px;margin-top: -3px;color: #666;font-size:16px;">西安智区</li>
+                            <li style="display:inline-block;height: 0;line-height: 36px;margin-top: -3px;color: #666;font-size:16px;">云南智区</li>
+                            @*<li><b>订单管理</b></li>*@
+                        </ul>
+                        <div class="layui-tab-content" style="margin-top:20px;">
+                            <div class="layui-tab-item layui-show">
+                                <div class="mod hotel">
+                                    <div class="mod-hd">
+                                        <div class="mod-bd-panel hotel-homestay">
+                                            <!-- product start -->
+                                            <div class="product">
+
+                                                <div class="product-bd">
+                                                    <div class="inner-tab-panel active inner-tab-panel_noextra" style="display: block;">
+                                                        <div class="product-item product-item_mask">
+                                                            <a href="javascript:;" group="city">
+                                                                <div class="item-thumbnail">
+                                                                    <img src="//pic.c-ctrip.com/htlpic/inn/pic/ctriphome/pic_220_160_1.jpg" alt="青岛智区">
+                                                                </div>
+                                                                <p class="item-name">青岛智区</p>
+                                                                <p class="item-info">寻求心灵的净化</p>
+                                                                <p class="item-num">特色养老</p>
+                                                            </a>
+                                                        </div>
+                                                        <div class="product-item product-item_mask">
+                                                            <a href="javascript:;" group="pro">
+                                                                <div class="item-thumbnail">
+                                                                    <img src="//pic.c-ctrip.com/htlpic/inn/pic/ctriphome/pic_220_160_2.jpg" alt="孕妇产检一站式照护">
+                                                                </div>
+                                                                <p class="item-name">孕妇产检一站式照护</p>
+                                                                <p class="item-info">安心服务</p>
+                                                                <span class="price"><dfn>¥</dfn>3303<i class="price_info">起</i></span>
+                                                            </a>
+                                                        </div>
+                                                        <div class="product-item product-item_mask">
+                                                            <a href="javascript:;" group="city">
+                                                                <div class="item-thumbnail">
+                                                                    <img src="//pic.c-ctrip.com/htlpic/inn/pic/ctriphome/pic_220_160_3.jpg" alt="">
+                                                                </div>
+                                                                <p class="item-name">青岛</p>
+                                                                <p class="item-info">清水寺前小径斜</p><p class="item-num">2000人入驻</p>
+                                                            </a>
+                                                        </div>
+                                                        <div class="product-item product-item_mask">
+                                                            <a href="javascript:;" group="pro">
+                                                                <div class="item-thumbnail">
+                                                                    <img src="//pic.c-ctrip.com/htlpic/inn/pic/ctriphome/pic_220_160_4.jpg" alt="">
+                                                                </div>
+                                                                <p class="item-name">青岛智区一站式教育</p>
+                                                                <p class="item-info">0/5分</p>
+                                                                <span class="price"><i class="price_info">价格实惠</i></span>
+                                                            </a>
+                                                        </div>
+                                                        <div class="product-item product-item_mask">
+                                                            <a href="javascript:;" group="city">
+                                                                <div class="item-thumbnail">
+                                                                    <img src="//pic.c-ctrip.com/htlpic/inn/pic/ctriphome/pic_220_160_5.jpg" alt="清迈">
+                                                                </div>
+                                                                <p class="item-name">比图教育</p>
+                                                                <p class="item-info">时间凝固在有故事的城</p>
+                                                                <p class="item-num">您的首选</p>
+                                                            </a>
+                                                        </div>
+                                                        <div class="product-item product-item_mask">
+                                                            <a href="javascript:;" group="pro">
+                                                                <div class="item-thumbnail">
+                                                                    <img src="//pic.c-ctrip.com/htlpic/inn/pic/ctriphome/pic_220_160_6.jpg" alt="">
+                                                                </div>
+                                                                <p class="item-name">教育驿站</p>
+                                                                <p class="item-info">汇通教育</p>
+                                                                <p class="item-num">2000人入驻</p>
+                                                            </a>
+                                                        </div>
+                                                        <div class="extra-item product-item_mask">
+                                                            <a href="javascript:;">
+                                                                <div class="extra-thumbnail">
+                                                                    <img src="//pic.c-ctrip.com/htlpic/inn/pic/pic_rec09_ctriphome.jpg" alt="">
+                                                                </div>
+                                                                <p class="item-name">养老式公寓</p>
+                                                                <p class="item-info">解决您的后顾之忧</p>
+                                                            </a>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- product end -->
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <!--婴幼照护-->
+                            <div class="layui-tab-item">
+                                <div class="main product">
+                                    <div class="layui-container">
+                                        <div class="content layui-row">
+
+                                            <div class="layui-carousel" id="sublunbo2">
+                                                <div carousel-item="">
+                                                    <div><img src="/Content/img/works/6.jpg" style="width:100%;height:240px;"></div>
+                                                    <div><img src="/Content/img/works/3.jpg" style="width:100%;height:340px;"></div>
+                                                    <div><img src="/Content/img/works/4.jpg" style="width:100%;height:340px;"></div>
+                                                    <div><img src="/Content/img/works/5.jpg" style="width:100%;height:340px;"></div>
+                                                    <div><img src="/Content/img/works/7.jpg" style="width:100%;height:340px;"></div>
+                                                    <div><img src="/Content/img/works/8.jpg" style="width:100%;height:340px;"></div>
+                                                </div>
+                                            </div>
+                                            <p class="label" style="font-size: 18px;line-height: 50px;">一岁宝宝护理</p>
+                                            <p class="detail" style="padding-bottom:0;">
+                                                @*<img src="~/Content/img/oldyear1.jpg" style="width:100%;height:375px;" />*@
+                                                文字介绍文字介绍文字介绍<br />
+                                            </p>
+                                            <p class="label" style="font-size: 18px;line-height: 50px;">二岁宝宝启智</p>
+                                            <p class="detail" style="padding-bottom:0;">
+                                                @*<img src="~/Content/img/oldyear1.jpg" style="width:100%;height:375px;" />*@
+                                                文字介绍文字介绍文字介绍<br />
+                                            </p>
+                                            <p class="label" style="font-size: 18px;line-height: 50px;">三岁宝宝</p>
+                                            <p class="detail" style="padding-bottom:0;">
+                                                @*<img src="~/Content/img/oldyear1.jpg" style="width:100%;height:375px;" />*@
+                                                文字介绍文字介绍文字介绍<br />
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--孕检照护-->
+                            <div class="layui-tab-item">
+                                <div class="main product">
+                                    <div class="layui-container">
+                                        <div class="content layui-row">
+
+                                            <div class="layui-carousel" id="sublunbo3">
+                                                <div carousel-item="">
+                                                    <div><img src="/Content/img/works/6.jpg" style="width:100%;height:240px;"></div>
+                                                    <div><img src="/Content/img/works/3.jpg" style="width:100%;height:340px;"></div>
+                                                    <div><img src="/Content/img/works/4.jpg" style="width:100%;height:340px;"></div>
+                                                    <div><img src="/Content/img/works/5.jpg" style="width:100%;height:340px;"></div>
+                                                    <div><img src="/Content/img/works/7.jpg" style="width:100%;height:340px;"></div>
+                                                    <div><img src="/Content/img/works/8.jpg" style="width:100%;height:340px;"></div>
+                                                </div>
+                                            </div>
+                                            <p class="label" style="font-size: 18px;line-height: 50px;">孕检周期</p>
+                                            <p class="detail" style="padding-bottom:0;">
+                                                @*<img src="~/Content/img/oldyear1.jpg" style="width:100%;height:375px;" />*@
+                                                文字介绍文字介绍文字介绍<br />
+                                            </p>
+                                            <p class="label" style="font-size: 18px;line-height: 50px;">孕检周期</p>
+                                            <p class="detail" style="padding-bottom:0;">
+                                                @*<img src="~/Content/img/oldyear1.jpg" style="width:100%;height:375px;" />*@
+                                                文字介绍文字介绍文字介绍<br />
+                                            </p>
+                                            <p class="label" style="font-size: 18px;line-height: 50px;">孕检周期</p>
+                                            <p class="detail" style="padding-bottom:0;">
+                                                @*<img src="~/Content/img/oldyear1.jpg" style="width:100%;height:375px;" />*@
+                                                文字介绍文字介绍文字介绍<br />
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--课后照护-->
+                            <div class="layui-tab-item">
+                                <div class="main product">
+                                    <div class="layui-container">
+                                        <div class="content layui-row">
+
+                                            <div class="layui-carousel" id="sublunbo4">
+                                                <div carousel-item="">
+                                                    <div><img src="/Content/img/works/6.jpg" style="width:100%;height:240px;"></div>
+                                                    <div><img src="/Content/img/works/3.jpg" style="width:100%;height:340px;"></div>
+                                                    <div><img src="/Content/img/works/4.jpg" style="width:100%;height:340px;"></div>
+                                                    <div><img src="/Content/img/works/5.jpg" style="width:100%;height:340px;"></div>
+                                                    <div><img src="/Content/img/works/7.jpg" style="width:100%;height:340px;"></div>
+                                                    <div><img src="/Content/img/works/8.jpg" style="width:100%;height:340px;"></div>
+                                                </div>
+                                            </div>
+                                            <p class="label" style="font-size: 18px;line-height: 50px;">学生课堂</p>
+                                            <p class="detail" style="padding-bottom:0;">
+                                                @*<img src="~/Content/img/oldyear1.jpg" style="width:100%;height:375px;" />*@
+                                                文字介绍文字介绍文字介绍<br />
+                                            </p>
+                                            <p class="label" style="font-size: 18px;line-height: 50px;">学生课堂</p>
+                                            <p class="detail" style="padding-bottom:0;">
+                                                @*<img src="~/Content/img/oldyear1.jpg" style="width:100%;height:375px;" />*@
+                                                文字介绍文字介绍文字介绍<br />
+                                            </p>
+                                            <p class="label" style="font-size: 18px;line-height: 50px;">学生课堂</p>
+                                            <p class="detail" style="padding-bottom:0;">
+                                                @*<img src="~/Content/img/oldyear1.jpg" style="width:100%;height:375px;" />*@
+                                                文字介绍文字介绍文字介绍<br />
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--未加载-->
+                            <div class="layui-tab-item">
+                                <div class="mod hotel">
+                                    <div class="mod-hd">
+                                        <div class="mod-bd-panel hotel-homestay">
+                                            <!-- product start -->
+                                            <div class="product">
+
+                                                <div class="product-bd">
+                                                    <div class="inner-tab-panel active inner-tab-panel_noextra" style="display: block;">
+                                                        <div class="product-item product-item_mask">
+                                                            <a href="javascript:;" group="city">
+                                                                <div class="item-thumbnail">
+                                                                    <img src="//pic.c-ctrip.com/htlpic/inn/pic/ctriphome/pic_220_160_1.jpg" alt="南京">
+                                                                </div>
+                                                                <p class="item-name">南京</p>
+                                                                <p class="item-info">寻求心灵的净化</p>
+                                                                <p class="item-num">特色养老</p>
+                                                            </a>
+                                                        </div>
+                                                        <div class="product-item product-item_mask">
+                                                            <a href="javascript:;" group="pro">
+                                                                <div class="item-thumbnail">
+                                                                    <img src="//pic.c-ctrip.com/htlpic/inn/pic/ctriphome/pic_220_160_2.jpg" alt="孕妇产检一站式照护">
+                                                                </div>
+                                                                <p class="item-name">孕妇产检一站式照护</p>
+                                                                <p class="item-info">安心服务</p>
+                                                                <span class="price"><dfn>¥</dfn>3303<i class="price_info">起</i></span>
+                                                            </a>
+                                                        </div>
+                                                        <div class="product-item product-item_mask">
+                                                            <a href="javascript:;" group="city">
+                                                                <div class="item-thumbnail">
+                                                                    <img src="//pic.c-ctrip.com/htlpic/inn/pic/ctriphome/pic_220_160_3.jpg" alt="">
+                                                                </div>
+                                                                <p class="item-name">玄武区</p>
+                                                                <p class="item-info">清水寺前小径斜</p><p class="item-num">2000人入驻</p>
+                                                            </a>
+                                                        </div>
+                                                        <div class="product-item product-item_mask">
+                                                            <a href="javascript:;" group="pro">
+                                                                <div class="item-thumbnail">
+                                                                    <img src="//pic.c-ctrip.com/htlpic/inn/pic/ctriphome/pic_220_160_4.jpg" alt="">
+                                                                </div>
+                                                                <p class="item-name">江宁一站式教育</p>
+                                                                <p class="item-info">0/5分</p>
+                                                                <span class="price"><i class="price_info">价格实惠</i></span>
+                                                            </a>
+                                                        </div>
+                                                        <div class="product-item product-item_mask">
+                                                            <a href="javascript:;" group="city">
+                                                                <div class="item-thumbnail">
+                                                                    <img src="//pic.c-ctrip.com/htlpic/inn/pic/ctriphome/pic_220_160_5.jpg" alt="清迈">
+                                                                </div>
+                                                                <p class="item-name">比图教育</p>
+                                                                <p class="item-info">时间凝固在有故事的城</p>
+                                                                <p class="item-num">您的首选</p>
+                                                            </a>
+                                                        </div>
+                                                        <div class="product-item product-item_mask">
+                                                            <a href="javascript:;" group="pro">
+                                                                <div class="item-thumbnail">
+                                                                    <img src="//pic.c-ctrip.com/htlpic/inn/pic/ctriphome/pic_220_160_6.jpg" alt="">
+                                                                </div>
+                                                                <p class="item-name">教育驿站</p>
+                                                                <p class="item-info">汇通教育</p>
+                                                                <p class="item-num">2000人入驻</p>
+                                                            </a>
+                                                        </div>
+                                                        <div class="extra-item product-item_mask">
+                                                            <a href="javascript:;">
+                                                                <div class="extra-thumbnail">
+                                                                    <img src="//pic.c-ctrip.com/htlpic/inn/pic/pic_rec09_ctriphome.jpg" alt="">
+                                                                </div>
+                                                                <p class="item-name">养老式公寓</p>
+                                                                <p class="item-info">解决您的后顾之忧</p>
+                                                            </a>
+                                                        </div>
+                                                        <div class="homestay-product">
+                                                            <div class="product-item product-item_mask">
+                                                                <a href="javascript:;" group="sto">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//pic.c-ctrip.com/htlpic/inn/pic/ctriphome/pic_220_160_7.jpg" alt="">
+                                                                    </div>
+                                                                    <div class="item-overlay">
+                                                                        <p class="avator"><img src="//pic.c-ctrip.com/hotelinternational121211/inn/user/pic_face03.jpg" alt=""></p>
+                                                                        <p class="item-name">是个时尚的课后看护</p><p class="iefix-bg"></p>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-item product-item_mask">
+                                                                <a href="javascript:;" group="sto">
+                                                                    <div class="item-thumbnail">
+                                                                        <img src="//pic.c-ctrip.com/htlpic/inn/pic/ctriphome/pic_220_160_8.jpg" alt="">
+                                                                    </div>
+                                                                    <div class="item-overlay">
+                                                                        <p class="avator"><img src="//pic.c-ctrip.com/hotelinternational121211/inn/user/pic_face01.jpg" alt=""></p>
+                                                                        <p class="item-name">典型别墅是产后护理<br>加婴儿照护</p><p class="iefix-bg"></p>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- product end -->
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--特色服务-->
+<section id="content" class="section-padding" style="background:#f6f6f6;margin-top:0;">
+    <div class="" style="padding-top: 50px">
+        <div class="layui-container">
+            <div class="content layui-row">
+                <div class="layui-container">
+                    <!--Tab风格的-->
+                    <div class="layui-tab layui-tab-brief" style="margin: 10px 0;">
+                        <ul class="layui-tab-title" style="float:none; border-bottom-width: 3px; border-bottom-style: solid;border-color:#2577e3; width :100%">
+                            <li class="layui-this" style="display: inline-block;height: 0;line-height: 36px;margin-top: -3px;color: #666;font-size:16px;">特色服务</li>
+
+                        </ul>
+                        <div class="layui-tab-content" style="margin-top:20px;">
+                            <div class="layui-tab-item layui-show">
+                                <div class="container">
+
+
+
+                                    @{
+                                        <div class="row showcase-section" id="teseold">
+                                            <div class="col-md-6">
+                                                @if (OldAgeCare.Count > 0)
+                                                {
+                                                    <a href="/Demand/OldAgeCare/">
+                                                        <img class="img-responsive" src="@(OldAgeCare[0].PicUrl)" alt="">
+                                                        <div class="service_bottom">
+                                                            <span> @(OldAgeCare[0].PicTitle)</span>
+                                                            <span> @(OldAgeCare[0].Memo)</span>
+                                                        </div>
+                                                    </a>
+                                                }
+                                            </div>
+                                            <div class="col-md-6">
+                                                @if (ClassCare.Count > 0)
+                                                {
+                                                    <a href="/Demand/ClassCare/">
+                                                        <img class="img-responsive" src="@(ClassCare[0].PicUrl)" alt="">
+                                                        <div class="service_bottom">
+                                                            <span> @(ClassCare[0].PicTitle)</span>
+                                                            <span> @(ClassCare[0].Memo)</span>
+                                                        </div>
+                                                    </a>
+                                                }
+                                            </div>
+                                        </div>
+
+                                        <!--婴幼儿-->
+                                        <div class="row showcase-section" id="tesehai">
+                                            <div class="col-md-6">
+                                                @if (InfantCare.Count > 0)
+                                                {
+                                                    <a href="/Demand/InfantCare/">
+                                                        <img class="img-responsive" src="@(InfantCare[0].PicUrl)" alt="">
+                                                        <div class="service_bottom">
+                                                            <span> @(InfantCare[0].PicTitle)</span>
+                                                            <span> @(InfantCare[0].Memo)</span>
+                                                        </div>
+                                                    </a>
+                                                }
+                                            </div>
+                                            <div class="col-md-6">
+                                                @if (GravidaCare.Count > 0)
+                                                {
+                                                    <a href="/Demand/GravidaCare/">
+                                                        <img class="img-responsive" src="@(GravidaCare[0].PicUrl)" alt="">
+                                                        <div class="service_bottom">
+                                                            <span> @(GravidaCare[0].PicTitle)</span>
+                                                            <span> @(GravidaCare[0].Memo)</span>
+                                                        </div>
+                                                    </a>
+                                                }
+                                            </div>
+                                        </div>
+
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--服务明星-->
+<section id="content" class="section-padding" style="background:#f6f6f6;margin-top:0;">
+    <div class="" style="padding-top: 50px">
+        <div class="layui-container">
+            <div class="content layui-row">
+                <div class="layui-container">
+                    <!--Tab风格的-->
+                    <div class="layui-tab layui-tab-brief" style="margin: 10px 0;">
+                        <ul class="layui-tab-title" style="float:none; border-bottom-width: 3px; border-bottom-style: solid;border-color:#2577e3; width :100%">
+                            <li class="layui-this" style="display: inline-block;height: 0;line-height: 36px;margin-top: -3px;color: #666;font-size:16px;">服务明星</li>
+
+                        </ul>
+                        <div class="layui-tab-content" style="margin-top:20px;">
+                            <div class="layui-tab-item layui-show">
+                                <div id="slider">
+                                    <div class="slider_box" id="slider_name">
+                                        <div class="silder_tip" id="movie_tip">工作人员</div>
+                                        <ul class="silder_con">
+                                            <li class="silder_panel clearfix">
+                                                <a href="#" class="f_l"><img src="/Content/img/service2.jpg" /></a>
+                                                <div class="silder_intro f_r">
+                                                    <h3> <strong><a href="#">标题信息1</a></strong> <span>服务明星</span> </h3>
+                                                    <ul>
+                                                        <li>
+                                                            <label>兼职：</label>
+                                                            <span><a href="javascript:;">共享保姆</a><a href="javascript:;">教师</a><a href="javascript:;">看护</a></span>
+                                                        </li>
+                                                        <li>
+                                                            <label>昵称：</label>
+                                                            <span><a href="javascript:;">好好阿姨</a></span>
+                                                        </li>
+                                                        <li>
+                                                            <label>业绩：</label>
+                                                            <span><a href="javascript:;">总订单20单</a></span>
+                                                        </li>
+                                                    </ul>
+                                                    <p>[<strong>客户评价</strong>]好好阿姨是以为责任心非常强的好护工,技术水平一流,服务态度暖心,把顾客当自己家人一样，事无巨细周到细致，堪称业界标杆..</p>
+                                                    @*<a class="silder_play" href="#">马上观看</a>*@
+                                                </div>
+                                            </li>
+                                            <li class="silder_panel clearfix">
+                                                <a href="#" class="f_l"><img src="/Content/img/service2.jpg" /></a>
+                                                <div class="silder_intro f_r">
+                                                    <h3> <strong><a href="#">标题信息2</a></strong> <span>服务明星：小华</span> </h3>
+                                                    <ul>
+                                                        <li>
+                                                            <label>兼职：</label>
+                                                            <span><a href="javascript:;">共享保姆</a><a href="javascript:;">教师</a><a href="javascript:;">看护</a></span>
+                                                        </li>
+                                                        <li>
+                                                            <label>昵称：</label>
+                                                            <span><a href="javascript:;">好好阿姨</a></span>
+                                                        </li>
+                                                        <li>
+                                                            <label>业绩：</label>
+                                                            <span><a href="javascript:;">总订单20单</a></span>
+                                                        </li>
+                                                    </ul>
+                                                    <p>[<strong>客户评价</strong>]好好阿姨是以为责任心非常强的好护工,技术水平一流,服务态度暖心,把顾客当自己家人一样，事无巨细周到细致，堪称业界标杆..</p>
+                                                </div>
+                                            </li>
+                                            <li class="silder_panel clearfix">
+                                                <a href="#" class="f_l" title="蝙蝠侠前传3黑暗骑士崛起"><img src="/Content/img/service2.jpg" title="蝙蝠侠前传3黑暗骑士崛起" /></a>
+                                                <div class="silder_intro f_r">
+                                                    <h3> <strong><a href="#" title="标题信息3">标题信息3</a></strong> <span>服务明星：小华</span> </h3>
+                                                    <ul>
+                                                        <li>
+                                                            <label>兼职：</label>
+                                                            <span><a href="javascript:;">共享保姆</a><a href="javascript:;">教师</a><a href="javascript:;">看护</a></span>
+                                                        </li>
+                                                        <li>
+                                                            <label>昵称：</label>
+                                                            <span><a href="javascript:;">好好阿姨</a></span>
+                                                        </li>
+                                                        <li>
+                                                            <label>业绩：</label>
+                                                            <span><a href="javascript:;">总订单20单</a></span>
+                                                        </li>
+                                                    </ul>
+                                                    <p>[<strong>客户评价</strong>]好好阿姨是以为责任心非常强的好护工,技术水平一流,服务态度暖心,把顾客当自己家人一样，事无巨细周到细致，堪称业界标杆..</p>
+                                                </div>
+                                            </li>
+                                            <li class="silder_panel clearfix">
+                                                <a href="#" class="f_l"><img src="/Content/img/service2.jpg" /></a>
+                                                <div class="silder_intro f_r">
+                                                    <h3> <strong><a href="#">标题信息4</a></strong> <span>服务明星：大神</span> </h3>
+                                                    <ul>
+                                                        <li>
+                                                            <label>兼职：</label>
+                                                            <span><a href="javascript:;">共享保姆</a><a href="javascript:;">教师</a><a href="javascript:;">看护</a></span>
+                                                        </li>
+                                                        <li>
+                                                            <label>昵称：</label>
+                                                            <span><a href="javascript:;">好好阿姨</a></span>
+                                                        </li>
+                                                        <li>
+                                                            <label>业绩：</label>
+                                                            <span><a href="javascript:;">总订单20单</a></span>
+                                                        </li>
+                                                    </ul>
+                                                    <p>[<strong>客户评价</strong>]好好阿姨是以为责任心非常强的好护工,技术水平一流,服务态度暖心,把顾客当自己家人一样，事无巨细周到细致，堪称业界标杆..</p>
+                                                </div>
+                                            </li>
+                                            <li class="silder_panel clearfix">
+                                                <a href="#" class="f_l"><img src="/Content/img/service2.jpg" /></a>
+                                                <div class="silder_intro f_r">
+                                                    <h3> <strong><a href="#">标题信息5</a></strong> <span>服务明星：小华</span> </h3>
+                                                    <ul>
+                                                        <li>
+                                                            <label>兼职：</label>
+                                                            <span><a href="javascript:;">共享保姆</a><a href="javascript:;">教师</a><a href="javascript:;">看护</a></span>
+                                                        </li>
+                                                        <li>
+                                                            <label>昵称：</label>
+                                                            <span><a href="javascript:;">好好阿姨</a></span>
+                                                        </li>
+                                                        <li>
+                                                            <label>业绩：</label>
+                                                            <span><a href="javascript:;">总订单20单</a></span>
+                                                        </li>
+                                                    </ul>
+                                                    <p>[<strong>客户评价</strong>]好好阿姨是以为责任心非常强的好护工,技术水平一流,服务态度暖心,把顾客当自己家人一样，事无巨细周到细致，堪称业界标杆..</p>
+                                                </div>
+                                            </li>
+                                            <li class="silder_panel clearfix">
+                                                <a href="#" class="f_l"><img src="/Content/img/service2.jpg" /></a>
+                                                <div class="silder_intro f_r">
+                                                    <h3> <strong><a href="#">标题信息6</a></strong> <span>服务明星：小华</span> </h3>
+                                                    <ul>
+                                                        <li>
+                                                            <label>兼职：</label>
+                                                            <span><a href="javascript:;">共享保姆</a><a href="javascript:;">教师</a><a href="javascript:;">看护</a></span>
+                                                        </li>
+                                                        <li>
+                                                            <label>昵称：</label>
+                                                            <span><a href="javascript:;">好好阿姨</a></span>
+                                                        </li>
+                                                        <li>
+                                                            <label>业绩：</label>
+                                                            <span><a href="javascript:;">总订单20单</a></span>
+                                                        </li>
+                                                    </ul>
+                                                    <p>[<strong>客户评价</strong>]好好阿姨是以为责任心非常强的好护工,技术水平一流,服务态度暖心,把顾客当自己家人一样，事无巨细周到细致，堪称业界标杆..</p>
+                                                </div>
+                                            </li>
+                                            <li class="silder_panel clearfix">
+                                                <a href="#" class="f_l"><img src="/Content/img/service2.jpg" /></a>
+                                                <div class="silder_intro f_r">
+                                                    <h3> <strong><a href="#">标题信息7</a></strong> <span>服务明星：小华</span> </h3>
+                                                    <ul>
+                                                        <li>
+                                                            <label>兼职：</label>
+                                                            <span><a href="javascript:;">共享保姆</a><a href="javascript:;">教师</a><a href="javascript:;">看护</a></span>
+                                                        </li>
+                                                        <li>
+                                                            <label>昵称：</label>
+                                                            <span><a href="javascript:;">好好阿姨</a></span>
+                                                        </li>
+                                                        <li>
+                                                            <label>业绩：</label>
+                                                            <span><a href="javascript:;">总订单20单</a></span>
+                                                        </li>
+                                                    </ul>
+                                                    <p>[<strong>客户评价</strong>]好好阿姨是以为责任心非常强的好护工,技术水平一流,服务态度暖心,把顾客当自己家人一样，事无巨细周到细致，堪称业界标杆..</p>
+                                                </div>
+                                            </li>
+                                            <li class="silder_panel clearfix">
+                                                <a href="#" class="f_l"><img src="/Content/img/service2.jpg" /></a>
+                                                <div class="silder_intro f_r">
+                                                    <h3> <strong><a href="#">标题信息8</a></strong> <span>服务明星</span> </h3>
+                                                    <ul>
+                                                        <li>
+                                                            <label>兼职：</label>
+                                                            <span><a href="javascript:;">共享保姆</a><a href="javascript:;">教师</a><a href="javascript:;">看护</a></span>
+                                                        </li>
+                                                        <li>
+                                                            <label>昵称：</label>
+                                                            <span><a href="javascript:;">好好阿姨</a></span>
+                                                        </li>
+                                                        <li>
+                                                            <label>业绩：</label>
+                                                            <span><a href="javascript:;">总订单20单</a></span>
+                                                        </li>
+                                                    </ul>
+                                                    <p>[<strong>客户评价</strong>]好好阿姨是以为责任心非常强的好护工,技术水平一流,服务态度暖心,把顾客当自己家人一样，事无巨细周到细致，堪称业界标杆..</p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <ul class="silder_nav clearfix">
+                                            <li><a href="javascript:;"><img src="/Content/img/service2.jpg" /></a></li>
+                                            <li><a href="javascript:;"><img src="/Content/img/service2.jpg" /></a></li>
+                                            <li><a href="javascript:;"><img src="/Content/img/service2.jpg" /></a></li>
+                                            <li><a href="javascript:;"><img src="/Content/img/service2.jpg" /></a></li>
+                                            <li><a href="javascript:;"><img src="/Content/img/service2.jpg" /></a></li>
+                                            <li><a href="javascript:;"><img src="/Content/img/service2.jpg" /></a></li>
+                                            <li><a href="javascript:;"><img src="/Content/img/service2.jpg" /></a></li>
+                                            <li><a href="javascript:;"><img src="/Content/img/service2.jpg" /></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="silderBox"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!--服务理念-->
+<section id="content" class="section-padding" style="background:#f6f6f6;margin-top:0;">
+    <div class="" style="padding-top: 50px">
+        <div class="layui-container">
+            <div class="content layui-row">
+                <div class="layui-container">
+                    <!--Tab风格的-->
+                    <div class="layui-tab layui-tab-brief" style="margin: 10px 0;">
+                        <ul class="layui-tab-title" style="float:none; border-bottom-width: 3px; border-bottom-style: solid;border-color:#2577e3; width :100%">
+                            <li class="layui-this" style="display: inline-block;height: 0;line-height: 36px;margin-top: -3px;color: #666;font-size:16px;">服务理念</li>
+
+                        </ul>
+                        <div class="layui-tab-content" style="margin-top:20px;">
+                            <div class="layui-tab-item layui-show">
+                                <div class="container">
+                                    <p style="font-size:18px;font-weight:700;margin : 20px auto;text-align:center;">我们致力于为顾客提供更优质的服务，更专业的指导，更省钱的方案！</p>
+                                    <div class="row">
+                                        <div class="skill-home">
+
+                                            <div class="skill-home-solid clearfix">
+                                                <div class="col-md-3 text-center">
+                                                    <span class="icons c1"><i class="fa fa-ambulance"></i></span>
+                                                    <div class="box-area" style="margin-top:15px;">
+                                                        <h3>更专业</h3> <p style="margin-top:15px;">专业的态度，为您提供专业的服务</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 text-center">
+                                                    <span class="icons c2"><i class="fa fa-users"></i></span>
+                                                    <div class="box-area" style="margin-top:15px;">
+                                                        <h3>更贴心</h3> <p style="margin-top:15px;">想顾客所想，为顾客排忧解难</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 text-center">
+                                                    <span class="icons c3"><i class="fa fa-trophy"></i></span>
+                                                    <div class="box-area" style="margin-top:15px;">
+                                                        <h3>更省时</h3> <p style="margin-top:15px;">致力于解除顾客后顾之忧</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 text-center">
+                                                    <span class="icons c4"><i class="fa fa-globe"></i></span>
+                                                    <div class="box-area" style="margin-top:15px;">
+                                                        <h3>更省钱</h3> <p style="margin-top:15px;">花最少的钱，办最好的事</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="/Scripts/jquery-1.10.2.min.js"></script>
+<script src="/Content/layui/layui.js"></script>
+<script src="~/Content/index/jquery.slides.js"></script>
+
+
+<script type="text/javascript">
+
+    $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js', function () {
+        alert(JSON.stringify(remote_ip_info));
+        alert(remote_ip_info.country);//国家  
+        alert(remote_ip_info.province);//省份  
+        alert(remote_ip_info.city);//城市  
+    });   
+    //页面加载--导航菜单设置选中状态
+    $(function () {
+        $("ul[class='nav navbar-nav'] li").removeClass("active");//删除class属性。
+        $("ul[class='nav navbar-nav'] > li:eq(0)").addClass("active");//设置class属性。
+        //加载表单
+        loadData();
+
+    });
+    //发布需求养老
+    layui.use(['carousel', 'form', 'layedit', 'layer', 'upload', 'laydate'], function () {
+        var $ = layui.jquery
+            , upload = layui.upload
+            , form = layui.form
+            , layer = layui.layer
+            , carousel = layui.carousel
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+        //图片轮播
+        carousel.render({
+            elem: '#sublunbo'
+            , width: '100%'
+            , height: '360px'
+            , arrow: 'none'
+            , interval: 5000
+        });
+
+
+
+    });
+
+   //订单表单
+    function loadData() {
+        $.post("/Home/UploadOrder/", {}, function (data) { jQuery("#UploadOrder").html(data); });
+    }
+
+
+     //判断当前是否登录
+    function is_login() {
+        var login = '@Request.IsAuthenticated';
+        if (login == "False") {
+            return false;
+        } else {
+            return true;
+        }
+    }
+</script>

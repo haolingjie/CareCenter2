@@ -1,0 +1,117 @@
+﻿.article_r {
+    padding-top: 10px;
+    text-align: center;
+}
+
+.pulisher, .Actime, .article_view, .article_comments, .article_del {
+    clear: both;
+    margin-right: 25px;
+}
+
+
+
+.comment_add_or_last {
+    margin: 0 auto;
+    clear: both;
+    width: 50%;
+    height: 40px;
+    background: #F0F0F0;
+    text-align: center;
+    line-height: 40px;
+}
+
+.imgcss {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.comment_name {
+    margin-left: -10px;
+    color: #3D9EEA;
+    font-size: 15px;
+    font-weight: bolder;
+}
+
+.layui-icon {
+    font-size: 10px;
+    color: grey;
+}
+/*以下评论的css*/
+.show_reply_list {
+    margin-right: 1em;
+    color: grey;
+}
+
+.comment_list {
+    background-color: #ffffff;
+    padding-top: 5px;
+    /*width: 900px;*/
+    margin: 0 auto;
+}
+
+.comment {
+    width: 900px;
+    margin-top: 10px;
+    margin: 0 auto;
+}
+
+.comment_details {
+    float: right;
+}
+
+.comment_content {
+    clear: both;
+    margin: 5px 50px
+}
+
+.imgdiv {
+    width: 80px;
+    height: 70px;
+    float: left;
+}
+
+.layui-icon {
+    font-size: 13px;
+    color: grey;
+}
+
+.del {
+    float: right;
+}
+
+.del_comment {
+    margin-right: 50px;
+}
+
+.reply_list {
+    clear: both;
+    display: none;
+    /*width: 900px;*/
+    padding-right: 15px;
+    margin-top: 10px;
+}
+
+.reply {
+    clear: both;
+    width: 80%;
+    margin: 4px auto;
+}
+
+.reply_name {
+    color: #3D9EEA;
+}
+
+.del_reply {
+    float: right;
+}
+
+.show_remain_reply {
+    width: 50%;
+    height: 40px;
+    text-align: center;
+    background-color: #F0F0F0;
+    margin: 0 auto;
+    line-height: 40px;
+    display: none;
+}

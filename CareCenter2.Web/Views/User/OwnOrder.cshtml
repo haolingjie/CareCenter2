@@ -1,0 +1,233 @@
+﻿
+@{
+    ViewBag.Title = "待服务订单(工作人员)";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model CareCenter2.DB.tb_User
+<link href="/Content/user/css/user.css" rel="stylesheet" />
+<link href="~/Content/laypage/skin/laypage.css" rel="stylesheet" />
+<style>
+    .grid {
+        padding-bottom: 15px;
+        border-bottom: 1px solid #00aeef;
+    }
+
+        .grid h5 {
+            font-size: 1em;
+        }
+
+    .blog-para img {
+        width: 200px;
+        height: 125px;
+    }
+
+    .btn-3 {
+        background: #00aeef;
+        color: #fff;
+    }
+</style>
+<sectionn id="content">
+    <div class="container " style="margin-top:166px;">
+        <div class="wrap">
+            <div class="header-right">
+                <div class="logo">
+                    <a href="/User/Index/"><img src="@Model.ImgUrl" alt="" /> </a>
+                    <h1>@Model.NickName</h1>
+                    <p><span style="color:#ff0000;"><i class="fa fa-certificate"></i>@ViewBag.Role</span></p>
+                </div>
+                <div class="menu">
+                    <ul class="user-nav">
+                        <li><a href="/User/Index/"><i class="fa fa-child"></i>个人主页</a></li>
+                        <li class="active"><a href="/User/OwnOrder/"><i class="fa fa-calendar"></i>待服务订单(工作人员)</a></li>
+                        <li><a href="/User/OwnNeed/"><i class="fa fa-file-text"></i>已提交订单</a></li>
+                        <li><a href="/User/OwnApply/"><i class="fa fa-briefcase"></i>我的钱包</a></li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="header-left">
+                @*<h2>我的订单</h2>*@
+                <div class="editContent" style="margin-top: 20px;  height: 36px; line-height: 36px;">
+                    @*background: #e4e4e4;*@
+                    <ul class="filter">                        
+                        <li><a href="#" data-filter="All" class="active">全部</a></li>
+                        <li><a href="#" data-filter="ClassCare">(共享保姆)课后托管照护</a></li>
+                        <li><a href="#" data-filter="InfantCare">婴幼照护</a></li>
+                        <li><a href="#" data-filter="OldAgeCare">养老照护</a></li>
+                        <li><a href="#" data-filter="GravidaCare">孕检照护</a></li>
+                    </ul>
+            </div>
+            <!-- /.gallery-filter -->
+
+            <div class="main" style="margin-top: 0">
+                <div class="blog" id="pageDatalist">
+
+                </div>
+                <div id="pageNotData"></div>@*显示没有查询到数据*@
+                <!-------------------翻页---------------------->
+                <div style="display:block;line-height:25px;margin-top:20px;">
+                    <div class=" font14 font-galy alpha-1" style="display:none;">
+                        <i class="fa fa-arrow-down" style="color:crimson"></i>
+                        <div class="font-white">共为您搜索到<b id="pageNumber"></b>条结果,共<b id="pageShu"></b>页</div>
+                    </div>
+                    <div id="pageFenYe" style="text-align:center;">
+
+                    </div>
+                </div>
+
+                <!-------------------翻页---------------------->
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+</sectionn>
+
+<script src="/Scripts/jquery-1.10.2.min.js"></script>
+@*<script src="/Content/js/custom.js"></script>*@
+<script src="~/Content/laypage/laypage.js"></script>
+<script src="~/Content/js/timer.js"></script>
+<script type="text/javascript">
+    //页面加载--导航菜单设置选中状态
+    $(function () {
+        $("ul[class='nav navbar-nav'] li").removeClass("active");//删除class属性。
+        $("ul[class='nav navbar-nav'] > li:eq(6)").addClass("active");//设置class属性。
+        $("ul[class='nav navbar-nav'] > li:eq(6)>ul>li:eq(0)").addClass("active");//设置子菜单class属性。
+        //var logo = sessionStorage.getItem("logo");
+        //if (logo == '杰出养老') {
+        //    //养老
+        //    $("#infantcare").css('display', 'none');//隐藏
+        //    $("#oldeyear").css('display', 'block');//显示
+        //    $("#logo").html("杰出养老");
+        //} else if (logo == '杰出婴幼陪护') {
+        //    $("#oldeyear").css('display', 'none');//隐藏
+        //    $("#infantcare").css('display', 'block');//显示
+        //    $("#logo").html("杰出婴幼陪护");
+        //} else {
+        //    $("#oldeyear").css('display', 'none');//隐藏
+        //    $("#infantcare").css('display', 'none');//显示
+        //    $("#logo").html("照护中心");
+        //}
+
+        //验证登录
+        if (!is_login()) {
+            location.href = "/Home/Login/?ReturnUrl=/User/OwnOrder/";
+        }
+       //查询分页数据
+        PageData("All");
+    });
+    //筛选条件
+    //var $container = $('#isotope-gallery-container');
+    var $filter = $('.filter');
+
+    $('.filter a').click(function () {
+
+        var selector = $(this).attr('data-filter');
+
+        $filter.find('a').removeClass('active');
+        $(this).addClass('active');
+        PageData(selector);
+
+    });
+
+    //分页数据
+    function PageData(ordertype) {
+        //分页显示
+        var data = "";//查询的数据
+        var pages = "";//总页数
+        $.ajax({
+            type: "POST",
+            url: "/User/OwnOrderData",
+            data: { OrderType: ordertype}, //OrderType: ordertype, SearchTxt: search, ddlDate: ddlDate
+            dataType: "json",
+            success: function (res) {
+                if (res.Statu == 1) {
+                    data = eval(res.Data);// res.Data;
+                    //window.parent.location.href = res.BackUrl;
+                    var nums = 3; //每页出现的数量
+                    pages = Math.ceil(data.length / nums); //得到总页数
+
+                    var thisDate = function (curr) {
+                        //此处只是演示，实际场景通常是返回已经当前页已经分组好的数据
+                        var str = '', last = curr * nums - 1;
+                        last = last >= data.length ? (data.length - 1) : last;
+                        for (var i = (curr * nums - nums); i <= last; i++) {
+                            str += '<div class="grid">';
+                            str += '<h4><a>' + data[i].OrderTitle + '</a></h4>';
+                            var date = new Date(data[i].CreateDate).Format("yyyy-MM-dd hh:mm");
+                            //var date =  data[i].CreateDate.replace(new RegExp('/', 'g'), "-");
+                            if (data[i].Status == -1) {
+                                str += '<h5>发布时间&nbsp;' + date + "&nbsp;&nbsp;订单状态&nbsp;<b>作废</b>" + '</h5>';
+                            } else if (data[i].Status == "1") {
+                                str += '<h5>发布时间&nbsp;' + date + "&nbsp;&nbsp;订单状态&nbsp;&nbsp;<b style='color: #0099AE;'><a href='javascript: ;'>待对接</a></b>" + '</h5>';
+                            } else if (data[i].Status == "2") {
+                                str += '<h5>发布时间&nbsp;' + date + "&nbsp;&nbsp;订单状态&nbsp;&nbsp;<b style='color: #b200ff;'>对接中</b>" + '</h5>';
+                            } else if (data[i].Status == "3") {
+                                str += '<h5>发布时间&nbsp;' + date + "&nbsp;&nbsp;订单状态&nbsp;&nbsp;<b style='color: #ff6a00;'>已对接</b>" + '</h5>';
+                            } else if (data[i].Status == "4") {
+                                str += '<h5>发布时间&nbsp;' + date + "&nbsp;&nbsp;订单状态&nbsp;&nbsp;<b style='color: #ff0000;'>已完结</b>" + '</h5>';
+                            } else if (data[i].Status == "0") {
+                                str += '<h5>发布时间&nbsp;' + date + "&nbsp;&nbsp;需求状态&nbsp;&nbsp;<b style='color: #ff0000;'>待审核</b>" + '</h5>';
+                            }
+                            str += '<h5>发布者&nbsp;<b style="color: #e06802;">' + data[i].NickName + '</b>&nbsp;&nbsp;工作服务人员&nbsp;<b style="color: #e06802;">' + data[i].AdminNickName + '</b></h5>';
+                            str += '<h5>照护日期范围&nbsp;<b style="color: #e06802;">' + data[i].CeraRange + '</b>&nbsp;&nbsp;照护方式&nbsp;<b style="color: #e06802;">' + data[i].DateType + '</b></h5>';
+                            if (data[i].PicUrl == "" || data[i].PicUrl == null) {
+                                if (data[i].OrderClassify == 1) {
+                                    str += '<div class="blog-para"><p><a href="javascript:;" rel="lightbox"><img src="/Content/img/img1.png" alt=""></a>' + data[i].OrderType + '&nbsp;' + data[i].Memo + '</p>';
+                                } else if (data[i].OrderClassify == 2) {
+                                    str += '<div class="blog-para"><p><a href="javascript:;" rel="lightbox"><img src="/Content/img/oldyear7.jpg" alt=""></a>' + data[i].OrderType + '&nbsp;' + data[i].Memo + '</p>';
+                                } else if (data[i].OrderClassify == 3) {
+                                    str += '<div class="blog-para"><p><a href="javascript:;" rel="lightbox"><img src="/Content/img/oldyear2.jpg" alt=""></a>' + data[i].OrderType + '&nbsp;' + data[i].Memo + '</p>';
+                                } else if (data[i].OrderClassify == 4) {
+                                    str += '<div class="blog-para"><p><a href="javascript:;" rel="lightbox"><img src="/Content/img/oldyear3.jpg" alt=""></a>' + data[i].OrderType + '&nbsp;' + data[i].Memo + '</p>';
+                                }
+                            } else {
+                                str += '<div class="blog-para"><p><a href="javascript:;" rel="lightbox"><img src=' + data[i].PicUrl + ' alt=""></a>' + data[i].OrderType + '&nbsp;' + data[i].Memo + '</p>';
+                            }                                       
+                            str += '<div class="readmore"><a href= "/User/UserDetails/?OrderID=' + data[i].OrderID + '"><button class="btn btn-3 btn-3e icon-arrow-right">' + "详情" + '</button></a></div>';
+                            str += ' </div><div class="clear"></div></div >';
+
+                        }
+                        return str;
+                    };
+
+                    //调用分页
+                    laypage({
+                        cont: 'pageFenYe',
+                        pages: pages,
+                        skin: 'molv', //皮肤
+                        //skip: true, //是否开启跳页
+                        groups: 4,//连续显示分页数
+                        jump: function (obj) {
+                            document.getElementById('pageDatalist').innerHTML = thisDate(obj.curr);//绑定数据
+                            document.getElementById('pageNotData').innerHTML = "";//无数据
+                            document.getElementById('pageNumber').innerHTML = data.length;//总条数
+                            document.getElementById('pageShu').innerHTML = pages;//总页数
+                        }
+                    });
+
+                } else {
+                    var str = "<div class='empty-box' style='text-align: center;'><div class='empty-pic'><img src='/Content/user/images/history2x.png' alt='' width='70' height='64'></div><div class='empty-txt'>您还没有订单记录</div></div>";
+                    document.getElementById('pageDatalist').innerHTML = "";//绑定数据
+                    document.getElementById('pageNotData').innerHTML = str;//绑定数据
+                    document.getElementById('pageNumber').innerHTML = 0;//总条数
+                    document.getElementById('pageShu').innerHTML = 0;//总页数
+                }
+            }
+        });
+    }
+
+
+
+    //判断当前是否登录
+    function is_login() {
+        var login = '@Request.IsAuthenticated';
+        if (login == "False") {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+</script>

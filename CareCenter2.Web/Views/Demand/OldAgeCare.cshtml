@@ -1,0 +1,252 @@
+﻿
+@{
+    ViewBag.Title = "养老照护";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="/Content/layui/css/layui.css" rel="stylesheet" />
+<link href="~/Content/laypage/skin/laypage.css" rel="stylesheet" />
+<style type="text/css">
+    .post-comment .pull-left img {
+        margin-right: 20px;
+        /*border-left: 3px solid #0884d5;*/
+    }
+
+    .about-btn {
+        max-width: inherit;
+        background: #f2f2f2;
+    }
+    #content {
+        margin-top: 120px;
+    }
+</style>
+<section id="content">
+    <div class="container">
+        <div class="row" style="background:#fff;">
+            <div class="col-md-12 col-sm-12">
+                <div class="single-blog blog-details two-column">
+                    <div class="post-content overflow">
+                        <div class="response-area">
+                            <div class="layui-row">
+                                <div class="layui-col-md4">
+                                    <h2 class="bold">杰出养老照护</h2>
+                                </div>
+                                <div class="layui-col-md4 layui-col-md-offset4" style="text-align:right;">
+                                    <a href="javascript:NewNeed();" class="layui-btn layui-btn-danger">申请需求</a>
+                                </div>
+                            </div>
+                            <div class="content layui-row" style="font-size:16px;text-align:left;padding:50px 0; border-top:1px solid #f1e8dd;line-height:40px;">
+
+                                <img src="~/Content/img/oldyear4.jpg" style="display:block;margin:0 auto;" /><br />
+                                养老康复中心VIP绿色通道为宾客提供24小时的养护保障服务；
+                                客入住期间，根据身体状况进行相关检查及诊治；
+                                宾客进行疗养咨询和访视，遵照医嘱指导宾客正确用药；
+                                突发性疾病进行院前急救及转诊；疗养护大查房每周1次（重点查新入住和特殊宾客）；特殊宾客健康养护方案讨论，每月1次；
+
+                            </div>
+                            <div class="content layui-row" style="font-size:16px;text-align:left;padding:50px 0; border-top:1px solid #f1e8dd;line-height:40px;">
+                                1.全方位的健康医养服务：我们建设医养康复中心，康复设备齐全，生活环境舒适温馨。<br />
+                                2.全方位的健康数据库：建立了全方位360°健康动态数据库，根据老人年龄、疾病等信息进行专业分析，更好实现对老人健康档案的电子化管理 以及电子病历全程跟踪管理，实现随人、长期和动态的监护。<br />
+                                <img src="~/Content/img/oldyear2.jpg" style="display:block;margin:0 auto;" /><br />
+                                3.全方位的日常生活服务：实行智能化管理，建立智能化总控中心和呼叫中心，配置闭路电视监控、红外线感应自动报警、设备监控等功能系统；配备专业服务人员，为长者提供全天候日常生活服务。<br />
+                                4.全日制老年大学服务：多功能演艺厅、茶室、棋牌室、影视厅、阅览室、美容美发室、乒乓球、台球等文娱场所，让传统的退休生活不再单一 。在这里，中心将与长者共同探索、发掘专属自己的魅力与境界。<br />
+                                5.全天候安全日常智能管理：全部采用无障碍人性标准化设计。
+                                <img src="~/Content/img/oldyear1.jpg" style="display:block;margin:0 auto;" />
+
+                            </div>
+                            <div class="content layui-row" style="font-size:16px;text-align:left;padding:50px 0; border-top:1px solid #f1e8dd;line-height:40px;">
+
+                                <img src="~/Content/img/oldyear3.jpg" style="display:block;margin:0 auto;" /><br />
+                                提供接待部电话、互联网；协助宾客联系亲友或监护人。
+                                所有入住老人均监测老人们的血压、脉搏及健康状况，智慧云平台通过数据分析实现数据报警，服务人员会在第一时 间来到老人身边，为老人提供专业的医疗服务，更加完善的为老人突发疾病及意外事故的处理提供有效的保障。
+
+                            </div>
+                            <div class="content layui-row" style="font-size:16px;text-align:left;padding:50px 0; border-top:1px solid #f1e8dd;line-height:40px;">
+
+                                <img src="~/Content/img/oldyear5.jpg" style="display:block;margin:0 auto;" /><br />
+                                每日三餐；公寓内设有餐。<br />
+                                友聚餐、寿宴（每年1次）；<br />
+                                特色餐：清真餐、素食餐；<br />
+                                <img src="~/Content/img/oldyear6.jpg" style="display:block;margin:0 auto;" /><br />
+                                治疗餐：营养药膳、滋补药膳、糖尿病餐、肾病餐、低盐餐等（每周两次药膳）；<br />
+                                指导宾客健康饮食。<br />
+                                <img src="~/Content/img/oldyear7.jpg" style="display:block;margin:0 auto;" /><br />
+                            </div>
+                            <div class="layui-row">
+                                <div class="layui-col-md4">
+                                    <h2 class="bold">成功案例</h2>
+                                </div>
+                            </div>
+                            <!--左边部分-->
+                            @*<div class="col-md-6">*@
+                            <ul class="media-list" id="pageDatalist"></ul>
+                            <div id="pageNotData"></div>@*显示没有查询到数据*@
+                            <!-------------------翻页---------------------->
+                            <div style="display:block;line-height:25px;margin-top:20px;">
+                                <div class=" font14 font-galy alpha-1" style="display:none;">
+                                    <i class="fa fa-arrow-down" style="color:crimson"></i>
+                                    <div class="font-white">共为您搜索到<b id="pageNumber"></b>条结果,共<b id="pageShu"></b>页</div>
+                                </div>
+                                <div id="pageFenYe" style="text-align:center;">
+
+                                </div>
+                            </div>
+
+                            <!-------------------翻页---------------------->
+                            @*</div>*@
+                            <!--右边部分-->
+
+
+                        </div><!--/Response-area-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script src="/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Content/laypage/laypage.js"></script>
+<script src="~/Content/js/timer.js"></script>
+<script>
+    //页面加载--导航菜单设置选中状态
+    $(function () {
+        $("ul[class='nav navbar-nav'] li").removeClass("active");//删除class属性。
+        $("ul[class='nav navbar-nav'] > li:eq(1)").addClass("active");//设置class属性。
+        $("ul[class='nav navbar-nav'] > li:eq(1)>ul>li:eq(0)").addClass("active");//设置子菜单class属性。
+        //jquery方法测试
+        $("#tijiaoData").click(function () {
+
+            //验证登录
+            if (!is_login()) {
+                location.href = "/Home/Login/?ReturnUrl=/Demand/OldAgeCare/";
+            }
+        });
+
+        //分页显示
+        var data = "";//查询的数据
+        var pages = "";//总页数
+        $.ajax({
+            type: "POST",
+            url: "/Demand/OldAgeCareData",
+            data: { }, //OrderType: ordertype, SearchTxt: search, ddlDate: ddlDate
+            dataType: "json",
+            success: function (res) {
+                
+                if (res.Statu == 1) {
+                    data = eval(res.Data);// res.Data;
+                    //window.parent.location.href = res.BackUrl;
+                    var nums = 3; //每页出现的数量
+                    pages = Math.ceil(data.length / nums); //得到总页数
+
+                    var thisDate = function (curr) {
+                        //此处只是演示，实际场景通常是返回已经当前页已经分组好的数据
+                        var str = '', last = curr * nums - 1;
+                        last = last >= data.length ? (data.length - 1) : last;
+                        for (var i = (curr * nums - nums); i <= last; i++) {
+
+                            str += '<li class="media"> <a href="/Demand/NeedDetail/?OrderID=' + data[i].OrderID + '&type=3"><div class="post-comment">';
+                            if (data[i].PicUrl == "" || data[i].PicUrl == null) {
+                                str += '<p class="pull-left" > <img class="media-object" style="width:137px;height:127px;" src="/Content/img/oldyear2.jpg" alt=""></p>';                              
+                            } else {
+                                str += '<p class="pull-left" > <img class="media-object" style="width:137px;height:127px;" src=' + data[i].PicUrl + ' alt=""></p>';
+                            }                                  
+                            var date = new Date(data[i].CreateDate).Format("yyyy-MM-dd hh:mm");
+
+                            str += '<div class="media-body"><span><i class="fa fa-user"></i>看护对象 <span style="color: #2b96cc;">' + data[i].NickName + '</span></span>';
+                            str += '<span><i class="fa fa-user"></i>服务人员 <span style="color: #2b96cc;">' + data[i].AdminNickName + '</span></span>';
+                            str += '  <p><span>健康状况： <span style="color: #2b96cc;">' + data[i].PersonInro + '</span></span>;&nbsp;<span>照护日期范围： <span style="color: #2b96cc;">' + data[i].CeraRange + '</p>';
+                            str += '  <p><span>照护方式: <span style="color: #2b96cc;">' + data[i].DateType + '</span></span>;&nbsp;<span>照护人数:<span style="color: #2b96cc;">' + data[i].CarePerson + '</p>';
+                            
+                            str += '  <p>' + data[i].OrderType + '&nbsp;' + data[i].Memo + '</p><ul class="nav navbar-nav post-nav">';
+                            str += '  <li><a href="javascript:;"><i class="fa fa-clock-o"></i>' + date + '</a></li>';
+                            if (data[i].Status == -1) {
+                                str += '<li><a href="javascript:;">作废</a></li>';
+                            } else if (data[i].Status == "1") {
+                                str += '<li><a href="javascript:;"><i class="fa fa-arrow-down"></i>待对接</a></li>';
+                            } else if (data[i].Status == "2") {
+                                str += '<li><a href="javascript:;" style="color:#b200ff"><i class="fa fa-angle-double-down"></i>对接中</a></li>';
+                            } else if (data[i].Status == 3) {
+                                str += '<li><a href="javascript:;" style="color:#ff6a00"><i class="fa fa-check-circle"></i>已对接</a></li>';
+                            } else if (data[i].Status == 4) {
+                                str += '<li><a href="javascript:;" style="color:#ff0000"><i class="fa fa-reply"></i>已完结</a></li>';
+                            } else if (data[i].Status == "0") {
+                                str += '<li><a href="javascript:;" style="color:#ff0000"><i class="fa fa-reply"></i>待审核</a></li>';
+                            }
+
+                            str += ' </ul></div></div></a></li>';
+
+
+
+                        }
+                        return str;
+                    };
+
+                    //调用分页
+                    laypage({
+                        cont: 'pageFenYe',
+                        pages: pages,
+                        skin: 'molv', //皮肤
+                        //skip: true, //是否开启跳页
+                        groups: 4,//连续显示分页数
+                        jump: function (obj) {
+                            document.getElementById('pageDatalist').innerHTML = thisDate(obj.curr);//绑定数据
+                            document.getElementById('pageNumber').innerHTML = data.length;//总条数
+                            document.getElementById('pageShu').innerHTML = pages;//总页数
+                        }
+                    });
+
+                } else {
+                    var str = "<div class='empty-box' style='text-align: center;'><div class='empty-pic'><img src='/Content/user/images/history2x.png' alt='' width='70' height='64'></div><div class='empty-txt'>没有任何记录</div></div>";
+                    document.getElementById('pageNotData').innerHTML = str;//绑定数据
+                    document.getElementById('pageNumber').innerHTML = 0;//总条数
+                    document.getElementById('pageShu').innerHTML = 0;//总页数
+                }
+            }
+        });
+
+    });
+
+    //申请需求
+    function NewNeed() {
+        if (!is_login()) {
+            layer.confirm('您尚未登录,即将跳转登录页面！', function (index) {
+                location.href = "/Home/Login/?ReturnUrl=/Demand/OldAgeCare/";
+                layer.close(index);
+            });
+        } else {
+            //加载层-风格3
+            parent.layer.load(1, { shade: false });
+            layer.open({
+                type: 2,
+                skin: 'Withdraw-class', //加上边框
+                title: '申请需求',
+                shadeClose: true,
+                shade: 0.5,
+                scrollbar: false,
+                cancel: function (index, layero) {
+                    layer.close(index)
+                    return false;
+                },
+                area: ['50%', '100%'],
+                content: ['/Demand/NewNeed/?type=3'] //iframe的url no是不显示滚动条
+            });
+            //此处演示关闭
+            setTimeout(function () {
+                parent.layer.closeAll('loading');
+            }, 1000);
+        }
+    }
+
+    //判断当前是否登录
+    function is_login() {
+        var login = '@Request.IsAuthenticated';
+        if (login == "False") {
+            return false;
+        } else {
+            return true;
+        }
+    }
+</script>
+
+

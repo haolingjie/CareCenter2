@@ -1,0 +1,374 @@
+﻿
+@{
+    ViewBag.Title = "详情页";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var orderList = (List<CareCenter2.DB.OrderModel>)ViewData["OrderDetail"];//订单数据
+    var comList = (List<CareCenter2.DB.CommentModel>)ViewData["CommentDetail"];//评论
+}
+@model CareCenter2.DB.tb_User
+<link href="/Content/user/css/user.css" rel="stylesheet" />
+<link href="~/Content/user/css/comment.css" rel="stylesheet" />
+
+<sectionn id="content">
+    <div class="container " style="margin-top:166px;">
+        <div class="wrap">
+            <div class="header-right">
+                <div class="logo">
+                    <a href="/User/Index/"><img src="/Content/img/HeadImg/login.png" alt="" /> </a>
+                    <h1>@Model.NickName</h1>
+                    <p><span style="color:#ff0000;"><i class="fa fa-certificate"></i>@ViewBag.Role</span></p>
+                </div>
+                <div class="menu">
+                    <ul class="user-nav">
+                        <li><a href="/User/Index/"><i class="fa fa-child"></i>个人主页</a></li>
+                        <li class="active"><a href="/User/OwnOrder/"><i class="fa fa-calendar"></i>待服务订单(工作人员)</a></li>
+                        <li><a href="/User/OwnNeed/"><i class="fa fa-file-text"></i>已提交订单</a></li>
+                        <li><a href="/User/OwnApply/"><i class="fa fa-briefcase"></i>我的钱包</a></li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="header-left">
+                <div class="main" style="margin-top: 0">
+                    <div class="details">
+                        
+                        @if (orderList.Count > 0)
+                        {
+                            
+                                <h2>@orderList[0].OrderTitle</h2>
+                                <div class="article_r">
+                                    <span class="pulisher">发布者  <span style="color:#00aeef">@(orderList[0].NickName)</span> </span>
+                                    <span class="pulisher">工作人员  <span style="color:#00aeef">@(orderList[0].AdminNickName)</span> </span><br />
+                                    <span class="Actime"> 发布时间 <span style="color:#00aeef">@orderList[0].CreateDate.ToString("yyyy-MM-dd HH:mm")</span>   </span>
+
+                                    <span class="pulisher">
+                                        需求
+                                        @if (orderList[0].OrderClassify == 1)
+                                        {
+                                            <span style="color:#00aeef">(共享保姆)课后托管照护</span>
+                                        }
+                                        else if (orderList[0].OrderClassify == 2)
+                                        {
+                                            <span style="color:#00aeef">婴幼照护</span>
+                                        }
+                                        else if (orderList[0].OrderClassify == 3)
+                                        {
+                                            <span style="color:#00aeef">养老照护</span>
+                                        }
+                                        else if (orderList[0].OrderClassify == 4)
+                                        {
+                                            <span style="color:#00aeef">孕检照护</span>
+                                        }
+                                    </span>
+                                    <input type="hidden" id="orderid" value="@orderList[0].OrderID" />
+                                </div>                            
+                                <div class="col-md-12" style="height:auto;margin:5% 0;">
+                                    @foreach (var video in (List<CareCenter2.DB.tb_Video>)ViewData["VideoList"])
+                                    {
+                                        <div class="col-md-4 col-sm-6 col-xs-12 det-pic">
+                                            @if (!string.IsNullOrEmpty(video.VideoUrl))
+                                            {
+                                                <video style="width:100%;height:430px" controls="controls">
+                                                    <source src="@video.VideoUrl" type="video/ogg" />
+                                                    <source src="@video.VideoUrl" type="video/mp4" />
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                            }
+                                        </div>
+                                    }
+                                    @if (orderList[0].OrderClassify == 1)//共享保姆/课后托管照护
+                                    {
+                                        <img src="~/Content/img/img1.png" style="width: 100%; height: 430px;" alt="">
+                                    }
+                                    else if (orderList[0].OrderClassify == 2)//婴幼照护
+                                    {
+                                        <img src="/Content/img/oldyear7.jpg" style="width: 100%; height: 430px;" alt="">
+                                    }
+                                    else if (orderList[0].OrderClassify == 3)//养老照护
+                                    {
+                                        <img src="/Content/img/oldyear2.jpg" style="width: 100%; height: 430px;" alt="">
+                                    }
+                                    else if (orderList[0].OrderClassify == 4)//孕检照护
+                                    {
+                                        <img src="/Content/img/oldyear3.jpg" style="width: 100%; height: 430px;" alt="">
+                                    }
+                                    @foreach (var pic in (List<CareCenter2.DB.tb_Pictuer>)ViewData["PicList"])
+                                    {
+                                        <div class="col-md-4 col-sm-6 col-xs-12 det-pic">
+                                            @if (!string.IsNullOrEmpty(pic.PicUrl))
+                                            {
+                                                <img src="@pic.PicUrl" style="width: 100%; height: 430px;" alt="">
+                                            }
+                                        </div>
+
+                                    }
+                                </div>
+                            
+                                <div class="det-para" style="clear:both;">
+                                    <span class="pulisher">健康状况<span style="color:#00aeef"> @orderList[0].PersonInro</span></span><br />
+                                    <span class="pulisher">照护人数<span style="color:#00aeef"> @orderList[0].CarePerson</span></span><br />
+                                    <span class="pulisher">照护方式<span style="color:#00aeef"> @orderList[0].DateType</span></span><br />
+                                    <span class="pulisher">照护日期范围<span style="color:#00aeef"> @orderList[0].CeraRange</span></span><br />
+                                    <span class="pulisher">照护地址<span style="color:#00aeef"> @orderList[0].CareAddress</span></span><br />
+                                    <p class="top">@Html.Raw(orderList[0].OrderIntor)</p>
+                                    <div class="readmore">
+                                        @if (orderList[0].Status == 1)
+                                        {
+                                            <a href="javascript:;"><button class="btn btn-3 btn-3e icon-arrow-right upd_status" data-id="2" data-txt="是否确定状态对接中">对接中</button></a>
+                                        }
+                                        else if (orderList[0].Status == 2)
+                                        {
+                                            <a href="javascript:;"><button class="btn btn-3 btn-3e icon-arrow-right upd_status" data-id="3" data-txt="是否确定状态已对接">已对接</button></a>
+                                        }
+                                        else if (orderList[0].Status == 3)
+                                        {
+                                            <a href="javascript:;"><button class="btn btn-3 btn-3e icon-arrow-right upd_status" data-id="4" data-txt="是否确定状态待评论">待评论</button></a>
+                                        }
+
+                                    </div>
+                                </div>
+                            
+                        }
+
+
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <!--评论区域 开始-->
+                <div class="comment_list">
+                    <h3 style="text-indent: 2em;">回复列表</h3>
+                    <hr>
+
+                    @if (comList.Count > 0)
+                    {
+                        foreach (var item in comList)
+                        {
+                            <div class="comment">
+                                <div class="imgdiv">
+                                    <img class="imgcss" src="@item.ImgUrl" />
+                                </div>
+                                <div class="conmment_details">
+                                    <div style="float:left;">
+
+                                        <span class="comment_name">@item.NickName </span> <span class="time" title="@item.CreateDate.ToString("yyyy-MM-dd HH:mm:ss")"></span>
+
+                                    </div>
+                                    <div class="del">
+                                        <a class="add_comment" data-id="1"> <i class="layui-icon layui-icon-note">新增回复</i></a>
+                                    </div>
+                                    <div class="comment_content">
+                                        @item.ComIntor
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                        }
+
+                    }
+                    else
+                    {
+                        <div style="text-align:center;"><button class="layui-btn add_comment" style="margin:30px auto;background-color: #00aeef;">新增回复</button></div>
+                    }
+
+
+                    <div class="comment" style="display:none;">
+                        <div class="imgdiv">
+                            <img class="imgcss" src="/Content/img/HeadImg/201796172117.png" />
+                        </div>
+                        <div class="conmment_details">
+                            <div style="float:left;">
+                                <span class="comment_name">大白 </span>     <span>22分钟前</span>
+
+                            </div>
+                            <div class="del">
+                                <span class="show_reply_list">查看回复</span>
+                                <i class="icon layui-icon">赞(164)</i>
+                                <a class="del_comment" data-id="1"> <i class="layui-icon layui-icon-note">回复</i></a>
+                            </div>
+                            <div class="comment_content">
+                                感觉林丹越来越帅了，好棒感觉林丹越来越帅了，好棒感觉林丹越来越帅了，好棒感觉林丹越来越帅了，好棒感觉林丹越来越帅了，好棒
+                            </div>
+                        </div>
+                        <div class="reply_list">
+                            <!--style="display:none;"-->
+                            <div class="reply">
+                                <span class="reply_name">小白</span>回复<span class="reply_name">小黑</span>：<span class="reply_content">你好没啊你好没啊你好没啊你好没啊你好没啊你好没啊你好没啊你好 </span>
+                                <a data-id="1" class="del_reply">
+                                    <i class="icon layui-icon ">    删除</i>
+                                </a>
+                            </div>
+                            <div class="reply">
+                                <span class="reply_name">小白</span>回复<span class="reply_name">小黑</span>：<span class="reply_content">你好没啊你好没啊你好没啊你好没啊你好没啊你好没啊你好没啊你好没啊你好没啊你好没啊你好没啊你好没啊 </span>
+                                <a data-id="1" class="del_reply">
+                                    <i class="icon layui-icon">    删除</i>
+                                </a>
+                            </div>
+                            <div class="reply">
+                                <span class="reply_name">小白</span>回复<span class="reply_name">小黑</span>：<span class="reply_content">你好没啊你好没啊你好没啊你好没啊你好没啊你好没啊你好没啊你好没啊你好没啊你好没啊你好没啊你好没啊 </span>
+                                <a data-id="1" class="del_reply">
+                                    <i class="icon layui-icon">    删除</i>
+                                </a>
+                            </div>
+                            <div class="reply">
+                                <span class="reply_name">小白</span>回复<span class="reply_name">小黑</span>：<span class="reply_content">你好没啊你好没啊你好没啊你好没啊你好没啊你好没啊你好没啊你好没啊你好没啊你好没啊你好没啊你好没啊 </span>
+                                <a data-id="1" class="del_reply">
+                                    <i class="icon layui-icon">    删除</i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="show_remain_reply">查看剩下的回复</div>
+                        <!--回复列表结束-->
+                    </div>
+
+                    @*<div class="comment_add_or_last">
+                            点击加载更多
+                        </div>*@
+
+                </div>
+                <!--评论区域 结束-->
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</sectionn>
+
+<script src="/Scripts/jquery-1.10.2.min.js"></script>
+<script src="/Content/js/timeago.js"></script>
+<script type="text/javascript">
+
+    //页面加载--导航菜单设置选中状态
+    $(function () {
+        $("ul[class='nav navbar-nav'] li").removeClass("active");//删除class属性。
+        $("ul[class='nav navbar-nav'] > li:eq(5)").addClass("active");//设置class属性。
+        $("ul[class='nav navbar-nav'] > li:eq(5)>ul>li:eq(0)").addClass("active");//设置子菜单class属性。
+
+        //var logo = sessionStorage.getItem("logo");
+        //if (logo == '杰出养老') {
+        //    //养老
+        //    $("#infantcare").css('display', 'none');//隐藏
+        //    $("#oldeyear").css('display', 'block');//显示
+        //    $("#logo").html("杰出养老");
+        //} else if (logo == '杰出婴幼陪护') {
+        //    $("#oldeyear").css('display', 'none');//隐藏
+        //    $("#infantcare").css('display', 'block');//显示
+        //    $("#logo").html("杰出婴幼陪护");
+        //} else {
+        //    $("#oldeyear").css('display', 'none');//隐藏
+        //    $("#infantcare").css('display', 'none');//显示
+        //    $("#logo").html("照护中心");
+        //}
+
+        //验证登录
+        if (!is_login()) {
+            location.href = "/Home/Login/?ReturnUrl=/User/OwnOrder/";
+        }
+
+    });
+    // 自动更新时间节点实现几分钟前、几小时前、几天前等时间差显示效果
+    $(".time").timeago();
+
+    layui.use(['form', 'layer', 'jquery', 'element', 'laypage', 'form', 'util'], function () {
+        var form = layui.form;
+        window.layer = layui.layer;
+        layedit = layui.layedit;
+        window.jQuery = window.$ = layui.jquery;
+        var element = layui.element, util = layui.util, form = layui.form;
+
+        $(document).ready(function () {
+            //alert($(".comment_list").find(".comment")[0] == undefined);
+            if ($(".comment_list").find(".comment")[0] == undefined) {
+                $(".comment_add_or_last").html("暂无人评论");
+            }
+            //订单状态
+            $(document).on('click', '.upd_status', function () {
+                
+                var id = $(this).attr("data-id");//获取对接状态
+                var txt = $(this).attr("data-txt");//获取对接
+                layer.confirm(txt, function (index) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/User/UpdOrderStatus/",
+                        data: {
+                            "orderid": $("#orderid").val(),
+                            "status": id
+                        },
+                        datatype: "json",
+                        success: function (res) {
+                            debugger
+                            if (res.Statu == 1) {
+                                layer.alert(res.Msg, function (index) {
+                                    location.href = res.BackUrl;
+                                    layer.close(index)
+                                });
+                            } else {
+                                layer.alert(res.Msg, { skin: 'layui-layer-lan' });
+                            }
+                        }
+                    });
+                    
+                    layer.close(index);
+                });
+            });
+
+            //新增评论
+            $(document).on('click', '.add_comment', function () {
+                layer.prompt({
+                    formType: 2,
+                    value: '请输入...',
+                    title: '请输回复内容',
+                    area: ['300px', '100px'] //自定义文本域宽高
+                }, function (value, index, elem) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/User/SetCommentData/",
+                        data: {
+                            "orderid": $("#orderid").val(),
+                            "comment": value
+                        },
+                        datatype: "json",
+                        success: function (res) {
+                            if (res.Statu == 1) {
+                                layer.alert(res.Msg, { skin: 'layui-layer-molv' }, function (index) {
+                                    location.href = res.BackUrl;
+                                    layer.close(index)
+                                });
+                            } else {
+                                layer.alert(res.Msg, { skin: 'layui-layer-lan' });
+                            }
+                        }
+                    });
+                    layer.close(index);
+                });
+
+            });
+            
+
+            $(document).on('click', '.comment_add_or_last', function () {
+                var getMoreComment = $(this);
+                //TODO如果获取的数据为零
+                getMoreComment.html("没有更多评论了");
+            });
+
+        });
+
+
+
+
+
+
+    });
+
+    //判断当前是否登录
+    function is_login() {
+        var login = '@Request.IsAuthenticated';
+        if (login == "False") {
+            return false;
+        } else {
+            return true;
+        }
+    }
+</script>
+
+
+
+

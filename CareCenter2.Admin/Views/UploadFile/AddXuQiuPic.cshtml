@@ -1,0 +1,189 @@
+﻿@{
+    ViewBag.Title = "需求主图";
+    Layout = null;
+}
+<!--layui -->
+<link href="/Content/layui/css/layui.css" rel="stylesheet" />
+<!--layui -->
+<div class="main" style="margin-top: 0">
+    <div class="about-btn" style="margin:0 6%;">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>需求主图</legend>
+        </fieldset>
+        <form class="layui-form layui-form-pane" action="">
+            @*<div class="layui-form-item">
+                <label class="layui-form-label">标题</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ordertitle" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                </div>
+            </div>*@
+            <div class="layui-form-item">
+                <label class="layui-form-label">标题</label>
+                <div class="layui-input-block">
+                    <select name="ordertitle" id="ordertitle" lay-filter="aihao">                      
+                        <option value="养老照护">养老照护</option>
+                        <option value="婴幼照护">婴幼照护</option>
+                        <option value="课后托管">课后托管</option>
+                        <option value="孕检照护">孕检照护</option>                      
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">简介</label>
+                <div class="layui-input-block">
+                    <input type="text" name="memo" placeholder="请输入简介不超过八个字" lay-verify="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <!--图片上传-->
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">图片上传</label>
+                <div class="layui-input-inline  layui-upload-drag" id="ImgList" style="margin-top:15px;">
+                    <i class="layui-icon layui-icon-add-1" id="jiahao" style="color:#d7d7d7;"></i>
+                    @*<p>点击上传，或将文件拖拽到此处</p>*@
+                    <img class="layui-upload-img" id="demo1" style="display:none;width:100px;">
+                </div>
+                <div class="layui-form-mid layui-word-aux" style="margin-top: 80px;">（上传图片,建议尺寸:825*550,支持格式jpg|png|gif|bmp|jpeg）</div>
+                <p id="errorImg"></p>
+                <input type="hidden" value="" name="ImgUrl" id="ImgUrl" />
+            </div>
+            <div class="layui-form-item">
+                <button class="layui-btn" lay-submit="" id="tijiaoData" lay-filter="save">上传图片</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/Scripts/jquery-1.10.2.min.js"></script>
+<script src="/Content/layui/layui.js"></script>
+<script>
+
+
+    //发布需求
+    layui.use(['form', 'layedit', 'layer', 'upload','laydate'], function () {
+        var $ = layui.jquery
+            , upload = layui.upload
+            , form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#date'
+            , type: 'year'
+        });
+
+
+
+        //监听提交
+        form.on('submit(save)', function (data) {
+
+            $.ajax({
+                type: "POST",
+                url: "/UploadFile/AddXuQiuPicData/",
+                data: {
+                    "Title": data.field.ordertitle,
+                    "Memo": data.field.memo,
+                    "ImgUrl": data.field.ImgUrl
+                },
+                dataType: "json",
+                success: function (res) {
+
+                    if (res.Statu == 1) {
+                        parent.layer.alert(res.Msg, function (index) {
+                            parent.location.href = res.BackUrl;
+                            layer.close(index)
+                        });
+
+                    } else {
+                        layer.alert(res.Msg);
+                        //layer.closrAll();
+                    }
+                }
+            });
+            return false;
+        });
+
+    });
+
+    //上传图片/视频
+    layui.use(['form', 'layedit', 'layer', 'upload', 'element'], function () {
+        var form = layui.form
+            , upload = layui.upload
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , element = layui.element;
+        //单个图片上传
+        var uploadInst = upload.render({
+            elem: '#ImgList'
+            , url: '/MemberM/UploadImgData/'
+            , method: 'POST'
+            , accept: 'images'
+            , xhr: xhrOnProgress
+            , progress: function (value) {//上传进度回调 value进度值
+                element.progress('demoimg', value + '%')//设置页面进度条
+            }
+            //, bindAction: '#testListAction'
+            , choose: function (obj) {
+
+                obj.preview(function (index, file, result) {
+
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+            }
+            , data: {
+
+            }
+            , before: function (obj) {
+
+            }
+            , done: function (res, index, upload) {
+
+                if (res.Statu == 1) { //上传成功
+
+                    //parent.location.href = res.BackUrl;
+                    $("#demo1").css("display", "block");
+                    $("#jiahao").css("display", "none");
+                    $('#demo1').attr('src', res.Data);
+                    $('#ImgUrl').val(res.Data);
+                    layer.closeAll();
+                } else {
+                    layer.alert(res.Msg);
+                    return false;
+
+                }
+
+            }
+            , error: function (index, upload) {
+
+                var demoText = $('#errorImg');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</ a>');
+                demoText.find('.demo-reload').on('click', function () {
+                    uploadInst.upload();
+                });
+            }
+        });
+
+    });
+
+    //创建监听函数
+    var xhrOnProgress = function (fun) {
+        xhrOnProgress.onprogress = fun; //绑定监听
+        //使用闭包实现监听绑
+        return function () {
+            //通过$.ajaxSettings.xhr();获得XMLHttpRequest对象
+            var xhr = $.ajaxSettings.xhr();
+            //判断监听函数是否为函数
+            if (typeof xhrOnProgress.onprogress !== 'function')
+                return xhr;
+            //如果有监听函数并且xhr对象支持绑定时就把监听函数绑定上去
+            if (xhrOnProgress.onprogress && xhr.upload) {
+                xhr.upload.onprogress = xhrOnProgress.onprogress;
+            }
+            return xhr;
+        }
+    }
+
+</script>
+
+
